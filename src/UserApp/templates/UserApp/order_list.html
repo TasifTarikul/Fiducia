@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+    {% block content %}
+        {% include 'header_nav.html' %}
+        {% load static %}
+        <div id="order-list-page-wrapper">
+            <h1 id="order-header">Orders</h1>
+            <div id="order-type-top-nav-wrapper">
+                <div id="" class="order-type-top-nav-items">Selfpacked</div>
+                <div id="" class="order-type-top-nav-items">Cybershop orders</div>
+            </div>
+            <div id="selfpacked-order-list-container" class="order-list-container">
+                <h1 class="order-category-header">Selfpacked</h1>
+            </div>
+            <div id="cybershop-order-list-container" class="order-list-container" >
+                <h1 class="order-category-header">Cyber Product</h1>
+            </div>
+        </div>
+        <div id="" class="main-modal">
+            <span class="material-icons close-main-modal-button" style="font-size:48px;color:white">close</span>
+            <div id="" class="modal-content-container">
+                <h1 id="" class="modal-content-header">
+                    Current Journeys
+                </h1>
+                <div id="modal-current-journey">
+                </div>
+            </div>
+        </div>
+
+        <! --- url to list all order --- >
+        <input type="hidden" id="order-list-url" class="list_url"
+               value="{% url 'UserApp:UserProfileApi:user_api:order_api-list' %}">
+
+        <! --- url to get all current journey of current user --- >
+        <input type="hidden" id="current-completed-journeys-url" class="list_url"
+               value="{% url 'UserApp:UserProfileApi:user_api:journey_api-current-completed-journey' %}">
+
+        <! --- url to link order and journey --- >
+        <input type="hidden" id="journey-order-url" class="list_url"
+               value="{% url 'UserApp:UserProfileApi:user_api:journey_order_api-list' %}">
+
+        <! --- to  get url to redirect to create journey page creat --- >
+        <input type="hidden" id="be-a-traveller-url" class="list_url"
+               value="{% url 'UserApp:be_traveller' %}">
+
+        <input type="hidden" id="current_user" value="{{ request.user }}">
+
+        <input type="hidden" name="csrf_token" id="order-list-csrf-token" class="csrf_token" value="{{ csrf_token }}">
+    {% endblock %}

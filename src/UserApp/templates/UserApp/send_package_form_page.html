@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    {% include 'header_nav.html' %}
+    <h1>Send package form</h1>
+    <div>
+        <form action="{% url 'UserApp:sendpackage'%}" method="post" enctype="multipart/form-data" id="main-form">
+            {% csrf_token %}
+            {% comment %}{{ formSet.management_form }}{% endcomment %}
+            {% for field in form %}
+                {% if field.label == 'Package image' %}
+                    <div class = "item-image-prev" id="image-preview-container">
+                        <img src="" alt="image-preview" class="image-preview__image" >
+                        <span class="image-preview-default-text">Image preview</span>
+                    </div>
+                    <input type="file" name="package_image" id="input_file">
+                {% else %}
+                    <div>
+                        {{ field.label_tag }} {{ field }}
+                    </div>
+                {% endif %}
+{#                {{ form.as_p }}#}
+            {% endfor %}
+            <input type="submit" name="self_packed_form" value="Submit" id="self-pack-form-submit-button">
+        </form>
+{#        FOR FORM SET #}
+{#        <div style="display: none;" id="selfpack_emptyform">#}
+{#            <div id="form-__prefix__">#}
+{#                {% for field in formSet.empty_form %}#}
+{#                    {% if field.label == 'Package image' %}#}
+{#                        <div class = "item-image-prev" id="image-preview-container">#}
+{#                            <img src="" alt="image-preview" class="image-preview__image" >#}
+{#                            <span class="image-preview-default-text">Image preview</span>#}
+{#                        </div>#}
+{#                        <input type="file" name="form-__prefix__-package_image" id="input_file">#}
+{#                    {% else %}#}
+{#                        <div>#}
+{#                            {{ field.label_tag }} {{ field }}#}
+{#                        </div>#}
+{#                    {% endif %}#}
+{#                {% endfor %}#}
+{#                <button style="background-color: #18a4e0;border: none" type="button"#}
+{#                     id="remove-form-__prefix__" class="form-remove-button" value="form-__prefix__">Remove</button>#}
+{#            </div>#}
+{#        </div>#}
+{#        <div>#}
+{#            <button style="margin-top: 20px" id="add-item-button" >Add Item</button>#}
+{#        </div>#}
+    </div>
+{% endblock %}

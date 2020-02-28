@@ -1,0 +1,161 @@
+/****** homepage.html ******/
+body, html, head{
+            padding: 0;
+            margin: 0;
+            height: 100%;
+        }
+
+
+        *{
+            box-sizing: border-box;
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        }
+
+        #top-section-wrapper{
+            height: 100%;
+            background-color: white;
+        }
+
+        #top-nav-container{
+            background-image: linear-gradient(to right, #18a4e0, #06164d);
+            height: 17%;
+            /*box-shadow: 0px 0px 1px dimgrey;*/
+        }
+
+        #top-nav-container-logo-container{
+            float: left;
+            height: 100%;
+            width: 220px;
+            background-color: transparent;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        #top-nav-container-logo{
+
+            /*margin-left: 80px;*/
+            font-size: 60px;
+            color: white;
+            text-decoration: none;
+            font-family: "Ubuntu Light";
+        }
+
+
+        .top-nav-container-tool-wrapper{
+            float: right;
+            /*background-color: steelblue;*/
+            margin: 0 0 0 30px;
+            line-height: 100px;
+            height: 100%;
+        }
+
+        .top-nav-tools-right{
+            outline: none;
+            text-decoration: none;
+            color: white;
+            font-weight: 900;
+        }
+
+        /****** main banner ******/
+
+        #main-banner{
+            /*background-color: red;*/
+            padding-top: 40px;
+            height: 83%;
+        }
+
+
+        #main-banner-content-container{
+            /*background-color: #0d3b52;*/
+            width: 500px;
+            margin: 0 0 0 80px;
+            float: left;
+
+        }
+
+        #main-banner-content-heading{
+            font-size: 40px;
+            margin: 0;
+            color: #323846;
+        }
+
+        .main-banner-content-section-wrapper{
+
+            /*background-color: #0d3b52;*/
+            margin-top: 10px;
+        }
+
+        #main-banner-content-traveller-section{
+            margin-bottom: 0;
+        }
+
+        .main-banner-content-text{
+            margin-bottom: 10px;
+            font-size: 14px;
+            color: #495056;
+            font-weight: 100;
+        }
+
+        .main-banner-content-button{
+            text-decoration: none;
+            color: black;
+            background-color: white;
+            display: block;
+            width: 200px;
+            height: 50px;
+            line-height: 48px;
+            text-align: center;
+            border: 1px solid #18a4e0;
+            border-radius: 50px;
+            font-weight: 700;
+        }
+
+        #main-banner-video-container{
+            height: 350px;
+            width: 550px;
+            float: right;
+            margin-right: 80px;
+            position: relative;
+            background-color: #22044a;
+
+        }
+
+        #main-banner-video-element{
+            height: 350px;
+            width: 100%;
+        }
+
+        /******** second section ********/
+
+        #second-section{
+            height: 100%;
+            background-color: #fa6e4f;
+        }
+
+        /*******third section********/
+        #third-section{
+            height: 100%;
+            background-color: #18a4e0;
+        }
+
+
+/****** send_package_form_page.html ******/
+
+
+.item-image-prev{
+            width: 300px;
+            min-height: 100px;
+            border: 2px solid #dddddd;
+            margin-top: 15px;
+            margin-bottom: 15px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #cccccc;
+        }
+        .image-preview__image{
+            display: none;
+            width: 100%;
+        }

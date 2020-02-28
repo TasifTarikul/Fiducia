@@ -1,0 +1,252 @@
+/*html,head, body{*/
+    /*height: 100%;*/
+/*}*/
+*{
+    box-sizing: border-box;
+}
+
+/********User Profile Page********/
+
+#page-wrapper{
+    margin-top: 4vh;
+}
+#user-info-panel{
+    background-color: #22044a;
+    color: white;
+    height: 30vh;
+    width: 90vw;
+    margin-left:5vw;
+    padding-left: 15px;
+    font-size: large;
+    font-weight: bold;
+}
+
+#bottom-section-wrapper{
+    margin:3vw 5vw 0 5vw;
+    width: 90vw;
+    background-color: #0d3b52;
+}
+
+#left-menu{
+    width: 20%;
+    float: left;
+    clear: left;
+    display: block;
+}
+
+.left-menu-items{
+    background-color: #dddddd;
+    margin-bottom: 2vh;
+    height: 6vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#right-panel-wrapper{
+    float: right;
+    /*background-color: #3b78f9;*/
+    width: 75%;
+}
+
+.right-sub-panel-wrapper{
+    /*background-color: #5e5b5b;*/
+    display: none;
+    padding: 20px;
+    float: left;
+    width: 100%;
+    border: 2px solid grey;
+    border-radius: 5px;
+}
+
+
+h2{
+    margin: 0;
+}
+
+    /*Profile panel*/
+#Profile{
+    display: block;
+}
+    /*order panel*/
+#current-orders-container{
+
+}
+
+.right-sub-panel-header{
+    margin-bottom: 2%;
+}
+
+.each-instance-wrapper{
+    margin-bottom: 2vh;
+    width: 100%;
+    overflow: hidden;
+    /*background-color: #fa6e4f;*/
+    padding: 1%;
+    border: 2px solid grey;
+    border-radius: 10px;
+}
+
+#each-order-init-details-wrapper{
+    float: left;
+}
+
+
+
+#each-order-response-details-wrapper{
+    float: right;
+}
+
+.order-details{
+
+}
+
+/********** Order list Page*********/
+
+#order-list-page-wrapper{
+    width: 100%;
+}
+
+#order-header{
+    width: 100%;
+    font-size: 3em;
+    border: 2px solid #3b78f9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+}
+
+#order-type-top-nav-wrapper{
+    text-align: center;
+    display: flex;
+    justify-content: center;
+}
+
+.order-type-top-nav-items{
+    background-color: #22044a;
+    color: white;
+    float: left;
+    width: 30%;
+    height: 8vh;
+    line-height: 8vh;
+}
+
+.order-category-header{
+}
+
+.order-list-container{
+    width: 70%;
+    margin: auto;
+}
+
+#cybershop-order-list-container{
+    display: none;
+}
+.order-wrapper{
+    border: 2px solid lightskyblue;
+    overflow: hidden;
+    margin-bottom: 3vh;
+    width: 100%;
+}
+
+.order-image{
+    height: 30vh;
+    width: 30%;
+}
+
+.order-list-order-details{
+    float: right;
+}
+.order-button-wrapper{
+    width: 100%;
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+
+}
+.order-button{
+    width: 40%;
+    text-align: center;
+    line-height: 50px;
+    height: 50px;
+    font-weight: bolder;
+    color: white;
+}
+
+.accept-button{
+    background-color: #3c4b82;
+    margin-right: 30px;
+}
+
+.negotiate-button{
+    background-color: #3b78f9;
+}
+
+.main-modal{
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0,0,0,0.4);
+    z-index: 1;
+    display: none;
+}
+
+.modal-content-container{
+    background-color: white;
+    padding: 10px;
+    width: 60%;
+    margin: 20vh auto 0 auto;
+
+}
+
+.modal-content-header{
+    text-align: center;
+    background-color: #18a4e0 ;
+    color: white;
+    font-weight: bolder;
+    font-size: 3em;
+    margin: 0 0 10px 0;
+    padding: 5px;
+
+}
+
+.each-current-journey-wrapper{
+    border: 2px solid grey;
+    border-radius: 5px  ;
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.current-order-checkbox-wrapper{
+    float: left;
+    display: inline-block;
+    height: 100%;
+}
+.current-order-checkbox{
+
+}
+
+.each-current-journey{
+    float: left;
+
+}
+
+.modal-submit-button-wrapper{
+    text-align: center;
+}
+
+.modal-submit-button{
+    margin: auto;
+    text-align: center;
+    background-color: #06164d;
+    color: white;
+    font-size: x-large;
+    font-weight: bolder;
+    width: 50%;
+    padding: 10px;
+    border-radius: 3px;
+    border-style: none;
+}

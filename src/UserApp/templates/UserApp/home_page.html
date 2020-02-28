@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+
+{% block content %}
+
+    <div id="top-section-wrapper">
+        <!--------nav ------->
+        {% include "header_nav.html" %}
+        <!-------- banner ------->
+        <div id="main-banner" class="">
+            <div id="main-banner-content-container">
+                <h1 id="main-banner-content-heading">
+                    Travel wasn't this fun, Delivery wasn't this cheap
+                </h1>
+                <div id="main-banner-content-send-section" class="main-banner-content-section-wrapper">
+                    <div id="main-banner-content-send-text" class="main-banner-content-text">
+                        Send personal package Lorem Ipsum is simply dummy text of the printing and
+                        typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
+                    </div>
+                    <a id="main-banner-content-send-button" class="main-banner-content-button" href="{% url 'UserApp:sendpackage' %}" >
+                        Send Package
+                    </a>
+                </div>
+                <div id="main-banner-content-create-section" class="main-banner-content-section-wrapper">
+                    <div id="main-banner-content-create-text" class="main-banner-content-text">
+                        Want to buy something from abroad It is a long established fact that a reader will
+                        be distracted by the readable content of a page when looking at its layout.
+                    </div>
+                    <a id="main-banner-content-create-button" class="main-banner-content-button" href="{% url 'UserApp:createorder' %}">
+                        Create order
+                    </a>
+                </div>
+                <div id="main-banner-content-traveller-section" class="main-banner-content-section-wrapper">
+                    <div id="main-banner-content-traveller-text" class="main-banner-content-text">
+                        Earn while travelling There are many variations of passages of Lorem Ipsum available, but
+                        the majority have suffered alteration in some form, by injected humour.
+                    </div>
+                    <a id="main-banner-content-traveller-button" class="main-banner-content-button" href="{% url 'UserApp:be_traveller' %}">
+                        Be a Traveller
+                    </a>
+                </div>
+            </div>
+            <div id="main-banner-video-container">
+                <video id="main-banner-video-element" playsinline autoplay muted loop controls>
+                    <source src = {%  static 'UserApp/videos/Animated_Marketing_Video_BNA_eCommerce.mp4' %} type="video/mp4" >
+                </video>
+            </div>
+        </div>
+    </div>
+
+    <!------second section-------->
+    <div id="second-section">
+
+    </div>
+
+    <!------second section-------->
+    <div id="third-section">
+
+    </div>
+{% endblock %}

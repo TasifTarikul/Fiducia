@@ -1,0 +1,8 @@
+certifi==2018.8.24
+Django==2.1.5
+django-filter==2.2.0
+django-widget-tweaks==1.4.3
+djangorestframework==3.11.0
+Pillow==6.2.1
+pycountry==18.12.8
+pytz==2019.1

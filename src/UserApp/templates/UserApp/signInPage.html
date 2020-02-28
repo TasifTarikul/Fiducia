@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+
+{% load static %}
+{% load widget_tweaks %}
+
+<html>
+<head>
+	  <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Acropolis | Migrate To Malaysia</title>
+{#    <link rel="icon" href="{% static '/img/logo-small.png' %}" />#}
+	  <link rel="stylesheet" href="https://unpkg.com/bootstrap-material-design@4.1.1/dist/css/bootstrap-material-design.min.css" integrity="sha384-wXznGJNEXNG1NFsbm0ugrLFMQPWswR3lds2VeinahP8N0zJw9VWSopbjv2x7WCvX" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css"
+    integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Archivo+Narrow" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static 'coreapp/css/style.css' %}" />
+</head>
+<body>
+    <section id="login-main-body">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4"></div>
+                <div class="col-lg-4 login-section" style="margin-top: 5%">
+                    <p class="login-logo-text">Fiducia</p>
+                    <p class="singup-title-top">Log in</p>
+                    <form class="login-form" action="{% url 'UserApp:signin' %}?next={{ next }}" method="post">
+                        {% csrf_token %}
+                        <!--{{ form.non_field_errors }}
+                        {{ form.source.errors }}
+                        {{ form.source }}-->
+                            {% if user_signinform.errors %}
+                                {% for field in user_signinform %}
+                                    {% for error in field.errors %}
+                                        <div>
+                                            <strong>{{ error|escape }}</strong>
+                                        </div>
+                                    {% endfor %}
+                                {% endfor %}
+                                {% for error in user_signinform.non_field_errors %}
+                                    <div class="alert alert-danger">
+                                        <strong>{{ error|escape }}</strong>
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
+                        <!--{% if user_signinform.non_field_errors %}
+                            {{ user_signinform.non_field_errors }}
+                        {% endif %}-->
+                        {% for field in user_signinform.visible_fields%}
+                          <div class="form-group single-group-box1">
+                            <label for="formGroupExampleInput" class="bmd-label-floating input-name-class">
+                                {{field.label_tag}}
+                            </label>
+                              {{field|add_class:"form-control input-box-class"}}
+                          </div>
+                        {% endfor %}
+                        <input type="submit" value="Submit" class="form-group single-group-box1 Persona-box login-submit-box" style="border: none; color: white">
+                    </form>
+{#                    <div style="padding-bottom: 20px; text-align: center">#}
+{#                        <a href="{% url 'coreApp:password_reset'%}">Forgot password ?</a>#}
+{#                    </div>#}
+                    <div style="padding-bottom: 20px; text-align: center">
+                        <a href="{% url 'UserApp:signup'%}?next={{ next }}">Sign Up</a>
+                    </div>
+
+                </div>
+                <div class="col-lg-4"></div>
+            </div>
+        </div>
+    </section>
+</body>
+  <script type="text/javascript" src="{% static 'coreapp/js/jquery-3.3.1.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'coreapp/js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'coreapp/js/main.js' %}"></script>
+  <script src="https://unpkg.com/popper.js@1.12.6/dist/umd/popper.js" integrity="sha384-fA23ZRQ3G/J53mElWqVJEGJzU0sTs+SvzG8fXVWP+kJQ1lwFAOkcUOysnlKJC33U" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/bootstrap-material-design@4.1.1/dist/js/bootstrap-material-design.js" integrity="sha384-CauSuKpEqAFajSpkdjv3z9t8E7RlpJ1UP0lKM/+NdtSarroVKu069AlsRPKkFBz9" crossorigin="anonymous"></script>
+  <script>$(document).ready(function() { $('body').bootstrapMaterialDesign(); });</script>
+
+</html>

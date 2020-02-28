@@ -1,0 +1,52 @@
+{% load static %}
+
+    <div id="top-nav-container">
+        <div id="top-nav-container-logo-container" class="top-nav-container-element-wrapper">
+            <a id="top-nav-container-logo" href="{% url 'UserApp:homePage' %}">Fiducia</a>
+    {#                src="{% static 'UserApp/images/main_logo.png' %}">#}
+        </div>
+        {% if user.is_authenticated %}
+        <!------- top nav tools -------->
+            <div id="top-nav-container-signin-container" class="top-nav-container-tool-wrapper" style="margin-right: 50px">
+                <a id="top-nav-container-signin" class="top-nav-tools-right">Help?</a>
+            </div>
+            <div id="top-nav-container-signin-container" class="top-nav-container-tool-wrapper">
+                <a id="top-nav-container-signin" class="top-nav-tools-right" href="{% url 'userProfilelogout'%}" >Log out</a>
+            </div>
+            <div id="top-nav-container-signin-container" class="top-nav-container-tool-wrapper">
+                <a id="top-nav-container-signin" class="top-nav-tools-right">notifiations</a>
+            </div>
+            <div id="top-nav-container-signin-container" class="top-nav-container-tool-wrapper">
+                <a id="top-nav-container-signin" class="top-nav-tools-right">messages</a>
+            </div>
+            <div id="top-nav-container-signin-container" class="top-nav-container-tool-wrapper">
+                <a id="top-nav-container-signin" class="top-nav-tools-right" href="{% url 'UserApp:usrProfile' %}">{{ user.first_name }} {{ user.last_name }}</a>
+            </div>
+            <div id="top-nav-container-signin-container" class="top-nav-container-tool-wrapper">
+                <a id="top-nav-container-signin" class="top-nav-tools-right" href="/admin/">Admin</a>
+            </div>
+            <div id="top-nav-container-signin-container" class="top-nav-container-tool-wrapper">
+                <a id="top-nav-container-signin" class="top-nav-tools-right" href="{% url 'UserApp:allorders' %}">Orders</a>
+            </div>
+            <div id="top-nav-container-signin-container" class="top-nav-container-tool-wrapper">
+                <a id="top-nav-container-signin" class="top-nav-tools-right" href="{% url 'UserApp:alltraveller' %}">Travellers</a>
+            </div>
+
+        {% else %}
+            <!------- top nav tools -------->
+            <div id="top-nav-container-signin-container" class="top-nav-container-tool-wrapper" style="margin-right: 50px">
+                <a id="top-nav-container-signin" class="top-nav-tools-right" href="{% url 'UserApp:signin' %}">Help?</a>
+            </div>
+            <div id="top-nav-container-signin-container" class="top-nav-container-tool-wrapper">
+                <a id="top-nav-container-signin" class="top-nav-tools-right" href="{% url 'UserApp:signup' %}?next=UserApp:homePage">Sign Up</a>
+            </div>
+            <div id="top-nav-container-signin-container" class="top-nav-container-tool-wrapper">
+                <a id="top-nav-container-signin" class="top-nav-tools-right" href="{% url 'UserApp:signin' %}?next=UserApp:homePage">Sign In</a>
+            </div>
+             <div id="top-nav-container-signin-container" class="top-nav-container-tool-wrapper">
+                <a id="top-nav-container-signin" class="top-nav-tools-right" href="/admin/">Admin</a>
+            </div>
+
+        {% endif %}
+    </div>
+

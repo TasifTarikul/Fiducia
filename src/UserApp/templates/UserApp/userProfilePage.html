@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+    {% block content %}
+        {% include 'header_nav.html' %}
+        <div id="page-wrapper">
+            <div id="user-info-panel" >
+                <img src="">
+                <div>{{ user.first_name }} {{ user.last_name }}</div>
+                <div>Date Joined  -  {{ user.date_joined }}</div>
+                <div>Shopper rating  -  {{ user.shopper_rating }}</div>
+                <div>Traveller rating  -  {{ user.traveller_rating }}</div>
+                <div>Verified number  -  {{ user.phone_no }}</div>
+                <div>Short bio  -  {{ user.short_bio }}</div>
+
+            </div>
+            <div id="bottom-section-wrapper">
+                <div id="left-menu" class="clear">
+                    <div class="left-menu-items">Profile</div>
+                    <div class="left-menu-items">Orders</div>
+                    <div class="left-menu-items">Journeys</div>
+                    <div class="left-menu-items">Notifications</div>
+                    <div class="left-menu-items">Account settings</div>
+                </div>
+                <div id="right-panel-wrapper" class="">
+
+                    <div id="Orders" class="right-sub-panel-wrapper">
+                        <div id="current-orders-container">
+                            <h2 class="right-sub-panel-header">Current Orders</h2>
+                        </div>
+                        <div id="completed-orders-container">
+                            <h2 class="right-sub-panel-header">Completed Orders</h2>
+                        </div>
+                    </div>
+
+                    <div id="Journeys" class="right-sub-panel-wrapper">
+                        <div id="current-journey-container">
+                            <h2 class="right-sub-panel-header">Current Journeys</h2>
+                        </div>
+                        <div id="completed-journey-container">
+                            <h2 class="right-sub-panel-header">Completed Journeys</h2>
+                        </div>
+                    </div>
+
+                    <div id="Profile" class="right-sub-panel-wrapper">
+                        <h2>Profile</h2>
+                        <div>
+                            <label for="user-first-name" >First name</label>
+                            <input id="user-first-name" type="text" class="user-info-update">
+                            <label for="user-last-name" >Last name</label>
+                            <input id="user-last-name" type="text" class="user-info-update">
+                        </div>
+                        <div>
+                            email
+                        </div>
+                        <div>
+                            phone
+                        </div>
+                        <div>
+                            <label for="user-short-bio" >Last name</label>
+                            <input id="user-short-bio" type="text" class="user-info user-update">
+                        </div>
+                    </div>
+
+                    <div id="Notifications" class="right-sub-panel-wrapper">
+                        <h2>Notifications</h2>
+                    </div>
+                    <div id="Account-settings" class="right-sub-panel-wrapper">
+                        <h2>Account Setting</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <input type="hidden" id="current-completed-order-url" class="list_url"
+               value="{% url 'UserApp:UserProfileApi:user_api:order_api-current-completed-order' %}">
+        <input type="hidden" id="current-completed-journeys-url" class="list_url"
+               value="{% url 'UserApp:UserProfileApi:user_api:journey_api-current-completed-journey' %}">
+
+        <input type="hidden" id="user-update-url" class="list_url"
+               value="{% url 'UserApp:UserProfileApi:user_api:user_api-list' %}">
+        <input type="hidden" name="csrf_token" class="csrf_token" value="{{ csrf_token }}">
+    {% endblock %}
