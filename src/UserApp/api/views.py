@@ -5,6 +5,9 @@ from .serializers import UserSerializer, OrderSerializer, JourneySerializer, Jou
 from ..models import Order, User, Journey, JourneyOrder
 from django.db.models import Q
 import time
+from django.http import HttpResponseRedirect
+from django.urls import reverse
+import uuid
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -62,4 +65,19 @@ class JourneyViewSet(viewsets.ModelViewSet):
 class JourneyOrderViewset(viewsets.ModelViewSet):
     serializer_class = JourneyOrderSerializer
     queryset = JourneyOrder.objects.all()
+
+
+def create_journey_order(request):
+    if request.method == 'POST':
+        if 'Accept' in request.POST:
+            journey = Journey.objects.get(pk=int(request.POST['journey']))
+            order = Order.objects.get(pk=uuid.UUID(request.POST['order']).hex)
+            i = JourneyOrder(order=order, journey= journey,
+                             accepted_order_status='active')
+            order.order_status = 'accepted'
+            order.journey = journey
+            order.save()
+            i.save()
+            print(request.POST)
+            return HttpResponseRedirect(reverse('UserApp:all_orders'))
 

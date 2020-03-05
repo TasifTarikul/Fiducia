@@ -94,7 +94,7 @@ $(document).ready(function () {
 
                             add_string+=
                             '<div class="modal-submit-button-wrapper">' +
-                                '<div id="" class="modal-submit-button">Submit</div>' +
+                                '<div id="" class="modal-submit-button"><input type="submit" name="Accept" value="Accept"></div>' +
                             '</div>'
 
                         }else{
@@ -105,7 +105,7 @@ $(document).ready(function () {
                                 '<a href="'+create_journey_url+'">Create A New Journey</a>' +
                                 '</div>'
                         }
-                        $('#modal-current-journey').html(add_string)
+                        $('#modal-current-journey').append(add_string)
                     }
                 });
             }
@@ -115,34 +115,36 @@ $(document).ready(function () {
 
     $('.order-list-container').on('click','.accept-button', function () {
         let _order_id = $(this).closest('.order-wrapper').attr('id');
-        $('#modal-current-journey .modal-submit-button').attr('id', _order_id);
+        // $('#modal-current-journey .modal-submit-button').attr('id', _order_id);
+        $("#modal-current-journey [name='order']").remove(); // remove any previous order id appended
+        $('<input type="hidden" value="'+_order_id+'" name="order">').insertBefore('.modal-submit-button-wrapper');
         $('.main-modal').css('display', 'block')
     });
 
     // click on Submit modal
 
-    $('.modal-content-container').on('click', '.modal-submit-button', function () {
-        const journey_id = $('#modal-current-journey input:radio:checked').attr('value');
-        const order_id = $(this).attr('id');
-        console.log(
-            'journey_id '+journey_id+
-            ' order_id '+order_id+
-            ' url '+journey_order_url
-        );
-        $.ajax({
-            url: journey_order_url,
-            headers:{'X-CSRFToken': csrf_token_order_list},
-            method: 'POST',
-            dataType: 'json',
-            data:{
-                'journey':journey_id,
-                'order': order_id,
-                'accepted_order_status': 'active',
-            }
-        });
-
-        $('.main-modal').css('display', 'none')
-    });
+    // $('.modal-content-container').on('click', '.modal-submit-button', function () {
+    //     const journey_id = $('#modal-current-journey input:radio:checked').attr('value');
+    //     const order_id = $(this).attr('id');
+    //     console.log(
+    //         'journey_id '+journey_id+
+    //         ' order_id '+order_id+
+    //         ' url '+journey_order_url
+    //     );
+        // $.ajax({
+        //     url: journey_order_url,
+        //     headers:{'X-CSRFToken': csrf_token_order_list},
+        //     method: 'POST',
+        //     dataType: 'json',
+        //     data:{
+        //         'journey':journey_id,
+        //         'order': order_id,
+        //         'accepted_order_status': 'active',
+        //     }
+        // });
+        //
+        // $('.main-modal').css('display', 'none')
+    // });
 
     // Negotiate button pressed
 
@@ -154,5 +156,5 @@ $(document).ready(function () {
 
     $('.close-main-modal-button').on('click', function () {
         $('.main-modal').css('display', 'none');
-    })
+    });
 });

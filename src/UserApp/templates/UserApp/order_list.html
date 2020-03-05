@@ -21,8 +21,9 @@
                 <h1 id="" class="modal-content-header">
                     Current Journeys
                 </h1>
-                <div id="modal-current-journey">
-                </div>
+                <form action="{% url "UserApp:UserProfileApi:create_journey_order" %}" method="POST" id="modal-current-journey">
+                    {% csrf_token %}
+                </form>
             </div>
         </div>
 
@@ -42,7 +43,10 @@
         <input type="hidden" id="be-a-traveller-url" class="list_url"
                value="{% url 'UserApp:be_traveller' %}">
 
+
+
         <input type="hidden" id="current_user" value="{{ request.user }}">
+
 
         <input type="hidden" name="csrf_token" id="order-list-csrf-token" class="csrf_token" value="{{ csrf_token }}">
     {% endblock %}
