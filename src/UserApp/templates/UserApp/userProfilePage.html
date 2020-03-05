@@ -73,9 +73,9 @@
 
         <input type="hidden" id="current-completed-order-url" class="list_url"
                value="{% url 'UserApp:UserProfileApi:user_api:order_api-current-completed-order' %}">
+
         <input type="hidden" id="current-completed-journeys-url" class="list_url"
                value="{% url 'UserApp:UserProfileApi:user_api:journey_api-current-completed-journey' %}">
-
         <input type="hidden" id="user-update-url" class="list_url"
                value="{% url 'UserApp:UserProfileApi:user_api:user_api-list' %}">
         <input type="hidden" name="csrf_token" class="csrf_token" value="{{ csrf_token }}">

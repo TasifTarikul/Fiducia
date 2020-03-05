@@ -2,12 +2,13 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.contrib.auth.forms import AuthenticationForm
 from .forms import UserSignUpForm, SelfPackItemForm, CreateOrderForm, TravellerForm
-from .models import Order, Journey
+from .models import Order, Journey, JourneyOrder
 from django.contrib import auth
 from django.urls import reverse, path
 from django.contrib.auth.decorators import login_required
 from django.urls import resolve
 from django.forms import formset_factory
+import uuid
 
 
 def sign_in(request):
@@ -173,8 +174,14 @@ def be_traveller(request):
 
 
 def all_orders(request):
+
     return render(request, 'UserApp/order_list.html')
 
 
 def all_travellers(request):
     return render(request, 'UserApp/traveller_list.html')
+
+
+def single_order(request, pk):
+    print(uuid.UUID(pk))
+    return render(request, 'UserApp/single_order.html')

@@ -23,10 +23,14 @@ $(document).ready(function () {
     // right-panel
 
     const nutrition_order_url = $('#current-completed-order-url').val();
+
     const nutrition_journey_url = $('#current-completed-journeys-url').val();
     const csrf_token = $('.csrf_token').val();
-    console.log(nutrition_order_url);
-    console.log(nutrition_journey_url);
+    // console.log('nutrition_order_url    '+nutrition_order_url);
+    // console.log('nutrition_journey_url  '+nutrition_journey_url);
+
+
+    // list all current and completed order
 
     $.ajax({
         url: nutrition_order_url,
@@ -53,9 +57,10 @@ $(document).ready(function () {
                             '<div class="order-details">To</div>\n' +
                         '</div>\n' +
                         '<div id="each-order-response-details-wrapper">\n' +
-                            '<div class="order-details">Order cancelled  Order canellation Date</div>\n' +
-                            '<div class="order-details">Delivery Status</div>\n' +
-                            '<div class="order-details">Ordere short bio - '+ e.orderer.short_bio+'</div>\n' +
+                            '<div class="order-details" >' +
+                            '<a href="http://127.0.0.1:8000/single-order/'+e.id+'">' +
+                            'link</a>' +
+                            '</div>\n' +
                             '<div class="order-details">Views</div>\n' +
                         '</div>\n' +
                         '</div>'
@@ -70,10 +75,9 @@ $(document).ready(function () {
             $('.packageimage').css(
                 'height', '30vh',
                 'min-width', '26vw',
-                'width', '26vw')
+                'width', '26vw');
 
-            // list all journey
-
+            // list all current and completed journey
 
             $.ajax({
                 url: nutrition_journey_url,

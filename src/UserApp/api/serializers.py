@@ -9,17 +9,19 @@ class UserSerializer(serializers.ModelSerializer):
         exclude = ['is_active', 'is_staff', 'password', 'last_login', 'is_superuser']
 
 
-class OrderSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = Order
-        fields = '__all__'
-
-
 class JourneySerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Journey
+        fields = '__all__'
+
+
+class OrderSerializer(serializers.ModelSerializer):
+
+    journey = JourneySerializer(many=False)
+
+    class Meta:
+        model = Order
         fields = '__all__'
 
 
