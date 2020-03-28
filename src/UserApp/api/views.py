@@ -1,8 +1,8 @@
 from rest_framework import viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
-from .serializers import UserSerializer, OrderSerializer, JourneySerializer, JourneyOrderSerializer
-from ..models import Order, User, Journey, JourneyOrder
+from .serializers import UserSerializer, OrderSerializer, JourneySerializer, JourneyOrderSerializer, NegotiateSerializer
+from ..models import Order, User, Journey, JourneyOrder, Negotiate
 from django.db.models import Q
 import time
 from django.http import HttpResponseRedirect
@@ -51,7 +51,7 @@ class JourneyViewSet(viewsets.ModelViewSet):
     def current_completed_journey(self, request):
         user = request.user
         all_current_journey = self.get_queryset().filter(Q(traveller=user), Q(journey_status='active'))
-        all_complete_journey = self.get_queryset().filter(Q(traveller=user), Q(journey_status='complete'))
+        all_complete_journey = self.get_queryset().filter(Q(traveller=user), Q(journey_status='completed'))
 
         all_current_journey_serializer = self.serializer_class(all_current_journey, many=True)
         all_complete_journey_serializer = self.serializer_class(all_complete_journey, many=True)
@@ -67,12 +67,20 @@ class JourneyOrderViewset(viewsets.ModelViewSet):
     queryset = JourneyOrder.objects.all()
 
 
+class NegotiateViewset(viewsets.ModelViewSet):
+    serializer_class = NegotiateSerializer
+    queryset = Negotiate
+
+    def create(self, request, *args, **kwargs):
+        return HttpResponseRedirect(reverse('UserApp:all_orders'))
+
+
 def create_journey_order(request):
     if request.method == 'POST':
         if 'Accept' in request.POST:
             journey = Journey.objects.get(pk=int(request.POST['journey']))
             order = Order.objects.get(pk=uuid.UUID(request.POST['order']).hex)
-            i = JourneyOrder(order=order, journey= journey,
+            i = JourneyOrder(order=order, journey=journey,
                              accepted_order_status='active')
             order.order_status = 'accepted'
             order.journey = journey

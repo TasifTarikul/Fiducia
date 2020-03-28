@@ -12,7 +12,7 @@ import os
 
 class MyUserManager(BaseUserManager):
     """
-    A custom user manager to deal with emails as unique identifiers for auth
+    A custom user manager to dea---l with emails as unique identifiers for auth
     instead of usernames. The default that's used is "UserManager"
     """
     def _create_user(self, email, password, **extra_fields):
@@ -99,7 +99,7 @@ class Journey(models.Model):
 
     __journey_status = (
         ('active', 'Active'),
-        ('complete', 'Complete'),
+        ('completed', 'Completed'),
         ('cancelled', 'Cancelled'),
     )
 
@@ -111,7 +111,7 @@ class Journey(models.Model):
     destination_area_name = models.CharField(max_length=50, null=True, blank=True)
 
     def __str__(self):
-        return self.traveller.email
+        return self.traveller.email+" "+self.depart_area_name
 
 
 class Order(models.Model):
@@ -159,14 +159,37 @@ class Order(models.Model):
         return self.package_description
 
 
+class Negotiate(models.Model):
+
+    __negotiation_status = (
+        ('active', 'Active'),
+        ('accepted_by_negotiator', 'Accepted by Negotiator'),
+        ('accepted_by_orderer', 'Accepted by Orderer'),
+        ('rejected', 'Rejected'),
+        ('cancelled', 'Cancelled')
+    )
+
+    order = models.ForeignKey(Order, null=True, blank=True, on_delete=models.SET_NULL, related_name='negotiates')
+    journey = models.ForeignKey(Journey, null=True, blank=True, on_delete=models.SET_NULL, related_name='negotiates')
+    negotiator = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, blank=True, on_delete=models.SET_NULL)
+    negotiator_price = models.CharField(max_length=100, null=True, blank=True)
+    orderer_price = models.CharField(max_length=100, null=True, blank=True)
+    negotiation_status = models.CharField(max_length=50, null=True, blank=True, choices=__negotiation_status)
+
+    def __str__(self):
+        return str(self.negotiator)
+
+
 class JourneyOrder(models.Model):
 
     __accepted_order_status = (
         ('active', 'Active'),
-        ('cancelled', 'Cancelled'),
+        ('completed', 'Completed'),
+        ('cancelled', 'Cancelled')
     )
 
-    journey = models.ForeignKey(Journey, null=True, blank=True, on_delete=models.SET_NULL)
+    journey = models.ForeignKey(Journey, null=True, blank=True, on_delete=models.SET_NULL,
+                                related_name='journey_order')
     order = models.ForeignKey(Order, null=True, blank=True, on_delete=models.SET_NULL)
     accepted_order_status = models.CharField(max_length=50, null=True, blank=True, choices=__accepted_order_status)
 
