@@ -183,5 +183,11 @@ def all_travellers(request):
 
 
 def single_order(request, pk):
-    print(uuid.UUID(pk))
-    return render(request, 'UserApp/single_order.html')
+    order = Order.objects.get(pk=pk)
+    negotiates = order.negotiates.all().filter(negotiation_status='active')
+    context = {
+        'user': request.user,
+        'order': order,
+        'negotiates': negotiates
+    }
+    return render(request, 'UserApp/single_order.html', context)

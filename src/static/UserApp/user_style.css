@@ -11,8 +11,8 @@
     margin-top: 4vh;
 }
 #user-info-panel{
-    background-color: #22044a;
-    color: white;
+    background-color: aliceblue;
+    color: midnightblue;
     height: 30vh;
     width: 90vw;
     margin-left:5vw;
@@ -22,7 +22,7 @@
 }
 
 #bottom-section-wrapper{
-    margin:3vw 5vw 0 5vw;
+    margin:3vh 5vw 0 5vw;
     width: 90vw;
     background-color: #0d3b52;
 }
@@ -148,6 +148,8 @@ h2{
     overflow: hidden;
     margin-bottom: 3vh;
     width: 100%;
+    padding: 8px;
+    background-color: aliceblue;
 }
 
 .order-image{
@@ -218,10 +220,7 @@ h2{
 }
 
 .each-current-journey-wrapper{
-    border: 2px solid grey;
-    border-radius: 5px  ;
-    display: flex;
-    margin-bottom: 10px;
+
 }
 
 .current-order-checkbox-wrapper{
@@ -253,4 +252,29 @@ h2{
     padding: 10px;
     border-radius: 3px;
     border-style: none;
+}
+
+/********** SINGLE ORDER PAGE *********/
+
+.content-container{
+}
+
+.product-image{
+    height: 60vh;
+}
+
+.traveller-image{
+    height: 40vh;
+}
+
+.negotiator-modal-body{
+    display: none;
+}
+.negotiator-image{
+    height: 40vh;
+}
+.info-bg{
+    background-color: /*18a4e0 */#d7f0fb;
+    color: black;
+    font-weight: normal;
 }
