@@ -72,7 +72,13 @@ class NegotiateViewset(viewsets.ModelViewSet):
     queryset = Negotiate
 
     def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
         return HttpResponseRedirect(reverse('UserApp:all_orders'))
+
+    def perform_create(self, serializer):
+        serializer.save()
 
 
 def create_journey_order(request):

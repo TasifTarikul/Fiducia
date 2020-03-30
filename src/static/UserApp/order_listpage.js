@@ -118,6 +118,7 @@ $(document).ready(function () {
                                 '<div>' +
                                 '<a href="'+create_journey_url+'">Create A New Journey</a>' +
                                 '</div>'
+                            $('.negotiation-modal-body').html(add_string)
                         }
                         $('#modal-current-journey').append(add_string);
                     }

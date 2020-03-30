@@ -24,6 +24,29 @@ $(document).ready(function () {
         }
     }
 
+    function get_total_negotiates(negotiates_array, journey_status){
+        let total_negotiates = 0;
+        if(journey_status == 'active'){
+            for (var n in negotiates_array){
+                if(negotiates_array[n].negotiation_status== 'active'){
+                    total_negotiates++;
+                }
+            }
+
+            if (total_negotiates == 1){
+                return'<div class="journey-details badge badge-info mr-1">' +
+                    'You have 1 negotiatiaton</div>'
+            }else if(total_negotiates>1){
+                return'<div class="journey-details badge badge-info mr-1">' +
+                    'You have '+total_negotiates+' negotiations</div>'
+            }else{
+                return'<div class="journey-details badge badge-info mr-1">You have no negotiates for this journey</div>'
+            }
+        }else{
+            return '';
+        }
+    }
+
     function get_orders_carrying(journey_order_array, journey_status){
         let total_orders = 0;
         if(journey_status == 'active'){
@@ -168,17 +191,8 @@ $(document).ready(function () {
                                     '<div class="journey-details">Journey Status    -    '+e.journey_status+'</div>\n' +
                                 '</div>\n' +
                                 '<div id="each-journey-response-details-wrapper">\n';
-                                let total_negotiates = get_total_negotiator(e.negotiates);
-                                console.log(total_negotiates);
-                                if (total_negotiates == 1){
-                                    add_string+='<div class="journey-details badge badge-info">' +
-                                        'You have 1 negotiatiaton</div>'
-                                }else if(total_negotiates>1){
-                                    add_string+='<div class="journey-details badge-info">' +
-                                        'You have '+total_negotiates+' negotiations</div>'
-                                }else{
-                                    add_string+='<div class="journey-details">You have no negotiates for this journey</div>'
-                                }
+                                add_string += get_total_negotiates(e.negotiates, e.journey_status);
+
                                 if(key == 'current_journey'){
 
                                     add_string+= get_orders_carrying(e.journey_order, e.journey_status);
