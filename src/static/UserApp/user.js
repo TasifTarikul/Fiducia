@@ -202,8 +202,9 @@ $(document).ready(function () {
                                     add_string+= get_orders_carried(e.journey_order, e.journey_status);
                                 }
                                 add_string+='<div class="journey-details">Views</div>\n' +
-                                '</div>\n' +
-                                '</div>'
+                                    '<a href='+'"http://127.0.0.1:8000/single-journey'+e.id+'" class="journey-details">Details</a>\n' +
+                                    '</div>\n' +
+                                    '</div>'
                             });
                             if(key == 'current_journey'){
                                 $('#current-journey-container').append(add_string);

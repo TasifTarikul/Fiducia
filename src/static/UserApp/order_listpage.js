@@ -46,14 +46,19 @@ $(document).ready(function () {
                         '<div>Weight '+order.package_weight+'</div>\n' +
                         '<div>Delivery price '+order.delivery_price+'</div>\n';
 
+                        // check if the current user is negotiator of this order
+
                         if (order.negotiates.some(n => n.negotiator == parseInt(current_user) &&
                                     (n.negotiation_status == 'accepted' || n.negotiation_status == 'active'))){
                             current_user_is_negotiator = true;
                             htmlstring+='<div id="" class="badge badge-info">Negotiation in process</div>\n'
                         }
+
                         htmlstring+='</div>\n';
                         console.log(current_user_is_negotiator);
-                        // hide accept and negotitation button
+                        // if current user is in negotitation or is a orderer
+                        // disable accept and negotitation button by not adding
+                        //  the classes .accept-button and .negotiate-button
                         if(orderer === current_user || current_user_is_negotiator){
                             htmlstring+='<div class="order-button-wrapper">\n' +
                                 '<div id="" class="order-button btn-primary" style="margin-right: 30px">Accept</div>\n' +
@@ -77,7 +82,13 @@ $(document).ready(function () {
                 }
             });
         }
-    });
+    });$('.order-list-container').on('click','.accept-button', function () {
+        let _order_id = $(this).closest('.order-wrapper').attr('id');
+        // $('#modal-current-journey .modal-submit-button').attr('id', _order_id);
+        $("#modal-current-journey [name='order']").remove(); // remove any previous order id appended
+        $('<input type="hidden" value="'+_order_id+'" name="order">').insertBefore('.modal-submit-button-wrapper');
+        $('.main-modal').css('display', 'block')
+    })
 
     // get current journey of user
 
@@ -117,7 +128,7 @@ $(document).ready(function () {
                                 '<h1>No Current Journeys</h1>'+
                                 '<div>' +
                                 '<a href="'+create_journey_url+'">Create A New Journey</a>' +
-                                '</div>'
+                                '</div>';
                             $('.negotiation-modal-body').html(add_string)
                         }
                         $('#modal-current-journey').append(add_string);

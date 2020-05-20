@@ -23,23 +23,26 @@
 
                           {% if negotiates %}
                               {% for n in negotiates %}
-                              <div class="negotiation-wrapper form-group">
-                                  <label id="" class="mr-2" data-toggle="modal" data-target="#negotiator-modal"
-                                  data-whatever="{{ n.negotiator.id}}-modal">
-                                      {{ n.negotiator.first_name }}
-                                  </label>
-                                  <label id="" class=" mr-2">Offered RM {{ n.negotiator_price }}</label>
-                                  <label id="" class=" mr-2">I offered RM {{ n.orderer_price }}</label>
-                                  <div class="button-wrapper">
-                                      <input class="negotiation_id" value="{{ n.id }}">
-                                      <input class="journey_id" value="{{ n.journey.id }}">
-                                      <div id="" class="nego-accept-button btn btn-primary mr-2">Accept</div>
-                                      <div id="" class="nego-negotiate-button btn btn-secondary mr-2">Negotiate</div>
-                                      <div id="" class="nego-reject-button btn btn-danger">Reject</div>
+                                  <!-- on click negotitator name show Negotiator details modal -->
+                                  <div class="negotiation-wrapper form-group">
+                                      <label id="" class="mr-2" data-toggle="modal" data-target="#negotiator-modal"
+                                      data-whatever="{{ n.negotiator.id}}-modal">
+                                          {{ n.negotiator.first_name }}
+                                      </label>
+                                      <label id="" class=" mr-2">Offered RM {{ n.negotiator_price }}</label>
+                                      <label id="" class=" mr-2">I offered RM {{ n.orderer_price }}</label>
+                                      <div class="button-wrapper">
+                                          <input type="hidden" class="negotiation_id" name="negotiation" value="{{ n.id }}">
+                                          <input type="hidden" class="journey_id" name="journey" value="{{ n.journey.id }}">
+                                          <input type="hidden" class="">
+                                          <div id="" class="nego-accept-button btn btn-primary mr-2">Accept</div>
+                                          <div id="" class="nego-negotiate-button btn btn-secondary mr-2">Negotiate</div>
+                                          <div id="" class="nego-reject-button btn btn-danger">Reject</div>
+                                      </div>
                                   </div>
-                              </div>
-                          {% endfor %}
+                              {% endfor %}
                           {% endif %}
+                      <!-- modal for negotiator details -->
                           <div class="modal fade" id="negotiator-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                               <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                                   <div class="modal-content">
@@ -50,23 +53,23 @@
                                           </button>
                                       </div>
                                       {% for n in negotiates %}
-                                      <div id="{{ n.negotiator.id }}-modal" class="modal-body negotiator-modal-body">
-                                          <div class="container-fluid">
-                                              <div class="row">
-                                                  <div class="col-md-6">
-                                                      <img class="rounded negotiator-image img-fluid" src="{% static 'UserApp/images/team2.png' %}">
-                                                  </div>
-                                                  <div class="col-md-6 bg-light p-3">
-                                                      <p>{{ n.negotiator.first_name }} {{ n.negotiator.last_name }}</p>
-                                                      <p>{{ n.negotiator.short_bio }}</p>
-                                                      <p>{{ n.negotiator.nationality }}</p>
-                                                      <p>date_joined</p>
-                                                      <p>Traveller {{ n.negotiator.traveller_rating }}</p>
-                                                      <p>Shopper {{ n.negotiator.shopper_rating }}</p>
+                                          <div id="{{ n.negotiator.id }}-modal" class="modal-body negotiator-modal-body">
+                                              <div class="container-fluid">
+                                                  <div class="row">
+                                                      <div class="col-md-6">
+                                                          <img class="rounded negotiator-image img-fluid" src="{% static 'UserApp/images/team2.png' %}">
+                                                      </div>
+                                                      <div class="col-md-6 bg-light p-3">
+                                                          <p>{{ n.negotiator.first_name }} {{ n.negotiator.last_name }}</p>
+                                                          <p>{{ n.negotiator.short_bio }}</p>
+                                                          <p>{{ n.negotiator.nationality }}</p>
+                                                          <p>date_joined</p>
+                                                          <p>Traveller {{ n.negotiator.traveller_rating }}</p>
+                                                          <p>Shopper {{ n.negotiator.shopper_rating }}</p>
+                                                      </div>
                                                   </div>
                                               </div>
                                           </div>
-                                      </div>
                                       {% endfor %}
                                   </div>
                               </div>
@@ -100,6 +103,7 @@
             <input type="hidden" class="order_id" value="{{ order.id }}">
             <input type="hidden" class="create_journey_order"
                    value="{% url "UserApp:UserProfileApi:create_journey_order" %}">
+            <input type="hidden" name="csrf_token" id="single-order-csrf-token" class="csrf_token" value="{{ csrf_token }}">
 
 {#            <div class="row">#}
 {#                <div class="col-sm-6" style="background-color: #18a4e0; margin: 0;padding: 0">#}

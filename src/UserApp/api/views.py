@@ -21,7 +21,6 @@ class OrderViewSet(viewsets.ModelViewSet):
 
     @action(detail=False)
     def current_completed_order(self, request):
-        start = time.process_time()
         user = request.user
         all_current_orders = self.get_queryset().filter(Q(orderer=user), ~Q(order_status='received'))
         all_complete_orders = self.get_queryset().filter(Q(orderer=user), Q(order_status='received'))
@@ -71,6 +70,7 @@ class NegotiateViewset(viewsets.ModelViewSet):
     serializer_class = NegotiateSerializer
     queryset = Negotiate
 
+    # over written to redierct to order list page
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
@@ -83,6 +83,7 @@ class NegotiateViewset(viewsets.ModelViewSet):
 
 def create_journey_order(request):
     if request.method == 'POST':
+        print(request.POST)
         if 'Accept' in request.POST:
             journey = Journey.objects.get(pk=int(request.POST['journey']))
             order = Order.objects.get(pk=uuid.UUID(request.POST['order']).hex)
@@ -92,6 +93,8 @@ def create_journey_order(request):
             order.journey = journey
             order.save()
             i.save()
+
             print(request.POST)
-            return HttpResponseRedirect(reverse('UserApp:all_orders'))
+        return HttpResponseRedirect(reverse('UserApp:all_orders'))
+        # return HttpResponseRedirect(reverse('UserApp:single_product', args=order))
 

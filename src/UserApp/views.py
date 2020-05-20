@@ -191,3 +191,11 @@ def single_order(request, pk):
         'negotiates': negotiates
     }
     return render(request, 'UserApp/single_order.html', context)
+
+
+def single_journey(request, pk):
+    journey = Journey.objects.get(pk=pk)
+    context = {
+        'journey': journey
+    }
+    return render(request, 'UserApp/single_journey_page.html', context)

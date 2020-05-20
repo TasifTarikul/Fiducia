@@ -1,6 +1,8 @@
 $(document).ready(function () {
 
     // on display of negotiator modal
+    const create_journey_order_url = $('.create_journey_order').val();
+    var csrf_token = $('#single-order-csrf-token').val();
 
     $('#negotiator-modal').on('show.bs.modal', function (event) {
       var button = $(event.relatedTarget); // Button that triggered the modal
@@ -15,15 +17,29 @@ $(document).ready(function () {
     });
 
     $('.nego-accept-button').on('click', function (event) {
-        let negotitation_id = $(this).closest('.button-wrapper').find('.negotiation_id').val();
+        let negotiation_id = $(this).closest('.button-wrapper').find('.negotiation_id').val();
         let journey_id = $(this).closest('.button-wrapper').find('.journey_id').val();
         let order_id = $('.order_id').val();
-        console.log(negotitation_id,journey_id,order_id);
+        console.log(negotiation_id,journey_id,order_id);
 
 
         // $('.negotiation-wrapper').remove();
         //
-        // $.ajax()
+        data = {
+            'journey':journey_id,
+            'order':order_id,
+            'negotiation_id': negotiation_id
+        };
+        $.ajax({
+            url: create_journey_order_url,
+            headers: {"X-CSRFToken": csrf_token},
+            method: 'POST',
+            data: data,
+            success: function (response) {
+                console.log(response)
+            }
+
+        })
 
     });
 

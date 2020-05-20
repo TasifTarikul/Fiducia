@@ -16,5 +16,6 @@ urlpatterns = [
     path('all-orders', views.all_orders, name='all_orders'),
     path('all-travellers', views.all_travellers, name='alltraveller'),
     path('single-order/<str:pk>', views.single_order, name='single_product'),
+    path('single-journey/<str:pk>', views.single_journey, name='single_journey'),
     path('api/', include('UserApp.api.urls'), name='UserProfileApi')
 ]
