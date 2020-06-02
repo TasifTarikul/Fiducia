@@ -2,9 +2,29 @@
 
     {% block content %}
         {% include 'header_nav.html' %}
+        <h1>Create Order package</h1>
         <form action="{% url 'UserApp:createorder' %}" method="post">
             {% csrf_token %}
-            {{ form.as_p }}
+            {% for field in form %}
+                {% if field.html_name == 'cyber_product_price' %}
+                    <div class="form-group">
+                        <label for="id_cyber_product_price"> Item Price:</label>
+                        {{ field }}
+                    </div>
+                {% elif field.html_name == 'package_image'%}
+                    <div class = "item-image-prev" id="image-preview-container">
+                        <img src="" alt="image-preview" class="image-preview_image" >
+                        <span class="image-preview-default-text">Image preview</span>
+                    </div>
+                    <input type="file" name="package_image" class="create-order-form-input-file">
+                {% else %}
+                    <div class="form-group">
+                        {{ field.label_tag }}
+                        {{ field }}
+                    </div>
+                {% endif %}
+
+            {% endfor %}
             <input type="submit" value="Submit">
         </form>
     {% endblock %}

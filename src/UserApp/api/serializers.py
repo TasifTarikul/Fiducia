@@ -39,6 +39,7 @@ class OrderSerializer(serializers.ModelSerializer):
 
     journey = JourneySerializer(many=False)
     negotiates = NegotiateSerializer(many=True, read_only=True)
+    orderer = UserSerializer(many=False)
 
     class Meta:
         model = Order

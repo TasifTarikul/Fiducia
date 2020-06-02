@@ -151,7 +151,7 @@ class Order(models.Model):
     delivery_status = models.CharField(max_length=100, null=True, blank=True, choices=__delivery_status)
     package_from = models.CharField(max_length=200, null=True, blank=True)
     package_to = models.CharField(max_length=200, null=True, blank=True)
-    journey = models.ForeignKey(Journey, null=True, blank=True, on_delete=models.SET_NULL)
+    journey = models.ForeignKey(Journey, null=True, blank=True, on_delete=models.SET_NULL, related_name='orders')
     orderer = models.ForeignKey(settings.AUTH_USER_MODEL,
                                 null=True, blank=True, on_delete=models.SET_NULL)
 

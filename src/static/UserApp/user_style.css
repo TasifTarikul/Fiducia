@@ -147,6 +147,7 @@ h2{
     border: 2px solid lightskyblue;
     overflow: hidden;
     margin-bottom: 3vh;
+    margin-top: 3vh;
     width: 100%;
     padding: 8px;
     background-color: aliceblue;
@@ -267,6 +268,14 @@ h2{
     height: 40vh;
 }
 
+.negotiation-wrapper > .nego-negotiate-submit-button{
+    display: none;
+}
+
+.negotiation-wrapper > .orderer-price-label > input{
+    display: none;
+}
+
 .negotiator-modal-body{
     display: none;
 }
@@ -278,3 +287,43 @@ h2{
     color: black;
     font-weight: normal;
 }
+
+
+/********** SINGLE JOURNEY PAGE *********/
+
+.journey-section-navbar-button{
+    background-color: white;
+    color: #22044a;
+    border: none;
+    height: 7vh;
+    width: 14vw;
+}
+.journey-section-navbar-button:focus {
+  outline: none;
+  box-shadow: none;
+}
+.journey-section-navbar-button:hover {
+  border-bottom: solid 4px #fd7e14;
+}
+
+.journey-section-package-image{
+    width: 100%;
+}
+
+
+.journey-section-negotiation-package-image{
+    width: 100%;
+}
+
+
+.journey-section-negotiation-input-group{
+    display: none;
+}
+
+
+.journey-section-negotiation-button{
+    height: 7vh;
+    line-height: 7vh;
+    border-radius: 0.25rem;
+}
+

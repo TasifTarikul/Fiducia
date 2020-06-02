@@ -1,5 +1,6 @@
 from rest_framework import viewsets
-from rest_framework.decorators import action
+from rest_framework.decorators import action, api_view
+
 from rest_framework.response import Response
 from .serializers import UserSerializer, OrderSerializer, JourneySerializer, JourneyOrderSerializer, NegotiateSerializer
 from ..models import Order, User, Journey, JourneyOrder, Negotiate
@@ -7,6 +8,7 @@ from django.db.models import Q
 import time
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+from django.shortcuts import redirect
 import uuid
 
 
@@ -81,6 +83,7 @@ class NegotiateViewset(viewsets.ModelViewSet):
         serializer.save()
 
 
+@api_view(['POST'])
 def create_journey_order(request):
     if request.method == 'POST':
         print(request.POST)
@@ -91,10 +94,22 @@ def create_journey_order(request):
                              accepted_order_status='active')
             order.order_status = 'accepted'
             order.journey = journey
+            order.delivery_price = int(request.POST['delivery_price'])
             order.save()
             i.save()
+            # if accept button is pressed by orderer or negotiator
+            if 'negotiation_status' in request.POST:
+                negotiation = Negotiate.objects.get(pk=int(request.POST['negotiation_id']))
+                negotiation.negotiation_status = request.POST['negotiation_status']
+                negotiation.save()
+                # turn all active negotiators to rejected
+                m = order.negotiates.exclude(id=request.POST['negotiation_id']).filter(negotiation_status='active')
+                for e in m:
+                    e.negotiation_status = 'rejected'
+                    e.save()
+                return Response('success') # reload page with jquery to display database changes
+                # return HttpResponseRedirect(reverse('UserApp:single_product', args=(request.POST['order'],)))
 
-            print(request.POST)
         return HttpResponseRedirect(reverse('UserApp:all_orders'))
-        # return HttpResponseRedirect(reverse('UserApp:single_product', args=order))
+
 

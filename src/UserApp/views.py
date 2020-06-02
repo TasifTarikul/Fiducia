@@ -7,6 +7,7 @@ from django.contrib import auth
 from django.urls import reverse, path
 from django.contrib.auth.decorators import login_required
 from django.urls import resolve
+# from .api.serializers import
 from django.forms import formset_factory
 import uuid
 
@@ -195,7 +196,12 @@ def single_order(request, pk):
 
 def single_journey(request, pk):
     journey = Journey.objects.get(pk=pk)
+    orders = journey.orders.all().filter(order_status='accepted')
+    negotiates = journey.negotiates.all().filter(negotiation_status='active')
+
     context = {
-        'journey': journey
+        'journey': journey,
+        'orders': orders,
+        'negotiates': negotiates
     }
     return render(request, 'UserApp/single_journey_page.html', context)

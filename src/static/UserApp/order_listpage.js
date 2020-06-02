@@ -27,68 +27,117 @@ $(document).ready(function () {
         success: function (response) {
             $.map(response, function (val, key) {
                 console.log(key, val);
-                var htmlstring='';
-                $.map(val, function (order) {
-                    let current_user_is_negotiator = false;
-                    let orderer = order.orderer.toString();
-                    htmlstring+=
-                        '<div id="'+order.id+'" class="order-wrapper mt-3">\n' +
-                        '<img class="order-image" src='+order.package_image+'/>\n' +
-                        '<div class="order-list-order-details">\n' +
-                        '<div>Package description '+order.package_description+'</div>\n' +
-                        '<div>Delivery date '+order.delivery_date+'</div>\n';
-                        if (order.departure !=null){
-                            // some orders  may not have
-                            htmlstring+='<div> departure '+order.package_from+'</div>'
-                        }
-                    htmlstring+=
-                        '<div>To '+order.package_to+'</div>\n' +
-                        '<div>Weight '+order.package_weight+'</div>\n' +
-                        '<div>Delivery price '+order.delivery_price+'</div>\n';
+                if (key == 'selfpacked'){
+                    var htmlstring='';
+                    $.map(val, function (order) {
+                        let current_user_is_negotiator = false;
+                        let orderer = order.orderer.id.toString();
+                        console.log(orderer);
+                        console.log(current_user);
+                        htmlstring+=
+                            '<div id="'+order.id+'" class="order-wrapper">\n' +
+                            '<img class="order-image" src='+order.package_image+'/>\n' +
+                            '<div class="order-list-order-details">\n' +
+                            '<div>Orderer '+order.orderer.first_name+'</div>\n' +
+                            '<div>Package description '+order.package_description+'</div>\n' +
+                            '<div>Delivery date '+order.delivery_date+'</div>\n';
+                            if (order.departure !=null){
+                                // some orders  may not have
+                                htmlstring+='<div> departure '+order.package_from+'</div>'
+                            }
+                        htmlstring+=
+                            '<div>To '+order.package_to+'</div>\n' +
+                            '<div>Weight '+order.package_weight+'</div>\n' +
+                            '<div>Delivery price<i class="delivery-price">'+order.delivery_price+'</i></div>\n';
 
-                        // check if the current user is negotiator of this order
+                            // check if the current user is negotiator of this order
 
-                        if (order.negotiates.some(n => n.negotiator == parseInt(current_user) &&
-                                    (n.negotiation_status == 'accepted' || n.negotiation_status == 'active'))){
-                            current_user_is_negotiator = true;
-                            htmlstring+='<div id="" class="badge badge-info">Negotiation in process</div>\n'
-                        }
-
-                        htmlstring+='</div>\n';
-                        console.log(current_user_is_negotiator);
-                        // if current user is in negotitation or is a orderer
-                        // disable accept and negotitation button by not adding
-                        //  the classes .accept-button and .negotiate-button
-                        if(orderer === current_user || current_user_is_negotiator){
-                            htmlstring+='<div class="order-button-wrapper">\n' +
-                                '<div id="" class="order-button btn-primary" style="margin-right: 30px">Accept</div>\n' +
-                                '<div class="order-button btn-secondary"' + '>Negotiate</div>\n' +
-                                '</div>\n' +
-                                '</div>'
-                        }else if (order.orderer !== current_user){
-                            htmlstring+='<div class="order-button-wrapper">\n' +
-                                '<div id="" class="order-button accept-button btn-primary">Accept</div>\n' +
-                                '<div class="order-button negotiate-button btn-secondary"' +
-                                'data-toggle="modal" data-target="#exampleModalCenter">Negotiate</div>\n' +
-                                '</div>\n' +
-                                '</div>'
+                            if (order.negotiates.some(n => n.negotiator == parseInt(current_user) &&
+                                        (n.negotiation_status == 'accepted' || n.negotiation_status == 'active'))){
+                                current_user_is_negotiator = true;
+                                htmlstring+='<div id="" class="badge badge-info">Negotiation in process</div>\n'
                             }
 
-                });
-                if (key == 'selfpacked'){
+                            htmlstring+='</div>\n';
+                            console.log(current_user_is_negotiator);
+                            // if current user is in negotitation or is a orderer
+                            // disable accept and negotitation button by not adding
+                            //  the classes .accept-button and .negotiate-button
+                            if(orderer === current_user || current_user_is_negotiator){
+                                htmlstring+='<div class="order-button-wrapper">\n' +
+                                    '<div id="" class="order-button btn-primary" style="margin-right: 30px">Accept</div>\n' +
+                                    '<div class="order-button btn-secondary"' + '>Negotiate</div>\n' +
+                                    '</div>\n' +
+                                    '</div>'
+                            }else if (order.orderer !== current_user){
+                                htmlstring+='<div class="order-button-wrapper">\n' +
+                                    '<div id="" class="order-button accept-button btn-primary">Accept</div>\n' +
+                                    '<div class="order-button negotiate-button btn-secondary"' +
+                                    ' data-toggle="modal" data-target="#exampleModalCenter">Negotiate</div>\n' +
+                                    '</div>\n' +
+                                    '</div>'
+                                }
+
+                    });
                     $('#selfpacked-order-list-container').append(htmlstring)
                 }else if(key == 'cybershop'){
+                    var htmlstring='';
+                    $.map(val, function (order) {
+                        let current_user_is_negotiator = false;
+                        let orderer = order.orderer.id.toString();
+                        htmlstring+=
+                            '<div id="'+order.id+'" class="order-wrapper">\n' +
+                            '<img class="order-image" src='+order.package_image+'/>\n' +
+                            '<div class="order-list-order-details">\n' +
+                            '<div>Orderer ' + order.orderer.first_name+'</div>\n' +
+                            '<div>Package description '+order.package_description+'</div>\n' +
+                            '<div>Delivery date '+order.delivery_date+'</div>\n';
+                            if (order.departure !=null){
+                                // some orders  may not have
+                                htmlstring+='<div> departure '+order.package_from+'</div>'
+                            }
+                        htmlstring+=
+                            '<div>To ' + order.package_to+'</div>\n' +
+                            '<div>URL- ' + order.url+'</div>\n' +
+                            '<div>Item Price ' + order.cyber_product_price+'</div>\n' +
+                            '<div>Delivery price<i class="delivery-price">'+order.delivery_price+'</i></div>\n';
+
+                            // check if the current user is negotiator of this order
+
+                            if (order.negotiates.some(n => n.negotiator == parseInt(current_user) &&
+                                        (n.negotiation_status == 'accepted' || n.negotiation_status == 'active'))){
+                                current_user_is_negotiator = true;
+                                htmlstring+='<div id="" class="badge badge-info">Negotiation in process</div>\n'
+                            }
+
+                            htmlstring+='</div>\n';
+                            console.log(current_user_is_negotiator);
+                            // if current user is in negotitation or is a orderer
+                            // disable accept and negotitation button by not adding
+                            //  the classes .accept-button and .negotiate-button
+                            if(orderer === current_user || current_user_is_negotiator){
+                                htmlstring+='<div class="order-button-wrapper">\n' +
+                                    '<div id="" class="order-button btn-primary" style="margin-right: 30px">Accept</div>\n' +
+                                    '<div class="order-button btn-secondary"' + '>Negotiate</div>\n' +
+                                    '</div>\n' +
+                                    '</div>'
+                            }else if (order.orderer !== current_user){
+                                htmlstring+='<div class="order-button-wrapper">\n' +
+                                    '<div id="" class="order-button accept-button btn-primary">Accept</div>\n' +
+                                    '<div class="order-button negotiate-button btn-secondary"' +
+                                    'data-toggle="modal" data-target="#exampleModalCenter">Negotiate</div>\n' +
+                                    '</div>\n' +
+                                    '</div>'
+                                }
+
+                    });
+
                     $('#cybershop-order-list-container').append(htmlstring)
                 }
             });
         }
-    });$('.order-list-container').on('click','.accept-button', function () {
-        let _order_id = $(this).closest('.order-wrapper').attr('id');
-        // $('#modal-current-journey .modal-submit-button').attr('id', _order_id);
-        $("#modal-current-journey [name='order']").remove(); // remove any previous order id appended
-        $('<input type="hidden" value="'+_order_id+'" name="order">').insertBefore('.modal-submit-button-wrapper');
-        $('.main-modal').css('display', 'block')
-    })
+    });
+
 
     // get current journey of user
 
@@ -141,9 +190,13 @@ $(document).ready(function () {
 
     $('.order-list-container').on('click','.accept-button', function () {
         let _order_id = $(this).closest('.order-wrapper').attr('id');
+        let delivery_price = $(this).closest('.order-wrapper').find('.delivery-price').text();
+        console.log(delivery_price);
         // $('#modal-current-journey .modal-submit-button').attr('id', _order_id);
         $("#modal-current-journey [name='order']").remove(); // remove any previous order id appended
+        $("#modal-current-journey [name='delivery_price']").remove();
         $('<input type="hidden" value="'+_order_id+'" name="order">').insertBefore('.modal-submit-button-wrapper');
+        $('<input type="hidden" value="'+delivery_price+'" name="delivery_price">').insertBefore('.modal-submit-button-wrapper');
         $('.main-modal').css('display', 'block')
     });
 

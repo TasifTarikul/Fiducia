@@ -3,18 +3,18 @@
 
 {% block content %}
     {% include 'header_nav.html' %}
-    <h1>Send package form</h1>
-    <div>
+    <h1 class="mt-3 ml-3">Send package form</h1>
+    <div class="ml-3">
         <form action="{% url 'UserApp:sendpackage'%}" method="post" enctype="multipart/form-data" id="main-form">
             {% csrf_token %}
             {% comment %}{{ formSet.management_form }}{% endcomment %}
             {% for field in form %}
                 {% if field.label == 'Package image' %}
                     <div class = "item-image-prev" id="image-preview-container">
-                        <img src="" alt="image-preview" class="image-preview__image" >
+                        <img src="" alt="image-preview" class="image-preview_image" >
                         <span class="image-preview-default-text">Image preview</span>
                     </div>
-                    <input type="file" name="package_image" id="input_file">
+                    <input type="file" name="package_image" class="create-order-form-input-file">
                 {% else %}
                     <div>
                         {{ field.label_tag }} {{ field }}

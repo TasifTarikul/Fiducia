@@ -29,12 +29,17 @@
                                       data-whatever="{{ n.negotiator.id}}-modal">
                                           {{ n.negotiator.first_name }}
                                       </label>
-                                      <label id="" class=" mr-2">Offered RM {{ n.negotiator_price }}</label>
-                                      <label id="" class=" mr-2">I offered RM {{ n.orderer_price }}</label>
+                                      <label id="" class="negotiator-price-label mr-2">Offered RM <i class="negotiator-price">{{ n.negotiator_price }}</i></label>
+                                      <label id="" class="orderer-price-label mr-2">I offered RM
+                                          <i class="orderer-price">{{ n.orderer_price }}</i>
+                                          <input class="orderer-price-input" value="{{ n.orderer_price }}">
+                                      </label>
+                                      <div id="" class="nego-negotiate-submit-button btn btn-primary">Submit</div>
+                                      <input type="hidden" class="negotiation_single-object_url"
+                                             value="{% url 'UserApp:UserProfileApi:user_api:negotiate-detail' n.id %}">
                                       <div class="button-wrapper">
                                           <input type="hidden" class="negotiation_id" name="negotiation" value="{{ n.id }}">
                                           <input type="hidden" class="journey_id" name="journey" value="{{ n.journey.id }}">
-                                          <input type="hidden" class="">
                                           <div id="" class="nego-accept-button btn btn-primary mr-2">Accept</div>
                                           <div id="" class="nego-negotiate-button btn btn-secondary mr-2">Negotiate</div>
                                           <div id="" class="nego-reject-button btn btn-danger">Reject</div>
@@ -66,6 +71,8 @@
                                                           <p>date_joined</p>
                                                           <p>Traveller {{ n.negotiator.traveller_rating }}</p>
                                                           <p>Shopper {{ n.negotiator.shopper_rating }}</p>
+                                                          <p>From {{ n.journey.depart_area_name }}</p>
+                                                          <p>To {{ n.journey.destination_area_name }}</p>
                                                       </div>
                                                   </div>
                                               </div>
@@ -87,7 +94,7 @@
                         <img class="mr-5 traveller-image rounded " src="{% static 'UserApp/images/team2.png' %}" alt="Generic placeholder image">
                         <div class="media-body info-bg p-3 rounded">
                             <h5 class="font-weight-bold">{{ order.journey.traveller.first_name }}</h5>
-                            <p id="" class="">Traveller Rating {{ order.package_weight }}</p>
+                            <p id="" class="">Traveller Rating {{ order.journey.traveller.traveller_rating }}</p>
                             <p id="" class="">Orderer Rating {{ order.delivery_price }}</p>
                             <p id="" class="">Travelling From {{ order.journey.depart_area_name }} date&time</p>
                             <p id="" class="">Travelling To {{ order.journey.destination_area_name }} date&time</p>

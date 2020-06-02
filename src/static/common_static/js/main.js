@@ -1,9 +1,9 @@
 $(document).ready(function () {
 
-    // send package form page //
+    // SEND PACKAGE FORM PAGE AND CREATE ORDER FORM PAGE //
 
-    const input_file = $("#input_file");
-    const preview_image = $(".image-preview__image");
+    const input_file = $(".create-order-form-input-file");
+    const preview_image = $(".image-preview_image");
     const previewDefaultText = $(".image-preview-default-text");
 
     function filePreview(input) {

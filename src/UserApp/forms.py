@@ -22,7 +22,7 @@ class SelfPackItemForm(ModelForm):
 class CreateOrderForm(ModelForm):
     class Meta:
         model = Order
-        fields = ['url', 'package_description']
+        fields = ['package_image', 'url', 'package_description', 'cyber_product_price', 'delivery_price']
 
 
 class TravellerForm(ModelForm):
