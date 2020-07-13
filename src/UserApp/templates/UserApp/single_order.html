@@ -20,6 +20,15 @@
                           <p id="" class="">From {{ order.package_from }}</p>
                           <p id="" class="">To {{ order.package_to }}</p>
                           <p id="" class="">Delivery date before{{ order.delivery_date }}</p>
+                          {% if order.order_status != 'awaiting' and  order.payment_status == True  %}
+                              <h3><span class="badge badge-info">Paid</span></h3>
+                          {% elif order.order_status == 'accepted' and order.payment_status == False  %}
+                                <a href="{% url "UserApp:payment" order.id %}" class="btn btn-primary float-right">
+                                    Make payment
+                                </a>
+                          {% else %}
+                                <div></div>
+                          {% endif %}
 
                           {% if negotiates %}
                               {% for n in negotiates %}
@@ -85,8 +94,12 @@
                     </div>
                 </div>
             </div>
+
+
             <br>
+
             {% if order.journey %}
+
             <div class="row4">
                 <div class="col-md-12">
                     <h3>Accepted by</h3>
@@ -95,7 +108,7 @@
                         <div class="media-body info-bg p-3 rounded">
                             <h5 class="font-weight-bold">{{ order.journey.traveller.first_name }}</h5>
                             <p id="" class="">Traveller Rating {{ order.journey.traveller.traveller_rating }}</p>
-                            <p id="" class="">Orderer Rating {{ order.delivery_price }}</p>
+                            <p id="" class="">Orderer Rating {{ order.journey.traveller.shopper_rating }}</p>
                             <p id="" class="">Travelling From {{ order.journey.depart_area_name }} date&time</p>
                             <p id="" class="">Travelling To {{ order.journey.destination_area_name }} date&time</p>
                         </div>

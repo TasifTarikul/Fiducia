@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 
 import os
 
+
 from django.http import HttpResponseRedirect
 from django.urls import reverse, reverse_lazy
 
@@ -115,15 +116,22 @@ REST_FRAMEWORK = {
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
 
+# DATETIME_FORMAT = 'D j, n Y'
+
+# DATETIME_INPUT_FORMAT = ''
+
+DATE_FORMAT = 'D j, n, Y'
+
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'GMT'
+TIME_ZONE = 'UTC'
 
 USE_I18N = True
 
 USE_L10N = True
 
 USE_TZ = True
+
 
 
 # Static files (CSS, JavaScript, Images)

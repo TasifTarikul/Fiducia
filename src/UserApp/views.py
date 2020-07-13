@@ -1,12 +1,15 @@
 from django.shortcuts import render
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.forms import AuthenticationForm
-from .forms import UserSignUpForm, SelfPackItemForm, CreateOrderForm, TravellerForm
+from .forms import UserSignUpForm, SelfPackItemForm, CreateOrderForm, JourneyForm
 from .models import Order, Journey, JourneyOrder
 from django.contrib import auth
 from django.urls import reverse, path
 from django.contrib.auth.decorators import login_required
 from django.urls import resolve
+import stripe
+
+from django.db.models import Q
 # from .api.serializers import
 from django.forms import formset_factory
 import uuid
@@ -152,7 +155,7 @@ def create_order(request):
     return render(request, 'UserApp/create_order.html', context)
 
 
-def be_traveller(request):
+def create_journey(request):
     if request.method == 'POST':
         user = request.user
         if user.is_authenticated and user.is_superuser is False:
@@ -160,13 +163,13 @@ def be_traveller(request):
                 traveller=user,
                 journey_status='active'
             )
-            form = TravellerForm(request.POST, instance=traveller)
+            form = JourneyForm(request.POST, instance=traveller)
             if form.is_valid():
                 form.save(commit=True)
-                return HttpResponseRedirect(reverse('UserApp:be_traveller'))
-        return HttpResponseRedirect(reverse('UserApp:signin')+'?next=UserApp:be_traveller')
+                return HttpResponseRedirect(reverse('UserApp:create_journey'))
+        return HttpResponseRedirect(reverse('UserApp:signin')+'?next=UserApp:create_journey')
 
-    form = TravellerForm()
+    form = JourneyForm()
     context = {
         'form': form,
         'user': request.user
@@ -179,8 +182,8 @@ def all_orders(request):
     return render(request, 'UserApp/order_list.html')
 
 
-def all_travellers(request):
-    return render(request, 'UserApp/traveller_list.html')
+def all_journey(request):
+    return render(request, 'UserApp/journey_list.html')
 
 
 def single_order(request, pk):
@@ -205,3 +208,26 @@ def single_journey(request, pk):
         'negotiates': negotiates
     }
     return render(request, 'UserApp/single_journey_page.html', context)
+
+
+def payment(request, pk):
+    order = Order.objects.get(pk=pk)
+    user = request.user
+    journey_order = JourneyOrder.objects.get(order=order, accepted_order_status='active')
+    context = {
+        'journey_order': journey_order
+    }
+    # if user.stripe_customer_id != '' and user.stripe_customer_id is not None:
+    #     cards = stripe.Customer.list_sources(
+    #         user.stripe_customer_id,
+    #         limit=3,
+    #         object='card'
+    #     )
+    #     cards_list = cards['data']
+    #     if len(cards_list) > 0:
+    #         context['card'] = cards_list[0]
+    #
+    # context['order'] = order
+
+    return render(request, "UserApp/payment.html", context)
+

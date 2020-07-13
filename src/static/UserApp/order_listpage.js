@@ -65,8 +65,8 @@ $(document).ready(function () {
                             //  the classes .accept-button and .negotiate-button
                             if(orderer === current_user || current_user_is_negotiator){
                                 htmlstring+='<div class="order-button-wrapper">\n' +
-                                    '<div id="" class="order-button btn-primary" style="margin-right: 30px">Accept</div>\n' +
-                                    '<div class="order-button btn-secondary"' + '>Negotiate</div>\n' +
+                                    '<div id="" class="order-button alert-primary" style="margin-right: 30px" >Accept</div>\n' +
+                                    '<div class="order-button alert-dark"' + ' disabled>Negotiate</div>\n' +
                                     '</div>\n' +
                                     '</div>'
                             }else if (order.orderer !== current_user){

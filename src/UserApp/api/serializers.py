@@ -1,6 +1,6 @@
 from UserApp.models import Order
 from rest_framework import serializers
-from ..models import User, Order, Journey, JourneyOrder, Negotiate
+from ..models import User, Order, Journey, JourneyOrder, Negotiate, Payment
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -27,6 +27,7 @@ class JourneySerializer(serializers.ModelSerializer):
 
     negotiates = NegotiateSerializer(many=True, read_only=True)
     journey_order = JourneyOrderSerializer(many=True, read_only=True)
+    traveller = UserSerializer(read_only=True)
 
     class Meta:
         model = Journey
@@ -43,7 +44,14 @@ class OrderSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Order
-        fields = ['id', 'order_type', 'order_creation_date', 'url', 'package_image', 'package_weight',
+        fields = ['id', 'order_type', 'timestamp', 'url', 'package_image', 'package_weight',
                   'package_description', 'delivery_price', 'delivery_date', 'cyber_product_price', 'order_status',
                   'orderer_status', 'traveller_status', 'delivery_status', 'package_from', 'package_to', 'journey',
-                  'orderer', 'negotiates']
+                  'orderer', 'negotiates', 'payment_status']
+
+
+class PaymentSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Payment
+        fields = '__all__'

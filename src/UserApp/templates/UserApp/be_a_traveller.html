@@ -2,9 +2,10 @@
 
     {% block content %}
         {% include 'header_nav.html' %}
-        <form action="{% url 'UserApp:be_traveller' %}" method="post">
+        <form action="{% url 'UserApp:create_journey' %}" method="post">
             {% csrf_token %}
             {{ form.as_p }}
+            <input type="date">
             <input type="submit" value="Submit">
         </form>
     {% endblock %}

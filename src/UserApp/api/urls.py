@@ -1,5 +1,6 @@
 from rest_framework import routers
-from .views import UserViewSet, OrderViewSet, JourneyViewSet, JourneyOrderViewset, create_journey_order, NegotiateViewset
+from .views import UserViewSet, OrderViewSet, JourneyViewSet, JourneyOrderViewset, \
+    create_journey_order, NegotiateViewset, on_success_payment
 from django.urls import path, include
 
 
@@ -14,5 +15,6 @@ router.register('negotiate', NegotiateViewset, basename='negotiate')
 
 urlpatterns = [
     path('', include((router.urls, 'user'), namespace='user_api')),
-    path('create-journey-order', create_journey_order, name='create_journey_order')
+    path('create-journey-order', create_journey_order, name='create_journey_order'),
+    path('on_success_payment/<str:journey_order_id>', on_success_payment, name='on_success_payment')
 ]

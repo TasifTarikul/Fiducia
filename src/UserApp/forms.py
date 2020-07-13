@@ -25,7 +25,7 @@ class CreateOrderForm(ModelForm):
         fields = ['package_image', 'url', 'package_description', 'cyber_product_price', 'delivery_price']
 
 
-class TravellerForm(ModelForm):
+class JourneyForm(ModelForm):
     class Meta:
         model = Journey
         exclude = ['traveller', 'journey_status']

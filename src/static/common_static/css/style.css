@@ -20,41 +20,49 @@ body, html, head{
 
         #top-nav-container{
             background-image: linear-gradient(to right, #18a4e0, #06164d);
-            height: 17%;
+
             /*box-shadow: 0px 0px 1px dimgrey;*/
         }
 
-        #top-nav-container-logo-container{
-            float: left;
-            height: 100%;
-            width: 220px;
-            background-color: transparent;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+        /*#top-nav-container-logo-container{*/
+            /*float: left;*/
+            /*height: 100%;*/
+            /*width: 220px;*/
+            /*background-color: transparent;*/
+            /*display: flex;*/
+            /*align-items: center;*/
+            /*justify-content: center;*/
+        /*}*/
         #top-nav-container-logo{
 
             /*margin-left: 80px;*/
-            font-size: 60px;
+            font-size: 2.5vw;
             color: white;
             text-decoration: none;
             font-family: "Ubuntu Light";
         }
 
 
-        .top-nav-container-tool-wrapper{
-            float: right;
-            /*background-color: steelblue;*/
-            margin: 0 0 0 30px;
-            line-height: 100px;
-            height: 100%;
-        }
+        /*.top-nav-container-tool-wrapper{*/
+            /*float: right;*/
+            /*!*background-color: steelblue;*!*/
+            /*margin: 0 0 0 30px;*/
+            /*line-height: 100px;*/
+            /*height: 100%;*/
+        /*}*/
 
         .top-nav-tools-right{
             outline: none;
             text-decoration: none;
             color: white;
+            font-weight: 900;
+        }
+
+        .top-nav-tools-right:hover{
+            outline: none;
+            color: white;
+            text-decoration: none;
+            text-shadow: 0 0 1vw white;
             font-weight: 900;
         }
 
@@ -160,4 +168,69 @@ body, html, head{
 .image-preview_image{
     display: none;
     width: 100%;
+}
+
+/****** checkout_page ******/
+
+.box-decoration{
+    box-shadow: 0vh 1vh 3vh darkgrey;
+    border-radius: 2vh;
+}
+
+#checkout-page-wrapper{
+    min-height: 100%;
+    /*background-color: #06184F;*/
+}
+
+#checkout-content-container{
+    padding: 2vh 2vw 2vh 2vw;
+}
+
+.checkout-each-order-row{
+    padding: 2vh;
+}
+
+.checkout-package-image{
+    max-width: 30vh;
+    max-height: 30vh;
+}
+
+.StripeElement {
+  box-sizing: border-box;
+
+  height: 40px;
+
+  padding: 10px 12px;
+
+  border: 1px solid transparent;
+  border-radius: 4px;
+  background-color: white;
+
+  box-shadow: 0 1px 3px 0 #e6ebf1;
+  -webkit-transition: box-shadow 150ms ease;
+  transition: box-shadow 150ms ease;
+}
+
+.StripeElement--focus {
+  box-shadow: 0 1px 3px 0 #cfd7df;
+}
+
+.StripeElement--invalid {
+  border-color: #fa755a;
+}
+
+.StripeElement--webkit-autofill {
+  background-color: #fefde5 !important;
+}
+
+.payment-options-buttons{
+    font-size: 4vh;
+    font-weight: bolder;
+    text-align: center;
+    line-height: 200%;
+    border-radius: 2vh;
+}
+
+.payment-option-panel{
+
 }

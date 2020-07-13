@@ -39,7 +39,7 @@ $(document).ready(function () {
             journey:journey_id,
             order:order_id,
             negotiation_id: negotiation_id,
-            negotiation_status: 'accepted_by_negotator',
+            negotiation_status: 'accepted_by_negotiator',
             delivery_price: orderer_price,
             Accept: 'Accept' // all accept button send this key to full fill API condition. see create_journey_order api
         };
@@ -55,7 +55,7 @@ $(document).ready(function () {
                 }
             }
         })
-    })
+    });
 
         // NEGOTIATE BUTTON
 
