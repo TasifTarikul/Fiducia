@@ -6,7 +6,7 @@ import uuid
 app_name = 'UserApp'
 
 urlpatterns = [
-    path('fiducia/', views.home_page, name='homePage'),
+    path('', views.home_page, name='homePage'),
     path('signin/', views.sign_in, name='signin'),
     path('signup/', views.sign_up, name='signup'),
     path('profile/', views.usr_profile, name='usrProfile'),

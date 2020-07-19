@@ -11,6 +11,9 @@ $(document).ready(function () {
         }else if($(this).attr('id') == 'journey-section-negotiation-button'){
             $('#journey-section-negotiation-section').show();
         }
+        $('.journey-section-navbar-button').removeClass('hover-effect-selected').addClass('hover-effect');
+        $(this).removeClass('hover-effect');
+        $(this).addClass('hover-effect-selected');
     });
 
     // JOURNEY SECTION PANEL SECTION
@@ -35,7 +38,7 @@ $(document).ready(function () {
 
         console.log(negotiation_id, order_id, orderer_price.trim(), journey_id.trim())
 
-        data = {
+        let data = {
             journey:journey_id,
             order:order_id,
             negotiation_id: negotiation_id,
@@ -64,7 +67,8 @@ $(document).ready(function () {
             .find('.journey-section-negotiator-offered-text');
         let negotiation_input_group = $(this).closest('.journey-section-each-negotiation-wrapper')
             .find('.journey-section-negotiation-input-group');
-        let negotiation_input_group_display = negotiation_input_group.css('display');
+        let negotiation_input_group_display = negotiation_in
+        put_group.css('display');
 
         if (negotiation_input_group_display=='none'){
             negotiation_input_group.css('display', 'block');

@@ -16,13 +16,13 @@ class SelfPackItemForm(ModelForm):
     class Meta:
         model = Order
         fields = ['package_image', 'package_weight', 'package_description',
-                  'delivery_price', 'package_from', 'package_to']
+                  'delivery_price', 'package_from', 'package_to', 'delivery_date']
 
 
 class CreateOrderForm(ModelForm):
     class Meta:
         model = Order
-        fields = ['package_image', 'url', 'package_description', 'cyber_product_price', 'delivery_price']
+        fields = ['package_image', 'url', 'package_description', 'cyber_product_price', 'delivery_price', 'delivery_date']
 
 
 class JourneyForm(ModelForm):

@@ -1,45 +1,61 @@
 {% extends 'base.html' %}
 
     {% block content %}
-    {% include 'header_nav.html' %}
     {% load static %}
-        <div class="container-fluid bg-primary p-3 ">
-            <div class="row justify-content-center">
-                <div class="col-md-11">
+        <div id="single-journey-full-page-wrapper" class="container-fluid">
+            <!--nav bar-->
+            <div class="row">
+                <div class="col-sm-12 p-0">
+                    {% include 'header_nav.html' %}
+                </div>
+            </div>
+
+            <div class="row justify-content-center mt-3">
+                <div class="col-sm-11">
                     <!--current journey info-->
-                    <div class="form-group row mb-0 bg-white">
-                        <label for="staticEmail" class="col-sm-3 col-form-label">Journey Status&emsp;
-                            <h4 class="float-right"><span class="badge badge-primary">Active</span></h4>
-                        </label>
-                    </div>
-                    <div class="form-group row mb-0 bg-light">
-                        <label for="staticEmail" class="col-sm-2 col-form-label ">Departure</label>
-                        <div class="col-sm-7 text-center">
-                            <p type="text" class="form-control-plaintext" id="staticEmail">{{ journey.depart_area_name }}</p>
+                    <div id="current-journey-info-wrapper" class="row">
+
+                        <div class="col-sm-12">
+
+                            <div id="current-journey-info-section-1" class="form-group row mb-0 bg-light">
+                                <label for="staticEmail" class="col-sm-3 col-form-label">Journey Status&emsp;
+                                    <h4 class="float-right"><span class="badge badge-primary">Active</span></h4>
+                                </label>
+                            </div>
+
+                            <div id="current-journey-info-section-2" class="form-group row mb-0 bg-light">
+                                <label for="staticEmail" class="col-sm-2 col-form-label ">Departure</label>
+                                <div class="col-sm-7 text-center">
+                                    <p type="text" class="form-control-plaintext" id="staticEmail">{{ journey.depart_area_name }}</p>
+                                </div>
+                                <div class="col-sm-3 text-center">
+                                    <p type="text" class="form-control-plaintext" id="date">12/04/5 05:66 PM</p>
+                                </div>
+                            </div>
+
+                            <div id="current-journey-info-section-3" class="form-group row mb-0 bg-light">
+                                <label for="staticEmail" class="col-sm-2 col-form-label">Arrival</label>
+                                <div class="col-sm-7 text-center">
+                                    <p type="text" class="form-control-plaintext" id="staticEmail">{{ destination_area_name }}</p>
+                                </div>
+                                <div class="col-sm-3 text-center">
+                                    <p type="text" class="form-control-plaintext" id="date">13/04/5 01:34 AM</p>
+                                </div>
+                            </div>
                         </div>
-                        <div class="col-sm-3 text-center">
-                            <p type="text" class="form-control-plaintext" id="date">12/04/5 05:66 PM</p>
-                        </div>
-                    </div>
-                    <div class="form-group row mb-0 bg-light">
-                        <label for="staticEmail" class="col-sm-2 col-form-label">Arrival</label>
-                        <div class="col-sm-7 text-center">
-                            <p type="text" class="form-control-plaintext" id="staticEmail">{{ destination_area_name }}</p>
-                        </div>
-                        <div class="col-sm-3 text-center">
-                            <p type="text" class="form-control-plaintext" id="date">13/04/5 01:34 AM</p>
-                        </div>
+
                     </div>
 
-                    <!-- Journey Section navbar -->
-                    <div class="row">
-                        <nav class="navbar navbar-expand-md navbar-light bg-white mt-5 col-md-12 p-0">
-                            <button id="journey-section-package-button" class="journey-section-navbar-button">Packages</button>
-                            <button id="journey-section-negotiation-button" class="journey-section-navbar-button">Negotiations</button>
+
+                    <!-- Journey Activities navbar -->
+                    <div id="single-journey-activities-nav-wrapper" class="row mt-4">
+                        <nav id="single-journey-activities-nav" class="navbar navbar-expand-md col-md-12 p-0">
+                            <div id="journey-section-package-button" class="journey-section-navbar-button hover-effect-selected">Packages</div>
+                            <div id="journey-section-negotiation-button" class="journey-section-navbar-button hover-effect">Negotiations</div>
                         </nav>
                     </div>
-                    <!-- Journey Section panel -->
-                    <div class="row mt-2 bg-light p-2" >
+                    <!-- Journey Activities panel -->
+                    <div id="single-journey-activities-panel-wrapper" class="row bg-light p-2 mt-3" >
                         <!-- Packages -->
                         <div id="journey-section-package-section" class="journey-section-panel-section col-md-12">
                             <!-- each row   -->

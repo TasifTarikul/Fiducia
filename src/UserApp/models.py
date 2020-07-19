@@ -60,7 +60,7 @@ class User(AbstractUser):
         path = "order_images/" + str(self.id) +"/"+ imagename
         return path
     username = models.CharField(max_length=150, unique=False, null=True, blank=True)
-    timestamp = models.DateField(null=True, blank=True, auto_now_add=True)
+    timestamp = models.DateField    (null=True, blank=True, auto_now_add=True)
     email = models.EmailField(unique=True, null=False)
     phone_no = models.CharField(max_length=100, null=True, blank=True)
     profile_pic = models.FileField(upload_to=profile_pic_folder, null=True, blank=True)

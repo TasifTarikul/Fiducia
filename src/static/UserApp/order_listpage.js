@@ -8,14 +8,21 @@ $(document).ready(function () {
     console.log(current_user);
     // Order list page
 
+
     $('.order-type-top-nav-items').on('click', function () {
         console.log($(this).text());
         $('.order-list-container').css('display', 'none');
         if ($(this).text() == 'Selfpacked'){
             $('#selfpacked-order-list-container').css('display','block')
+
         }else if($(this).text() == 'Cybershop orders'){
             $('#cybershop-order-list-container').css('display','block')
         }
+
+        $('.order-type-top-nav-items').removeClass('hover-effect-selected');
+        $('.order-type-top-nav-items').addClass('hover-effect');
+        $(this).removeClass('hover-effect');
+        $(this).addClass('hover-effect-selected')
     });
         // get all current orders
 
@@ -34,13 +41,15 @@ $(document).ready(function () {
                         let orderer = order.orderer.id.toString();
                         console.log(orderer);
                         console.log(current_user);
+                        console.log(order.delivery_date);
+                        console.log(typeof(order.delivery_date));
                         htmlstring+=
                             '<div id="'+order.id+'" class="order-wrapper">\n' +
                             '<img class="order-image" src='+order.package_image+'/>\n' +
                             '<div class="order-list-order-details">\n' +
                             '<div>Orderer '+order.orderer.first_name+'</div>\n' +
                             '<div>Package description '+order.package_description+'</div>\n' +
-                            '<div>Delivery date '+order.delivery_date+'</div>\n';
+                            '<div>Deliver by <span class="font-weight-bold">'+order.delivery_date+'</span></div>\n';
                             if (order.departure !=null){
                                 // some orders  may not have
                                 htmlstring+='<div> departure '+order.package_from+'</div>'
@@ -91,7 +100,7 @@ $(document).ready(function () {
                             '<div class="order-list-order-details">\n' +
                             '<div>Orderer ' + order.orderer.first_name+'</div>\n' +
                             '<div>Package description '+order.package_description+'</div>\n' +
-                            '<div>Delivery date '+order.delivery_date+'</div>\n';
+                            '<div>Delivery by <span class="font-weight-bold">'+order.delivery_date+'</span></div>\n';
                             if (order.departure !=null){
                                 // some orders  may not have
                                 htmlstring+='<div> departure '+order.package_from+'</div>'

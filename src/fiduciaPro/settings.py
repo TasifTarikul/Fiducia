@@ -109,7 +109,8 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 REST_FRAMEWORK = {
-    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
+    'DATE_FORMAT': "%B %d %Y",
 }
 
 
@@ -120,15 +121,15 @@ REST_FRAMEWORK = {
 
 # DATETIME_INPUT_FORMAT = ''
 
-DATE_FORMAT = 'D j, n, Y'
+DATE_FORMAT = 'F, j, Y'
 
 LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
 
-USE_I18N = True
+USE_I18N = False
 
-USE_L10N = True
+USE_L10N = False
 
 USE_TZ = True
 

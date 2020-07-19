@@ -2,10 +2,38 @@
 
     {% block content %}
         {% include 'header_nav.html' %}
-        <form action="{% url 'UserApp:create_journey' %}" method="post">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <input type="date">
-            <input type="submit" value="Submit">
-        </form>
+
+        <div class="container-fluid">
+
+            <div class="row">
+                <h1 class="mt-3 ml-3">Create Order package</h1>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-4 pb-3">
+                    <form action="{% url 'UserApp:create_journey' %}" method="post" enctype="multipart/form-data" id="main-form">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="depart_date">Departure</label>
+                            <input type="text" class="form-control" id="depart_date" name="depart_date">
+                        </div>
+                        <div class="form-group">
+                            <label for="depart_date">Date</label>
+                            <input type="text" class="form-control" id="depart_date" name="depart_date">
+                        </div>
+                        <div class="form-group">
+                            <label for="destination_name">Destination</label>
+                            <input type="text" class="form-control" id="destination_name" name="destination_name">
+                        </div>
+                        <div class="form-group">
+                            <label for="destination_date">Date</label>
+                            <input type="date" class="form-control" id="destination_date" name="destination_date">
+                        </div>
+
+                        <button type="submit" class="btn btn-secondary">Submit</button>
+                    </form>
+                </div>
+            </div>
+
+        </div>
     {% endblock %}

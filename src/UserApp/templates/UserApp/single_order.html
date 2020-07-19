@@ -35,8 +35,8 @@
                                   <!-- on click negotitator name show Negotiator details modal -->
                                   <div class="negotiation-wrapper form-group">
                                       <label id="" class="mr-2" data-toggle="modal" data-target="#negotiator-modal"
-                                      data-whatever="{{ n.negotiator.id}}-modal">
-                                          {{ n.negotiator.first_name }}
+                                      data-whatever="{{ n.journey.traveller.id}}-modal">
+                                          {{ n.journey.traveller.first_name }}
                                       </label>
                                       <label id="" class="negotiator-price-label mr-2">Offered RM <i class="negotiator-price">{{ n.negotiator_price }}</i></label>
                                       <label id="" class="orderer-price-label mr-2">I offered RM
@@ -67,19 +67,19 @@
                                           </button>
                                       </div>
                                       {% for n in negotiates %}
-                                          <div id="{{ n.negotiator.id }}-modal" class="modal-body negotiator-modal-body">
+                                          <div id="{{ n.journey.traveller.id }}-modal" class="modal-body negotiator-modal-body">
                                               <div class="container-fluid">
                                                   <div class="row">
                                                       <div class="col-md-6">
                                                           <img class="rounded negotiator-image img-fluid" src="{% static 'UserApp/images/team2.png' %}">
                                                       </div>
                                                       <div class="col-md-6 bg-light p-3">
-                                                          <p>{{ n.negotiator.first_name }} {{ n.negotiator.last_name }}</p>
-                                                          <p>{{ n.negotiator.short_bio }}</p>
-                                                          <p>{{ n.negotiator.nationality }}</p>
+                                                          <p>{{ n.journey.traveller.first_name }} {{ n.journey.traveller.last_name }}</p>
+                                                          <p>{{ n.journey.traveller.short_bio }}</p>
+                                                          <p>{{ n.journey.traveller.nationality }}</p>
                                                           <p>date_joined</p>
-                                                          <p>Traveller {{ n.negotiator.traveller_rating }}</p>
-                                                          <p>Shopper {{ n.negotiator.shopper_rating }}</p>
+                                                          <p>Traveller {{ n.journey.traveller.traveller_rating }}</p>
+                                                          <p>Shopper {{ n.journey.traveller.shopper_rating }}</p>
                                                           <p>From {{ n.journey.depart_area_name }}</p>
                                                           <p>To {{ n.journey.destination_area_name }}</p>
                                                       </div>
@@ -116,7 +116,7 @@
                 </div>
             </div>
             {% else %}
-                <p class="display-4">Not Accepted Ya</p>
+                <p class="display-4">Not Accepted</p>
             {% endif %}
             <br>
 

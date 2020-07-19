@@ -1,4 +1,4 @@
-from rest_framework import viewsets
+from rest_framework import viewsets, permissions
 from rest_framework.parsers import JSONParser
 from rest_framework.decorators import action, api_view
 
@@ -17,6 +17,19 @@ from django.shortcuts import render
 import stripe
 
 import json
+
+
+class CustomerAccessPermission(permissions.BasePermission):
+    message = 'Not Allowed.'
+
+    def has_permission(self, request, view):
+	    # if request.user.is_superuser:
+        if request.user.is_authenticated:
+            if request.user.is_superuser:
+                return True
+        return True
+
+
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -80,7 +93,6 @@ class JourneyViewSet(viewsets.ModelViewSet):
         active_journeys = self.get_queryset().filter(journey_status='active')
         active_journeys_serializer= self.serializer_class(active_journeys, many=True)
         return Response(active_journeys_serializer.data)
-
 
 
 class JourneyOrderViewset(viewsets.ModelViewSet):
