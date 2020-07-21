@@ -57,7 +57,7 @@ $(document).ready(function () {
         let price_input = $(this).closest('.negotiation-wrapper').find('.orderer-price-input');
         let negotiation_submit_button = $(this).closest('.negotiation-wrapper').find('.nego-negotiate-submit-button');
 
-
+        // Show option to negotiate
         if(_display=='none'){
             _price_i_element.css('display', 'none');
             price_input.css('display', 'inline-block');

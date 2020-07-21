@@ -175,7 +175,7 @@ class Negotiate(models.Model):
     negotiator = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, blank=True, on_delete=models.SET_NULL)
     negotiator_price = models.CharField(max_length=100, null=True, blank=True)
     orderer_price = models.CharField(max_length=100, null=True, blank=True)
-    negotiation_status = models.CharField(max_length=50, null=True, blank=True, choices=__negotiation_status)
+    negotiation_status = models.    CharField(max_length=50, null=True, blank=True, choices=__negotiation_status)
     timestamp = models.DateTimeField(null=True, blank=True, auto_now_add=True)
 
     def __str__(self):

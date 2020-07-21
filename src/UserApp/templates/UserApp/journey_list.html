@@ -62,26 +62,9 @@
                   <div id="journey-list-page-all-product-list" class="modal-body">
                       <form id="order-request-form" class="" action="{% url 'UserApp:UserProfileApi:user_api:negotiate-list' %}" method="post">
                         {% csrf_token %}
+
                           <!--- ORDER BOXES--->
-
-
-{#                          <div class="form-check form-row order-box mt-3">#}
-{#                              <div class="col-sm-1">#}
-{#                                  <input class="form-check-input" type="radio" name="order" id="u" value="2">#}
-{#                              </div>#}
-{#                              <div class="col-sm-11">#}
-{#                                  <div class="form-row">#}
-{#                                      <div class="col-sm-6">#}
-{#                                          <img src="">#}
-{#                                      </div>#}
-{#                                      <div class="col-sm-6">#}
-{#                                          <div>Order description</div>#}
-{#                                          <div>Delivery price</div>#}
-{#                                          <input id="" class="" name="orderer_price" value="{{ order.delivery_price }}"/>#}
-{#                                      </div>#}
-{#                                  </div>#}
-{#                              </div>#}
-{#                          </div>#}
+{#                          all current user active orders added from api call#}
 
                           <input type="hidden" id="negotiation-status-value" class="" name="negotiation_status" value="active">
                           <input type="hidden" id="negotiator-value" class="" name="negotiator" value="{{ request.user.id }}">

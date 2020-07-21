@@ -67,8 +67,7 @@ $(document).ready(function () {
             .find('.journey-section-negotiator-offered-text');
         let negotiation_input_group = $(this).closest('.journey-section-each-negotiation-wrapper')
             .find('.journey-section-negotiation-input-group');
-        let negotiation_input_group_display = negotiation_in
-        put_group.css('display');
+        let negotiation_input_group_display = negotiation_input_group.css('display');
 
         if (negotiation_input_group_display=='none'){
             negotiation_input_group.css('display', 'block');
@@ -85,8 +84,8 @@ $(document).ready(function () {
             .find('.journey-section-negotiator-offered').val();
 
         let url = $(this).closest('.journey-section-each-negotiation-wrapper')
-            .find('.journey-section-negotiation-api-url').val()
-        console.log(my_price, url)
+            .find('.journey-section-negotiation-api-url').val();
+        console.log(my_price, url);
 
         data = {
             negotiator_price: my_price
@@ -106,6 +105,8 @@ $(document).ready(function () {
         // REJECT BUTTON
 
     $('.journey-section-reject-button').on('click', function () {
+        let negotiation_url = $(this).closest('.journey-section-each-negotiation-wrapper').find('journey-section-negotiation-api-url').val();
+        console.log(negotiation_id)
 
     });
 

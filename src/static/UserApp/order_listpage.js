@@ -41,8 +41,7 @@ $(document).ready(function () {
                         let orderer = order.orderer.id.toString();
                         console.log(orderer);
                         console.log(current_user);
-                        console.log(order.delivery_date);
-                        console.log(typeof(order.delivery_date));
+
                         htmlstring+=
                             '<div id="'+order.id+'" class="order-wrapper">\n' +
                             '<img class="order-image" src='+order.package_image+'/>\n' +
@@ -59,15 +58,16 @@ $(document).ready(function () {
                             '<div>Weight '+order.package_weight+'</div>\n' +
                             '<div>Delivery price<i class="delivery-price">'+order.delivery_price+'</i></div>\n';
 
-                            // check if the current user is negotiator of this order
+                            // check if the current user is INVOLVED IN NEGOTIATION for this order
 
-                            if (order.negotiates.some(n => n.negotiator == parseInt(current_user) &&
-                                        (n.negotiation_status == 'accepted' || n.negotiation_status == 'active'))){
+                            if (order.negotiates.some(n => n.traveller == parseInt(current_user) && n.negotiation_status == 'active')){
+
                                 current_user_is_negotiator = true;
                                 htmlstring+='<div id="" class="badge badge-info">Negotiation in process</div>\n'
                             }
 
                             htmlstring+='</div>\n';
+
                             console.log(current_user_is_negotiator);
                             // if current user is in negotitation or is a orderer
                             // disable accept and negotitation button by not adding

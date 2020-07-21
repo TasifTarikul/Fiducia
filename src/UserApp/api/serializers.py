@@ -11,9 +11,12 @@ class UserSerializer(serializers.ModelSerializer):
 
 class NegotiateSerializer(serializers.ModelSerializer):
 
+    traveller = serializers.IntegerField(source='journey.traveller.id')
+
     class Meta:
         model = Negotiate
-        fields = '__all__'
+        fields = ['order', 'journey', 'negotiator', 'negotiator_price', 'orderer_price',
+                  'negotiation_status', 'timestamp', 'traveller']
 
 
 class JourneyOrderSerializer(serializers.ModelSerializer):
@@ -27,7 +30,7 @@ class JourneySerializer(serializers.ModelSerializer):
 
     negotiates = NegotiateSerializer(many=True, read_only=True)
     journey_order = JourneyOrderSerializer(many=True, read_only=True)
-    traveller = UserSerializer(read_only=True)
+    traveller = UserSerializer()
 
     class Meta:
         model = Journey
