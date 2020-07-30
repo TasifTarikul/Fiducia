@@ -33,7 +33,7 @@ body, html, head{
             /*align-items: center;*/
             /*justify-content: center;*/
         /*}*/
-        #top-nav-container-logo{
+        #top-nav-container-logo-1{
 
             /*margin-left: 80px;*/
             font-size: 2.5vw;
@@ -42,7 +42,13 @@ body, html, head{
             font-family: "Ubuntu Light";
         }
 
-
+        #top-nav-container-logo-2{
+            /*display: block;*/
+            font-size: 1.2vw;
+            color: white;
+            text-decoration: none;
+            font-family: "Ubuntu Light";
+        }
         /*.top-nav-container-tool-wrapper{*/
             /*float: right;*/
             /*!*background-color: steelblue;*!*/
