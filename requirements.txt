@@ -1,8 +1,15 @@
 certifi==2018.8.24
-Django==2.2.10
+chardet==3.0.4
+Django==2.1.5
 django-filter==2.2.0
 django-widget-tweaks==1.4.3
 djangorestframework==3.11.0
+gunicorn==20.0.4
+idna==2.9
 Pillow==6.2.1
 pycountry==18.12.8
 pytz==2019.1
+requests==2.24.0
+stripe==2.48.0
+urllib3==1.25.9
+whitenoise==5.1.0
