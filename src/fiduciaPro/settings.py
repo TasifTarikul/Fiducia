@@ -29,7 +29,7 @@ SECRET_KEY = '&g)0y^n3yy!*9c9#s#kvi-x-63$xwi37b$#e6_q1r0+_tj98tx'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['fiducia-logistics.herokuapp.com']
 
 
 # Application definition
@@ -51,6 +51,9 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+
+    'whitenoise.middleware.WhiteNoiseMiddleware',
+
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -146,6 +149,7 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
     )
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 AUTH_USER_MODEL = 'UserApp.User'
 
