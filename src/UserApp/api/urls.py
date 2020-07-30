@@ -11,7 +11,7 @@ router.register('userinfo', UserViewSet, basename='user_api')
 router.register('order', OrderViewSet, basename='order_api')
 router.register('journey', JourneyViewSet, basename='journey_api')
 router.register('journey_order', JourneyOrderViewset, basename='journey_order_api')
-router.register('negotiate', NegotiateViewset, basename='negotiate')
+router.register('negotiate', NegotiateViewset, basename='negotiate_api')
 
 urlpatterns = [
     path('', include((router.urls, 'user'), namespace='user_api')),

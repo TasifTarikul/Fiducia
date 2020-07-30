@@ -1,6 +1,10 @@
 $(document).ready(function () {
 
-    // user profile page
+    const nutrition_order_url = $('#current-completed-order-url').val();
+    const nutrition_journey_url = $('#current-completed-journeys-url').val();
+    const csrf_token = $('.csrf_token').val();
+    const single_user_info_update = $('#single-user-update-user-info').val();
+    // user profile page'
 
     // left menu
 
@@ -9,7 +13,7 @@ $(document).ready(function () {
         let total_negotiator = 0;
         if(order_status == 'awaiting'){
             for (var n in negotiates_array){
-                if(negotiates_array[n].negotiation_status== 'active'){
+                if(negotiates_array[n].negotiation_status== 'active' && negotiates_array[n].journey !=null ){
                     total_negotiator++;
                 }
             }
@@ -20,15 +24,16 @@ $(document).ready(function () {
                 return '<div class="order-details">You have '+total_negotiator+' negotiators</div>';
             }
         }else{
-            return '';
+            return '<div class="order-details">You have no negotiators for this order</div>';
         }
     }
 
+    // function to get all negotiates for each current journey
     function get_total_negotiates(negotiates_array, journey_status){
         let total_negotiates = 0;
         if(journey_status == 'active'){
             for (var n in negotiates_array){
-                if(negotiates_array[n].negotiation_status== 'active'){
+                if(negotiates_array[n].negotiation_status == 'active' && negotiates_array[n].order !=null){
                     total_negotiates++;
                 }
             }
@@ -46,12 +51,12 @@ $(document).ready(function () {
             return '';
         }
     }
-
+    // function to get all orders carrying for each current journey
     function get_orders_carrying(journey_order_array, journey_status){
         let total_orders = 0;
         if(journey_status == 'active'){
             for (var e in journey_order_array){
-                if(journey_order_array[e].accepted_order_status == 'active'){
+                if(journey_order_array[e].accepted_order_status == 'active' && journey_order_array[e].order !=null){
                     total_orders++;
                 }
             }
@@ -66,6 +71,7 @@ $(document).ready(function () {
 
     }
 
+    // function to count all orders carried for each completed journey
     function get_orders_carried(journey_order_array, journey_status){
         let total_orders = 0;
 
@@ -101,10 +107,7 @@ $(document).ready(function () {
 
     // right-panel
 
-    const nutrition_order_url = $('#current-completed-order-url').val();
 
-    const nutrition_journey_url = $('#current-completed-journeys-url').val();
-    const csrf_token = $('.csrf_token').val();
     // console.log('nutrition_order_url    '+nutrition_order_url);
     // console.log('nutrition_journey_url  '+nutrition_journey_url);
 
@@ -129,7 +132,7 @@ $(document).ready(function () {
                             '<div class="order-details">Order description  -  '+e.package_description+'</div>\n' +
                             '<div class="order-details">Date Accepted</div>\n' +
                             '<div class="order-details">Price Offered</div>\n';
-                        if(e.order_status == 'accepted'){
+                        if(e.order_status == 'accepted' && e.journey!=null){
                             add_string+='<h5 class=""><span class="badge badge-success">'+e.order_status+'</span></h5>'
                         }
                             add_string+='<div class="order-details">Delivery Status</div>\n' +
@@ -219,4 +222,87 @@ $(document).ready(function () {
 
         }
     });
+
+    $('.user-info-update').on('keydown',function (e) {
+        if (e.which==13){
+            console.log('enter pressed');
+            let input_vlue = $(this).val();
+            console.log(input_vlue);
+            let field_name = $(this).attr('name');
+            console.log(field_name);
+
+            let data = {};
+            data[field_name] = input_vlue;
+
+            $.ajax({
+                url: single_user_info_update,
+                data: data,
+                method: 'PATCH',
+                headers:{'X-CSRFToken': csrf_token},
+                success:function () {
+                    console.log('successfully update');
+                    window.location.reload(true);
+                    window.alert( field_name + 'successfully updated')
+                }
+            });
+
+
+        }
+    });
+
+
+    // PROFILE PIC UPLOAD
+
+    const pic_input = $('#profile-pic-input-file');
+    const pic_preview_img = $('#profile-pic-upload-preview-img');
+    const pic_preview_text = $('#profile-pic-upload-preview-text');
+
+    function file_preview(input){
+        console.log(input.files);
+        console.log(input.files[0]);
+        if (input.files && input.files[0]) {
+            // console.log(typeof (input.files[0].name));
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                pic_preview_text.css('display', 'none');
+                pic_preview_img.css('display', 'block');
+                pic_preview_img.attr('src', e.target.result)
+            };
+            reader.readAsDataURL(input.files[0]);
+        }else{
+            // preview_image.css('display', null);
+            // preview_image.attr('src', "");
+            // previewDefaultText.css('display', null)
+        }
+
+    }
+
+    pic_input.change(function () {
+        file_preview(this);
+    });
+
+
+    // $('#profile-pic-upload-submit-button').on('click', function () {
+    //
+    //     let img = $('#profile-pic-input-file').val();
+    //     console.log(img);
+    //
+    //     let data = {};
+    //
+    //     data['profile_pic']=img;
+    //
+    //     console.log(data);
+    //
+    //     $.ajax({
+    //         url: single_user_info_update,
+    //         method: 'PATCH',
+    //         headers: {'X-CSRFToken': csrf_token},
+    //         data: data,
+    //         success: function () {
+    //             windows.location.reload(true)
+    //         }
+    //
+    //     })
+    // })
+
 });

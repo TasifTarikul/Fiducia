@@ -1,7 +1,12 @@
 $(document).ready(function () {
 
     const create_journey_order_url = $('.create_journey_order').val();
+    const single_journey_api_url = $('#single-journey-page-journey-api-url').val();
     let csrf_token = $('#single-journey-csrf-token').val();
+
+    console.log(single_journey_api_url);
+
+
     // JOURNEY SECTION NAVBAR
 
     $('.journey-section-navbar-button').on('click', function () {
@@ -19,6 +24,26 @@ $(document).ready(function () {
     // JOURNEY SECTION PANEL SECTION
 
     $('#journey-section-negotiation-section').hide();
+
+    // PACKAGES SECTION
+
+        // ON CLICK ORDERER NAME
+    // by deafult hide all orderer detail in modal
+    $('.each-orderer-detail-modal').hide();
+
+    $('#single-journey-page-orderer-detail-modal').on('show.bs.modal', function (event) {
+      var button = $(event.relatedTarget); // Button that triggered the modal
+      var orderer = button.data('orderer-id');// Extract class name that will be shown in the modal, from data-* attributes
+      console.log(orderer);
+      // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+      // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+      $('.each-orderer-detail-modal').hide();
+      $('#orderer-'+orderer).show();
+      // modal.find('.modal-title').text('New message to ' + recipient)
+      // modal.find('.modal-body input').val(recipient)
+    });
+
+
 
     // NEGOTIATION SECTION
 
@@ -105,8 +130,19 @@ $(document).ready(function () {
         // REJECT BUTTON
 
     $('.journey-section-reject-button').on('click', function () {
-        let negotiation_url = $(this).closest('.journey-section-each-negotiation-wrapper').find('journey-section-negotiation-api-url').val();
-        console.log(negotiation_id)
+        let negotiation_url = $(this).closest('.journey-section-each-negotiation-wrapper').find('.journey-section-negotiation-api-url').val();
+        let data = {
+            negotiation_status: 'rejected_by_traveller'
+        };
+        $.ajax({
+            url:negotiation_url,
+            method: 'PATCH',
+            headers: {'X-CSRFToken': csrf_token},
+            data: data,
+            success: function () {
+                location.reload(true)
+            }
+        })
 
     });
 
@@ -125,6 +161,8 @@ $(document).ready(function () {
         modal.find('#negotiation-modal-package-image').attr('src', package_detail[0]);
         modal.find('#negotiation-modal-package-description').text(package_detail[1]);
         modal.find('#negotiation-modal-order-type').text(package_detail[2]);
+        modal.find('#negotiation-modal-order-from').text(package_detail[3]);
+        modal.find('#negotiation-modal-order-to').text(package_detail[4]);
         //check order type
         if (package_detail[2] == 'cybershop'){
             modal.find('#negotiation-modal-order-type')
@@ -143,8 +181,20 @@ $(document).ready(function () {
         modal.find('#negotiation-modal-orderer-nationality').text(orderer_detail[4]);
         console.log(package_detail);
         console.log(orderer_detail);
-    })
+    });
 
 
+    // CANCEL JOURNEY BUTTON
+
+    $('#single-journey-page-journey-cancel-button').on('click', function () {
+        $.ajax({
+            url:single_journey_api_url,
+            method:'DELETE',
+            headers: {'X-CSRFToken': csrf_token},
+            success:function (response) {
+                console.log('journey successfully deleted')
+            }
+        })
+    });
 
 });

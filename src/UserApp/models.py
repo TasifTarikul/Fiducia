@@ -57,10 +57,11 @@ class User(AbstractUser):
         )
 
     def profile_pic_folder(self, imagename):
-        path = "order_images/" + str(self.id) +"/"+ imagename
+        path = "user_profile_images/" + str(self.id) +"/"+ imagename
         return path
     username = models.CharField(max_length=150, unique=False, null=True, blank=True)
-    timestamp = models.DateField    (null=True, blank=True, auto_now_add=True)
+    date_joined = models.DateTimeField( null=True, blank=True)
+    timestamp = models.DateField(null=True, blank=True, auto_now_add=True)
     email = models.EmailField(unique=True, null=False)
     phone_no = models.CharField(max_length=100, null=True, blank=True)
     profile_pic = models.FileField(upload_to=profile_pic_folder, null=True, blank=True)
@@ -92,7 +93,7 @@ class User(AbstractUser):
     objects = MyUserManager()
 
     def __str__(self):
-        return self.email
+        return str(self.id)
 
 
 class Journey(models.Model):
@@ -111,7 +112,7 @@ class Journey(models.Model):
     destination_area_name = models.CharField(max_length=50, null=True, blank=True)
 
     def __str__(self):
-        return self.traveller.email+" "+self.depart_area_name
+        return self.traveller.email
 
 
 class Order(models.Model):
@@ -166,7 +167,8 @@ class Negotiate(models.Model):
         ('active', 'Active'),
         ('accepted_by_negotiator', 'Accepted by Negotiator'),
         ('accepted_by_orderer', 'Accepted by Orderer'),
-        ('rejected', 'Rejected'),
+        ('rejected_by_orderer', 'Rejected by Orderer'),
+        ('rejected_by_traveller', 'Rejected by Traveller'),
         ('cancelled', 'Cancelled')
     )
 
@@ -175,11 +177,11 @@ class Negotiate(models.Model):
     negotiator = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, blank=True, on_delete=models.SET_NULL)
     negotiator_price = models.CharField(max_length=100, null=True, blank=True)
     orderer_price = models.CharField(max_length=100, null=True, blank=True)
-    negotiation_status = models.    CharField(max_length=50, null=True, blank=True, choices=__negotiation_status)
+    negotiation_status = models.CharField(max_length=50, null=True, blank=True, choices=__negotiation_status)
     timestamp = models.DateTimeField(null=True, blank=True, auto_now_add=True)
 
-    def __str__(self):
-        return str(self.negotiator)
+    # def __str__(self):
+    #     return str(self.negotiator)
 
 
 class JourneyOrder(models.Model):

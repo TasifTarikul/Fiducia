@@ -44,6 +44,26 @@
 
                    </div>
 
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination">
+                            <li class="page-item">
+                                <a id="previous-link" class="page-link" data-url="" aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+                            <li class="page-item"><a id="start-link" class="page-link" data-url="">Start</a></li>
+                            <li class="page-item"><a class="page-link page-number-boxes" href="">1</a></li>
+                            <li id="end-link-wrapper" class="page-item">
+                                <a id="end-link" class="page-link" data-url="">End</a>
+                            </li>
+                            <li id="next-link-wrapper" class="page-item">
+                              <a id="next-link" class="page-link" data-url="" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                              </a>
+                            </li>
+                        </ul>
+                    </nav>
+
                 </div>
 
             </div>
@@ -60,7 +80,7 @@
                     </button>
                   </div>
                   <div id="journey-list-page-all-product-list" class="modal-body">
-                      <form id="order-request-form" class="" action="{% url 'UserApp:UserProfileApi:user_api:negotiate-list' %}" method="post">
+                      <form id="order-request-form" class="" action="{% url 'UserApp:UserProfileApi:user_api:negotiate_api-list' %}" method="post">
                         {% csrf_token %}
 
                           <!--- ORDER BOXES--->

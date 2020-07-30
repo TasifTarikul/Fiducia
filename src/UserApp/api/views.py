@@ -1,4 +1,4 @@
-from rest_framework import viewsets, permissions
+from rest_framework import viewsets, permissions,pagination
 from rest_framework.parsers import JSONParser
 from rest_framework.decorators import action, api_view
 
@@ -23,23 +23,42 @@ class CustomerAccessPermission(permissions.BasePermission):
     message = 'Not Allowed.'
 
     def has_permission(self, request, view):
-	    # if request.user.is_superuser:
         if request.user.is_authenticated:
             if request.user.is_superuser:
                 return True
         return True
 
 
+class StandardResultsSetPagination(pagination.PageNumberPagination):
+    page_size = 5
+
+    def get_paginated_response(self, data):
+        # print(dir(self.page))
+        return Response({
+            'pagination': {
+                'next': self.get_next_link(),
+                'previous': self.get_previous_link(),
+                'total_value': self.page.paginator.count,
+                'this_page_start_index_no': self.page.start_index(),
+                'this_page_end_index_no': self.page.end_index(),
+                'num_of_pages': self.page.paginator.num_pages,
+                'current_page': self.page.number,
+                'page_range': list(self.page.paginator.page_range)
+            },
+            'results': data
+        })
 
 
 class UserViewSet(viewsets.ModelViewSet):
     serializer_class = UserSerializer
     queryset = User.objects.all()
+    permission_classes = (CustomerAccessPermission,)
 
 
 class OrderViewSet(viewsets.ModelViewSet):
     serializer_class = OrderSerializer
     queryset = Order.objects.all()
+    permission_classes = (CustomerAccessPermission,)
 
     @action(detail=False)
     def user_active_orders(self, request):
@@ -63,8 +82,10 @@ class OrderViewSet(viewsets.ModelViewSet):
     def list(self, request, *args, **kwargs):
         all_self_orders = self.get_queryset().filter(Q(order_status='awaiting'), Q(order_type='selfpacked'))
         all_cyberproduct_orders = self.get_queryset().filter(Q(order_status='awaiting'), Q(order_type='cybershop'))
-        all_self_orders_serializer = self.serializer_class(all_self_orders, many=True)
-        all_cyberproduct_orders_orders_serializer = self.serializer_class(all_cyberproduct_orders, many=True)
+        all_self_orders_page = self.paginate_queryset(all_self_orders)
+        all_cyberproduct_orders_page= self.paginate_queryset(all_cyberproduct_orders)
+        all_self_orders_serializer = self.serializer_class(all_self_orders_page, many=True)
+        all_cyberproduct_orders_orders_serializer = self.serializer_class(all_cyberproduct_orders_page, many=True)
         return Response({
             'selfpacked':all_self_orders_serializer.data,
             'cybershop': all_cyberproduct_orders_orders_serializer.data
@@ -74,6 +95,8 @@ class OrderViewSet(viewsets.ModelViewSet):
 class JourneyViewSet(viewsets.ModelViewSet):
     serializer_class = JourneySerializer
     queryset = Journey.objects.all()
+    permission_classes = (CustomerAccessPermission,)
+    pagination_class = StandardResultsSetPagination
 
     @action(detail=False)
     def current_completed_journey(self, request):
@@ -91,18 +114,21 @@ class JourneyViewSet(viewsets.ModelViewSet):
 
     def list(self, request, *args, **kwargs):
         active_journeys = self.get_queryset().filter(journey_status='active')
-        active_journeys_serializer= self.serializer_class(active_journeys, many=True)
-        return Response(active_journeys_serializer.data)
+        page = self.paginate_queryset(active_journeys)
+        active_journeys_serializer = self.serializer_class(page, many=True)
+        return self.get_paginated_response(active_journeys_serializer.data)
 
 
 class JourneyOrderViewset(viewsets.ModelViewSet):
     serializer_class = JourneyOrderSerializer
     queryset = JourneyOrder.objects.all()
+    permission_classes = (CustomerAccessPermission,)
 
 
 class NegotiateViewset(viewsets.ModelViewSet):
     serializer_class = NegotiateSerializer
     queryset = Negotiate
+    permission_classes = (CustomerAccessPermission,)
 
     # over written to redierct to order list page
     def create(self, request, *args, **kwargs):

@@ -10,17 +10,27 @@
                 </div>
             </div>
 
-            <div class="row justify-content-center mt-3">
+            <div class="row justify-content-center mt-3 pb-4">
                 <div class="col-sm-11">
                     <!--current journey info-->
                     <div id="current-journey-info-wrapper" class="row">
 
                         <div class="col-sm-12">
 
-                            <div id="current-journey-info-section-1" class="form-group row mb-0 bg-light">
-                                <label for="staticEmail" class="col-sm-3 col-form-label">Journey Status&emsp;
-                                    <h4 class="float-right"><span class="badge badge-primary">Active</span></h4>
-                                </label>
+                            <div id="current-journey-info-section-1" class="form-group row mb-0 bg-light border-bottom">
+                                <div for="staticEmail" class="col-sm-2 col-form-label">Journey Status</div>
+                                <div class="col-sm-2 text-center">
+                                    <p type="text" class="form-control-plaintext" id="staticEmail">
+                                        <h4 class=""><span class="badge badge-primary text-capitalize">{{ journey.journey_status }}</span></h4>
+                                    </p>
+                                </div>
+                                <div class="col-sm-2 text-center">
+                                    <p type="text" class="form-control-plaintext" id="date">
+                                        <div id="single-journey-page-journey-cancel-button" class="btn btn-danger">
+                                            Cancel Journey
+                                        </div>
+                                    </p>
+                                </div>
                             </div>
 
                             <div id="current-journey-info-section-2" class="form-group row mb-0 bg-light">
@@ -58,102 +68,118 @@
                     <div id="single-journey-activities-panel-wrapper" class="row bg-light p-2 mt-3" >
                         <!-- Packages -->
                         <div id="journey-section-package-section" class="journey-section-panel-section col-md-12">
+                            {% if orders %}
                             <!-- each row   -->
-                            {% for package in  orders %}
-                                <div class="row mt-2">
-                                    <div class="col-sm-2 p-0"><img class="journey-section-package-image" src="{{ package.package_image.url }}"></div>
-                                    <div class="col-sm-5 pl-sm-5">
-                                        <div class="row">{{ package.package_description }}</div>
-                                        <div class="row">{{ package.package_weight }}</div>
-                                        <div class="row">{{ package.delivery_price }}</div>
-                                        <div class="row">Delivery price {{ package.delivery_price }}</div>
-                                    </div>
-                                    <div class="col-sm-5">
-                                        <div class="row">Orderer {{ package.orderer}}</div>
-                                        <div class="row">From {{ package.journey.depart_area_name }}</div>
-                                        <div class="row">To {{ package.journey.destination_area_name }}</div>
-                                    </div>
-                                </div>
-                            {% endfor %}
-                        </div>
-                        <!-- Negotiations -->
-                        <div id="journey-section-negotiation-section" class="journey-section-panel-section col-sm-12">
-                            {% for negotiation in negotiates %}
-                                <div class="row journey-section-each-negotiation-wrapper">
-                                    <!-- package detail -->
-                                    <div class="col-sm-2">
-                                        <div class="row negotiation-package-image">
-                                            <img class="col-sm-12 journey-section-negotiation-package-image p-0"
-                                                 src="{{ negotiation.order.package_image.url }}">
+                                {% for package in  orders %}
+                                    <div class="row mt-4">
+                                        <div class="col-sm-2 p-0">
+                                            <img class="journey-section-package-image" src="{{ package.package_image.url }}">
+                                            {% if package.payment_status is True %}
+                                                <div class="badge badge-info mt-2">Payment is confirmed by the orderer</div>
+                                            {% elif package.payment_status is False %}
+                                                <div class="badge badge-info mt-2">Payment is not confirmed yet.
+                                                    You can see Orderers email to contact once the payment is confirmed.</div>
+                                            {% endif %}
                                         </div>
-                                        <div class="row mt-2">
-                                            <div class="each-negotiation-detail-button p-2 rounded" data-toggle="modal" data-target="#negotiation-modal"
-                                                 style="background-color: #fd7e14; color: white; font-weight: bolder; font-size: larger; font-family: Helvetica Neue, Helvetica, Arial, sans-serif;"
-                                                 data-package="{{ negotiation.order.package_image.url }},{{ negotiation.order.package_description }},{{ negotiation.order.order_type }},{{ negotiation.order.cyber_product_price }}"
-                                                 data-orderer = "{{ negotiation.order.orderer.first_name }} {{ negotiation.order.orderer.last_name }},{{ negotiation.order.orderer.shopper_rating }},{{ negotiation.order.orderer.traveller_rating }},{{ negotiation.order.orderer.short_bio }},{{ negotiation.order.orderer.nationality }}">
-                                                View detail
+                                        <div class="col-sm-5 pl-sm-5">
+                                            <div class="row">{{ package.package_description }}</div>
+                                            <div class="row">{{ package.package_weight }}</div>
+                                            <div class="row">{{ package.delivery_price }}</div>
+                                            <div class="row">Delivery price {{ package.delivery_price }}</div>
+                                        </div>
+                                        <div class="col-sm-5">
+                                            <div class="row" data-toggle="modal" data-target="#orderer-detail-modal" data-orderer-id="{{ package.orderer.id }}" >Orderer {{ package.orderer.first_name}} {{ package.orderer.last_name}}</div>
+                                            <div class="row">From {{ package.journey.depart_area_name }}</div>
+                                            <div class="row">To {{ package.journey.destination_area_name }}</div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            {% else %}
+                                <p class="text-dark font-weight-bold">Currently not carrying any packages</p>
+                            {% endif %}
+                        </div>
+                        <!-- Negotiations Activities panel -->
+                        <div id="journey-section-negotiation-section" class="journey-section-panel-section col-sm-12">
+                            {% if negotiates %}
+                                {% for negotiation in negotiates %}
+                                    <div class="row journey-section-each-negotiation-wrapper mt-4">
+                                        <!-- package detail -->
+                                        <div class="col-sm-2">
+                                            <div class="row negotiation-package-image">
+                                                <img class="col-sm-12 journey-section-negotiation-package-image p-0"
+                                                     src="{{ negotiation.order.package_image.url }}">
+                                            </div>
+                                            <div class="row mt-2">
+                                                <div class="each-negotiation-detail-button p-2 rounded" data-toggle="modal" data-target="#negotiation-modal"
+                                                     style="background-color: #fd7e14; color: white; font-weight: bolder; font-size: larger; font-family: Helvetica Neue, Helvetica, Arial, sans-serif;"
+                                                     data-package="{{ negotiation.order.package_image.url }},{{ negotiation.order.package_description }},{{ negotiation.order.order_type }},{{ negotiation.order.cyber_product_price }},{{ negotiation.order.package_from }}, {{ negotiation.order.package_to }} "
+                                                     data-orderer = "{{ negotiation.order.orderer.first_name }} {{ negotiation.order.orderer.last_name }},{{ negotiation.order.orderer.shopper_rating }},{{ negotiation.order.orderer.traveller_rating }},{{ negotiation.order.orderer.short_bio }},{{ negotiation.order.orderer.nationality }}">
+                                                    View detail
+                                                </div>
                                             </div>
                                         </div>
+
+                                        <div class="col-md-2 form-group">
+    {#                                        <label for="journey-section-negotiator-offered"#}
+    {#                                               class="journey-section-negotiation-input-label journey-section-negotiation-input-group">#}
+    {#                                            I offered#}
+    {#                                        </label>#}
+                                            <input id="" class="w-100 journey-section-negotiator-offered
+                                             journey-section-negotiation-input-group"
+                                                   value="{{ negotiation.negotiator_price }}">
+                                            <div id=""
+                                               class="journey-section-negotiation-button mt-1
+                                                        journey-section-negotiation-submit-button
+                                                        journey-section-negotiation-input-group
+                                               btn-primary text-center">Submit</div>
+                                            <label class="journey-section-negotiator-offered-text">
+                                                I offered
+                                            </label>
+                                            <p class="journey-section-negotiator-offered-text">{{ negotiation.negotiator_price }}</p>
+                                        </div>
+
+                                        <div class="col-md-2 form-group">
+                                            <label for="journey-section-orderer-offered">Offered to me</label>
+                                            <p id="" class="journey-section-orderer-offered">
+                                                {{ negotiation.orderer_price }}
+                                            </p>
+                                        </div>
+
+                                        <div class="col-md-2">
+                                            <div id=""
+                                               class="journey-section-accept-button
+                                               journey-section-negotiation-button btn-primary text-center">Accept</div>
+                                        </div>
+
+                                        <div class="col-md-2">
+                                            <div id=""
+                                               class="journey-section-negotiate-button
+                                               journey-section-negotiation-button btn-secondary text-center">Negotiate</div>
+                                        </div>
+
+                                        <div class="col-md-2">
+                                            <div id=""
+                                               class="journey-section-reject-button
+                                               journey-section-negotiation-button btn-danger text-center">Reject</div>
+                                        </div>
+
+                                        <input type="hidden" id="" class="journey-section-negotiation-id" value="{{ negotiation.id }}">
+                                        <input  type="hidden" id="" class="journey-section-order-id" value="{{ negotiation.order.id }}">
+                                        <input type="hidden" id="" class="journey-section-negotiation-api-url"
+                                               value="{% url 'UserApp:UserProfileApi:user_api:negotiate_api-detail' negotiation.id %}">
+
                                     </div>
-
-                                    <div class="col-md-2 form-group">
-{#                                        <label for="journey-section-negotiator-offered"#}
-{#                                               class="journey-section-negotiation-input-label journey-section-negotiation-input-group">#}
-{#                                            I offered#}
-{#                                        </label>#}
-                                        <input id="" class="w-100 journey-section-negotiator-offered
-                                         journey-section-negotiation-input-group"
-                                               value="{{ negotiation.negotiator_price }}">
-                                        <div id=""
-                                           class="journey-section-negotiation-button mt-1
-                                                    journey-section-negotiation-submit-button
-                                                    journey-section-negotiation-input-group
-                                           btn-primary text-center">Submit</div>
-                                        <label class="journey-section-negotiator-offered-text">
-                                            I offered
-                                        </label>
-                                        <p class="journey-section-negotiator-offered-text">{{ negotiation.negotiator_price }}</p>
-                                    </div>
-
-                                    <div class="col-md-2 form-group">
-                                        <label for="journey-section-orderer-offered">Offered to me</label>
-                                        <p id="" class="journey-section-orderer-offered">
-                                            {{ negotiation.orderer_price }}
-                                        </p>
-                                    </div>
-
-                                    <div class="col-md-2">
-                                        <div id=""
-                                           class="journey-section-accept-button
-                                           journey-section-negotiation-button btn-primary text-center">Accept</div>
-                                    </div>
-
-                                    <div class="col-md-2">
-                                        <div id=""
-                                           class="journey-section-negotiate-button
-                                           journey-section-negotiation-button btn-secondary text-center">Negotiate</div>
-                                    </div>
-
-                                    <div class="col-md-2">
-                                        <div id=""
-                                           class="journey-section-reject-button
-                                           journey-section-negotiation-button btn-danger text-center">Reject</div>
-                                    </div>
-
-                                    <input type="hidden" id="" class="journey-section-negotiation-id" value="{{ negotiation.id }}">
-                                    <input  type="hidden" id="" class="journey-section-order-id" value="{{ negotiation.order.id }}">
-                                    <input type="hidden" id="" class="journey-section-negotiation-api-url"
-                                           value="{% url 'UserApp:UserProfileApi:user_api:negotiate-detail' negotiation.id %}">
-
-                                </div>
-                            {% endfor %}
-
+                                {% endfor %}
+                            {% else %}
+                                <p class="text-dark font-weight-bold">Currently no negotiations</p>
+                            {% endif %}
                         </div>
                     </div>
 
                 </div>
             </div>
         </div>
+
         <!-- each negotiation modal detail -->
         <div class="modal fade" id="negotiation-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -173,6 +199,8 @@
                           <div class="col-sm-6">
                               <div id="negotiation-modal-package-description" class="form-group"></div>
                               <div id="negotiation-modal-order-type" class="form-group"></div>
+                              <div id="negotiation-modal-order-from" class="form-group"></div>
+                              <div id="negotiation-modal-order-to" class="form-group"></div>
                           </div>
                       </div>
                       <!-- orderer details -->
@@ -210,7 +238,53 @@
           </div>
         </div>
 
+        <!--- each packages orderer details modal ------>
+
+        <div class="modal fade" id="single-journey-page-orderer-detail-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                  <div class="container-fluid">
+                      {%  for package in orders %}
+                      <!-- package details -->
+                          <div id="orderer-{{ package.orderer.id }}" class="row each-orderer-detail-modal">
+                              <div class="col-sm-6">
+                                  <img id="single-journeypage-order-image" class=" img-fluid" src="{% static 'UserApp/images/team2.png' %}">
+                              </div>
+                              <div class="col-sm-6">
+                                  <div id="negotiation-modal-orderer-name" class="form-group">
+                                      {{ package.orderer.first_name}} {{ package.orderer.last_name}}
+                                  </div>
+                                  {% if package.payment_status is True %}
+                                    <div id="negotiation-modal-order-email" class="form-group">
+                                        {{ package.orderer.email}}
+                                    </div>
+                                  {% elif package.payment_status is Flse %}
+                                    <div id="negotiation-modal-order-email-not-available-message" class="form-group">
+                                        Email will be displayed after the orderer confirms payment
+                                    </div>
+                                  {% endif %}
+                                  <div id="negotiation-modal-order-nationality" class="form-group">{{ package.orderer.nationality}}</div>
+                                  <div id="negotiation-modal-order-short-bio" class="form-group">{{ package.orderer.short_bio}}</div>
+                              </v>
+                          </div>
+                      {% endfor %}
+                  </div>
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <input type="hidden" class="journey-section-journey-id" value="{{ journey.id }}">
+        <input type="hidden" id="single-journey-page-journey-api-url" class="" value="{% url 'UserApp:UserProfileApi:user_api:journey_api-detail' journey.id %}">
         <input type="hidden" class="create_journey_order"
                    value="{% url "UserApp:UserProfileApi:create_journey_order" %}">
         <input type="hidden" name="csrf_token" id="single-journey-csrf-token" class="csrf_token" value="{{ csrf_token }}">

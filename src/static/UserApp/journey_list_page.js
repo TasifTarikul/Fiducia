@@ -8,17 +8,37 @@ $(document).ready(function () {
 
     // GET ALL JOURNEY
 
-    $.ajax({
-        url: all_journey_url,
+    function render_journeys(url){
+
+        function apend_pgnation_numbr_box(current_page, limit) {
+            $('.page-number-boxes-wrapper').remove();
+            for (var i = current_page; i <= limit; i++) {
+                $('<li class="page-item page-number-boxes-wrapper">' +
+                    '<a id="page-'+i+'-link" class="page-link page-number-boxes" data-url="' + all_journey_url + '?page=' + i.toString() + '">' + i + '</a>' +
+                    '</li>').insertBefore('#end-link-wrapper')
+            }
+            $('.page-link').css({
+                'color': 'black'
+            });
+            $('#page-'+current_page.toString()+'-link').css({
+                'color':'#007bff'
+            })
+        }
+
+        $.ajax({
+        url: url,
         method:'GET',
         dataType: 'json',
         'X-CSRFToken': csrf_token,
         success: function (response) {
-            console.log(response);
+            let pagination = response.pagination;
+            let current_page = parseInt(pagination.current_page);
+            let num_of_pages = parseInt(pagination.num_of_pages);
             let html_string = '';
-            $.map(response, function (journey) {
+            console.log(response);
+            $.map(response.results, function (journey) {
                 html_string+=
-                    '<div id="" class="row journey-list-each-journey-wrapper">\n' +
+                    '<div id="" class="row journey-list-each-journey-wrapper bg-light">\n' +
                     '<div id="" class="col-sm-3">\n' +
                     '<h5>Journey detail</h5>\n' +
                     '<div>From '+ journey.depart_area_name +'</div>\n' +
@@ -54,8 +74,44 @@ $(document).ready(function () {
                     '</div>';
                 }
             });
+            $('#journey-list-each-journey-container').empty();
+            $('#journey-list-each-journey-container').append(html_string);
 
-            $('#journey-list-each-journey-container').append(html_string)
+
+            // pagination
+
+            $('#next-link').attr('data-url', pagination.next);
+            if(pagination.previous != null){
+                $('#previous-link').attr('data-url', pagination.previous);
+            }
+            $('.pagination').find('.page-number-boxes').remove();
+            if (num_of_pages-current_page<=3){
+                apend_pgnation_numbr_box(current_page, num_of_pages)
+            }else if (num_of_pages-current_page>3){
+                apend_pgnation_numbr_box(current_page, current_page+1)
+            }
+
+            $('#start-link').attr('data-url', all_journey_url+'?page=1');
+            $('#end-link').attr('data-url', all_journey_url+'?page='+num_of_pages)
+
+        }
+    });
+    }
+
+    render_journeys(all_journey_url);
+
+
+
+    // PAGINATION
+
+    $('.pagination').on('click', '.page-link', function (event) {
+        let url = $(this).attr('data-url');
+        $('.page-link').css({
+            'color': 'black',
+        });
+        console.log(url);
+        if(url != ''){
+            render_journeys(url)
         }
     });
 
@@ -122,6 +178,7 @@ $(document).ready(function () {
                 $(journey).append('<div class="journey-list-page-order-negotiation-message badge-info p-2 rounded">Already in negotiation process</div>')
             }
         });
+
         $('#order-request-form').find('.journey-selected').remove(); //remove any previous journey selected
         // add new selected journey id
         $('<input id="" class="journey-selected" type="hidden" value="'+selected_journey_id+'" name="journey">').insertBefore('#negotiation-status-value');

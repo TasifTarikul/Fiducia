@@ -11,7 +11,8 @@ class UserSerializer(serializers.ModelSerializer):
 
 class NegotiateSerializer(serializers.ModelSerializer):
 
-    traveller = serializers.IntegerField(source='journey.traveller.id')
+    traveller = serializers.IntegerField(source='journey.traveller.id', allow_null=True)
+    #to check negotiation if process, see order_list_page.js
 
     class Meta:
         model = Negotiate
@@ -34,7 +35,6 @@ class JourneySerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Journey
-
         fields = ['id', 'traveller', 'journey_status', 'depart_date', 'depart_area_name',
                   'destination_date', 'destination_area_name', 'negotiates', 'journey_order']
 

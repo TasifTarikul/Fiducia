@@ -5,58 +5,66 @@
 
 {% block content %}
 
-    <div id="top-section-wrapper">
-        <!--------nav ------->
-        {% include "header_nav.html" %}
+    <div id="top-section-wrapper" class="container-fluid">
         <!-------- banner ------->
-        <div id="main-banner" class="">
-            <div id="main-banner-content-container">
-                <h1 id="main-banner-content-heading">
-                    Travel wasn't this fun, Delivery wasn't this cheap
-                </h1>
-                <div id="main-banner-content-send-section" class="main-banner-content-section-wrapper">
-                    <div id="main-banner-content-send-text" class="main-banner-content-text">
-                        Send personal package Lorem Ipsum is simply dummy text of the printing and
-                        typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
+        <div id="main-banner" class="row">
+            <div id="main-banner-content-container" class="col-sm-12">
+                <!--------nav ------->
+                <div class="row">
+                    <div class="col-sm-12 p-0">
+                        {% include "header_nav.html" %}
                     </div>
-                    <a id="main-banner-content-send-button" class="main-banner-content-button" href="{% url 'UserApp:sendpackage' %}" >
-                        Send Package
-                    </a>
+
                 </div>
-                <div id="main-banner-content-create-section" class="main-banner-content-section-wrapper">
-                    <div id="main-banner-content-create-text" class="main-banner-content-text">
-                        Want to buy something from abroad It is a long established fact that a reader will
-                        be distracted by the readable content of a page when looking at its layout.
+
+                <div id="main-banner-content-heading-wrapper" class="row justify-content-center">
+                    <h1 id="main-banner-content-heading" class="col-sm-7 text-center">
+                        Order, Travel, Earn, Save !
+                    </h1>
+                </div>
+
+                <div id="main-banner-card-wrapper" class="row">
+
+                    <div id="" class="col-sm-4 main-banner-content-section-wrapper">
+                        <div class="main-banner-card">
+                          <div class="main-banner-card-body">
+                            <p id="main-banner-content-send-text" class="main-banner-card-text">Send self-packed item. If you already have some items and you want to send the Package.</p>
+                            <a href="{% url 'UserApp:sendpackage' %}" id="main-banner-content-send-button" class="main-banner-content-button">Send Package</a>
+                          </div>
+                        </div>
                     </div>
-                    <a id="main-banner-content-create-button" class="main-banner-content-button" href="{% url 'UserApp:createorder' %}">
-                        Create order
-                    </a>
-                </div>
-                <div id="main-banner-content-traveller-section" class="main-banner-content-section-wrapper">
-                    <div id="main-banner-content-traveller-text" class="main-banner-content-text">
-                        Earn while travelling There are many variations of passages of Lorem Ipsum available, but
-                        the majority have suffered alteration in some form, by injected humour.
+
+                    <div id="" class="col-sm-4 main-banner-content-section-wrapper">
+                        <div class="main-banner-card">
+                          <div class="main-banner-card-body">
+                            <p id="main-banner-content-create-text" class="main-banner-card-text">Want to buy something from abroad. Copy url from any E-commerce sit and create an Order.</p>
+                            <a href="{% url 'UserApp:createorder' %}" id="main-banner-content-create-button" class="main-banner-content-button">Create Order</a>
+                          </div>
+                        </div>
                     </div>
-                    <a id="main-banner-content-traveller-button" class="main-banner-content-button" href="{% url 'UserApp:create_journey' %}">
-                        Be a Traveller
-                    </a>
+
+                    <div id="" class="col-sm-4 main-banner-content-section-wrapper">
+
+                        <div class="main-banner-card">
+                          <div class="main-banner-card-body">
+                            <p id="main-banner-content-journey-text" class="main-banner-card-text">Earn while travelling by carrying packages and reduce you trip cost.</p>
+                            <a href="{% url 'UserApp:create_journey' %}" id="main-banner-content-journey-button" class="main-banner-content-button">Post journey</a>
+                          </div>
+                        </div>
+                    </div>
+
                 </div>
-            </div>
-            <div id="main-banner-video-container">
-                <video id="main-banner-video-element" playsinline autoplay muted loop controls>
-                    <source src = {%  static 'UserApp/videos/Animated_Marketing_Video_BNA_eCommerce.mp4' %} type="video/mp4" >
-                </video>
             </div>
         </div>
     </div>
 
-    <!------second section-------->
-    <div id="second-section">
-
-    </div>
-
-    <!------second section-------->
-    <div id="third-section">
-
-    </div>
+{#    <!------second section-------->#}
+{#    <div id="second-section">#}
+{##}
+{#    </div>#}
+{##}
+{#    <!------second section-------->#}
+{#    <div id="third-section">#}
+{##}
+{#    </div>#}
 {% endblock %}

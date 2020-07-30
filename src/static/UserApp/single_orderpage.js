@@ -2,7 +2,10 @@ $(document).ready(function () {
 
     // on display of negotiator modal
     const create_journey_order_url = $('.create_journey_order').val();
+    const single_order_api_url = $('#single-order-page-order-api-url').val()
     var csrf_token = $('#single-order-csrf-token').val();
+    let current_page_url = $('#current-page-url').val();
+
 
     $('#negotiator-modal').on('show.bs.modal', function (event) {
       var button = $(event.relatedTarget); // Button that triggered the modal
@@ -97,7 +100,38 @@ $(document).ready(function () {
 
 
     $('.nego-reject-button').on('click', function (event) {
+        let this_button = $(this);
+        let nego_reject_url = this_button.closest('.negotiation-wrapper').find('.negotiation_single-object_url').val();
+        console.log(nego_reject_url);
 
+        let data = {
+            negotiation_status: "rejected_by_orderer",
+        };
+
+        $.ajax({
+            url: nego_reject_url,
+            headers: {'X-CSRFToken': csrf_token},
+            method: 'PATCH',
+            data: data,
+            success: function () {
+                console.log('success reject');
+                location.reload(true)
+            }
+        })
     });
+    
+    // CANCEL ORDER
+    
+    $('#single-order-page-cancel-order-button').on('click', function (event) {
+        console.log('cancel button pressed');
+        $.ajax({
+            url: single_order_api_url,
+            headers: {'X-CSRFToken':csrf_token},
+            method: 'DELETE',
+            success: function () {
+                console.log('cancelled')
+            }
+        })
+    })
 
 });

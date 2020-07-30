@@ -24,6 +24,23 @@ $(document).ready(function () {
         $(this).removeClass('hover-effect');
         $(this).addClass('hover-effect-selected')
     });
+
+    // add_orderer daetail to modal
+
+    function add_orderer_detail_to_modal(orderer_id, image_url, first_name, last_name, nationality, short_bio){
+        $('#order-list-page-orderer-detail-container').append(
+            '<div id="order-list-page-orderer-'+ orderer_id +'" class="row order-list-page-each-orderer-detail-modal">\n' +
+            '<div class="col-sm-6">Profile pic \n' +
+            '<img id="single-journeypage-order-image" class=" img-fluid" src="'+image_url+'">\n' +
+            '</div>\n' +
+            '<div class="col-sm-6">\n' +
+            '<div id="negotiation-modal-orderer-name" class="form-group">'+first_name+''+last_name+ '</div>\n' +
+            '<div id="negotiation-modal-order-nationality" class="form-group">'+nationality+'</div>\n' +
+            '<div id="negotiation-modal-order-short-bio" class="form-group">'+short_bio+'</div>\n' +
+            '</div>\n' +
+            '</div>'
+        )
+    }
         // get all current orders
 
     $.ajax({
@@ -35,7 +52,8 @@ $(document).ready(function () {
             $.map(response, function (val, key) {
                 console.log(key, val);
                 if (key == 'selfpacked'){
-                    var htmlstring='';
+                    let htmlstring='';
+                    let orderer_detail_modal_string='';
                     $.map(val, function (order) {
                         let current_user_is_negotiator = false;
                         let orderer = order.orderer.id.toString();
@@ -43,10 +61,10 @@ $(document).ready(function () {
                         console.log(current_user);
 
                         htmlstring+=
-                            '<div id="'+order.id+'" class="order-wrapper">\n' +
+                            '<div id="'+order.id+'" class="order-wrapper bg-light">\n' +
                             '<img class="order-image" src='+order.package_image+'/>\n' +
                             '<div class="order-list-order-details">\n' +
-                            '<div>Orderer '+order.orderer.first_name+'</div>\n' +
+                            '<div id="" class="" data-orderer-id="'+order.orderer.id+'" data-target="#order-list-page-orderer-detail-modal" data-toggle="modal" >Orderer '+order.orderer.first_name+'</div>\n' +
                             '<div>Package description '+order.package_description+'</div>\n' +
                             '<div>Deliver by <span class="font-weight-bold">'+order.delivery_date+'</span></div>\n';
                             if (order.departure !=null){
@@ -86,19 +104,25 @@ $(document).ready(function () {
                                     '</div>\n' +
                                     '</div>'
                                 }
-
+                                // add orderer detaile to orderer modal
+                                add_orderer_detail_to_modal(order.orderer.id,order.orderer.profile_pic,
+                                    order.orderer.first_name, order.orderer.last_name, order.orderer.nationality,
+                                    order.orderer.short_bio);
                     });
-                    $('#selfpacked-order-list-container').append(htmlstring)
+
+                    $('#selfpacked-order-list-container').append(htmlstring);
+                    $('#order-list-page-orderer-detail-container').append(orderer_detail_modal_string)
+
                 }else if(key == 'cybershop'){
                     var htmlstring='';
                     $.map(val, function (order) {
                         let current_user_is_negotiator = false;
                         let orderer = order.orderer.id.toString();
                         htmlstring+=
-                            '<div id="'+order.id+'" class="order-wrapper">\n' +
+                            '<div id="'+order.id+'" class="order-wrapper bg-light">\n' +
                             '<img class="order-image" src='+order.package_image+'/>\n' +
                             '<div class="order-list-order-details">\n' +
-                            '<div>Orderer ' + order.orderer.first_name+'</div>\n' +
+                            '<div  data-orderer-id="'+order.orderer.id+'" data-target="#order-list-page-orderer-detail-modal" data-toggle="modal" >Orderer ' + order.orderer.first_name+'</div>\n' +
                             '<div>Package description '+order.package_description+'</div>\n' +
                             '<div>Delivery by <span class="font-weight-bold">'+order.delivery_date+'</span></div>\n';
                             if (order.departure !=null){
@@ -138,6 +162,9 @@ $(document).ready(function () {
                                     '</div>\n' +
                                     '</div>'
                                 }
+                        add_orderer_detail_to_modal(order.orderer.id,order.orderer.profile_pic,
+                            order.orderer.first_name, order.orderer.last_name, order.orderer.nationality,
+                            order.orderer.short_bio);
 
                     });
 
@@ -145,6 +172,21 @@ $(document).ready(function () {
                 }
             });
         }
+    });
+
+
+    $('.order-list-page-each-orderer-detail-modal').hide();
+
+    $('#order-list-page-orderer-detail-modal').on('show.bs.modal', function (event) {
+      var button = $(event.relatedTarget); // Button that triggered the modal
+      var orderer = button.data('orderer-id');// Extract class name that will be shown in the modal, from data-* attributes
+      console.log(orderer);
+      // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+      // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+      $('.order-list-page-each-orderer-detail-modal').hide();
+      $('#order-list-page-orderer-'+orderer).show();
+      // modal.find('.modal-title').text('New message to ' + recipient)
+      // modal.find('.modal-body input').val(recipient)
     });
 
 

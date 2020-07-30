@@ -20,12 +20,15 @@
                           <p id="" class="">From {{ order.package_from }}</p>
                           <p id="" class="">To {{ order.package_to }}</p>
                           <p id="" class="">Delivery date before{{ order.delivery_date }}</p>
+                          <div id="single-order-page-cancel-order-button" class="btn btn-danger">Cancel Order</div>
                           {% if order.order_status != 'awaiting' and  order.payment_status == True  %}
                               <h3><span class="badge badge-info">Paid</span></h3>
                           {% elif order.order_status == 'accepted' and order.payment_status == False  %}
-                                <a href="{% url "UserApp:payment" order.id %}" class="btn btn-primary float-right">
-                                    Make payment
-                                </a>
+                              <a href="{% url "UserApp:payment" order.id %}" class="btn btn-primary float-right">
+                                  Make payment
+                              </a>
+                              <p id="" class="badge badge-info float-right mt-2">Please make payment to see travellers Email</p>
+
                           {% else %}
                                 <div></div>
                           {% endif %}
@@ -45,7 +48,7 @@
                                       </label>
                                       <div id="" class="nego-negotiate-submit-button btn btn-primary">Submit</div>
                                       <input type="hidden" class="negotiation_single-object_url"
-                                             value="{% url 'UserApp:UserProfileApi:user_api:negotiate-detail' n.id %}">
+                                             value="{% url 'UserApp:UserProfileApi:user_api:negotiate_api-detail' n.id %}">
                                       <div class="button-wrapper">
                                           <input type="hidden" class="negotiation_id" name="negotiation" value="{{ n.id }}">
                                           <input type="hidden" class="journey_id" name="journey" value="{{ n.journey.id }}">
@@ -107,6 +110,9 @@
                         <img class="mr-5 traveller-image rounded " src="{% static 'UserApp/images/team2.png' %}" alt="Generic placeholder image">
                         <div class="media-body info-bg p-3 rounded">
                             <h5 class="font-weight-bold">{{ order.journey.traveller.first_name }}</h5>
+                            {% if order.payment_status is True %}
+                                <p id="" class="">Email{{ order.journey.traveller.email }}</p>
+                            {% endif %}
                             <p id="" class="">Traveller Rating {{ order.journey.traveller.traveller_rating }}</p>
                             <p id="" class="">Orderer Rating {{ order.journey.traveller.shopper_rating }}</p>
                             <p id="" class="">Travelling From {{ order.journey.depart_area_name }} date&time</p>
@@ -124,6 +130,9 @@
             <input type="hidden" class="create_journey_order"
                    value="{% url "UserApp:UserProfileApi:create_journey_order" %}">
             <input type="hidden" name="csrf_token" id="single-order-csrf-token" class="csrf_token" value="{{ csrf_token }}">
+            <input id="current-page-url" class="" type="hidden" value="{{ request.path }}"/>
+            <!--url to make api request for this order-->
+            <input id="single-order-page-order-api-url" class="" type="hidden" value="{% url 'UserApp:UserProfileApi:user_api:order_api-detail' order.id %}">
 
 {#            <div class="row">#}
 {#                <div class="col-sm-6" style="background-color: #18a4e0; margin: 0;padding: 0">#}
@@ -134,4 +143,8 @@
 {#                </div>#}
 {#            </div>#}
         </div>
+
+
+
+
     {% endblock %}

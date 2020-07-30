@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.forms import AuthenticationForm
 from .forms import UserSignUpForm, SelfPackItemForm, CreateOrderForm, JourneyForm
@@ -6,6 +6,7 @@ from .models import Order, Journey, JourneyOrder
 from django.contrib import auth
 from django.urls import reverse, path
 from django.contrib.auth.decorators import login_required
+from django.core.files.storage import FileSystemStorage
 from django.urls import resolve
 import stripe
 
@@ -31,10 +32,17 @@ def sign_in(request):
                 if user.account_status == 'deactive':  # reactive account if deactivated
                     user.accountq_status = 'active'
                     user.save()
-
-                return HttpResponseRedirect(reverse(next))
+                print('logged in successfully')
+                try:
+                    return HttpResponseRedirect(reverse(next))
+                except:
+                    print('url reverse didnt work')
+                try:
+                    return redirect(next)
+                except:
+                    print('redirect also didnt work')
             except Exception as e:
-                print(e,'user can\'t logged in after register')
+                print(e,'user can\'t logged in after register tasif')
 
         else:
             print('error ase ', form.errors.as_data())
@@ -61,9 +69,16 @@ def sign_up(request):
             try:
                 auth.login(request, user)
                 if request.user.is_authenticated:
-                    return HttpResponseRedirect(reverse(next))
+                    try:
+                        return HttpResponseRedirect(reverse(next))
+                    except:
+                        print('url reverse didnt work')
+                    try:
+                        return redirect(next)
+                    except:
+                        print('redirect also didnt work')
             except Exception as e:
-                print('user can\'t logged in after register')
+                print('user can\'t logged in after register tasif')
     else:
         form = UserSignUpForm()
 
@@ -88,7 +103,17 @@ def home_page(request):
 def usr_profile(request):
     # if request.user.is_superuser:  # checks wether the user is a superuser.
     #     return HttpResponseRedirect(reverse('superAdmin:dashboard'))
-    user =  request.user
+    user = request.user
+    if 'upload_profile_pic' in request.POST:
+        doc = request.FILES.get('profile_pic')
+
+        if doc:
+            fs = FileSystemStorage(location='media/user_profile_images/'+str(user.id)+'/')
+            filename = fs.save(doc.name, doc)
+            user.profile_pic = 'user_profile_images/'+str(user.id)+'/'+filename
+            user.save()
+            return HttpResponseRedirect(reverse('UserApp:usrProfile'))
+
     context = {
         'user': user
     }
@@ -98,8 +123,6 @@ def usr_profile(request):
 
 def sendpackage(request):
     user = request.user
-    current_url = resolve(request.path_info)
-    print(current_url)
     if request.method == 'POST':
         user = request.user
         if user.is_authenticated and user.is_superuser is False:
@@ -176,12 +199,11 @@ def create_journey(request):
     }
     return render(request, 'UserApp/be_a_traveller.html', context)
 
-
+@login_required
 def all_orders(request):
-
     return render(request, 'UserApp/order_list.html')
 
-
+@login_required
 def all_journey(request):
     return render(request, 'UserApp/journey_list.html')
 
