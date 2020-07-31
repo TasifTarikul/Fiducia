@@ -9,7 +9,8 @@ class UserSignUpForm(UserCreationForm):
         model = get_user_model()
         exclude = ['is_favorite', 'account_status', 'profile_pic', 'user_permissions', 'is_staff', 'is_active',
                    'is_superuser', 'groups', 'last_login', 'date_joined', 'username',
-                   'password', 'shopper_rating', 'traveller_rating']
+                   'password', 'shopper_rating', 'traveller_rating', 'current_add_city', 'current_add_state',
+                   'phone_no', 'short_bio', 'passport_no']
 
 
 class SelfPackItemForm(ModelForm):

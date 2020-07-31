@@ -121,6 +121,7 @@ def usr_profile(request):
     return render(request, 'UserApp/userProfilePage.html', context)
 
 
+@login_required()
 def sendpackage(request):
     user = request.user
     if request.method == 'POST':
@@ -190,6 +191,8 @@ def create_journey(request):
             if form.is_valid():
                 form.save(commit=True)
                 return HttpResponseRedirect(reverse('UserApp:create_journey'))
+            else:
+                print(form.errors)
         return HttpResponseRedirect(reverse('UserApp:signin')+'?next=UserApp:create_journey')
 
     form = JourneyForm()

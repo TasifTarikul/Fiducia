@@ -15,19 +15,19 @@
                         {% csrf_token %}
                         <div class="form-group">
                             <label for="depart_date">Departure</label>
-                            <input type="text" class="form-control" id="depart_date" name="depart_area_name">
+                            <input type="text" class="form-control" id="depart_date" name="depart_area_name" required>
                         </div>
                         <div class="form-group">
                             <label for="depart_date">Date</label>
-                            <input type="date" class="form-control" id="depart_date" name="depart_date">
+                            <input type="date" class="form-control" id="depart_date" name="depart_date" required>
                         </div>
                         <div class="form-group">
                             <label for="destination_name">Destination</label>
-                            <input type="text" class="form-control" id="destination_name" name="destination_area_name">
+                            <input type="text" class="form-control" id="destination_name" name="destination_area_name" required>
                         </div>
                         <div class="form-group">
                             <label for="destination_date">Date</label>
-                            <input type="date" class="form-control" id="destination_date" name="destination_date">
+                            <input type="date" class="form-control" id="destination_date" name="destination_date" required>
                         </div>
 
                         <button type="submit" class="btn btn-secondary">Submit</button>

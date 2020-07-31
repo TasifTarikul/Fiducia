@@ -82,10 +82,8 @@ class OrderViewSet(viewsets.ModelViewSet):
     def list(self, request, *args, **kwargs):
         all_self_orders = self.get_queryset().filter(Q(order_status='awaiting'), Q(order_type='selfpacked'))
         all_cyberproduct_orders = self.get_queryset().filter(Q(order_status='awaiting'), Q(order_type='cybershop'))
-        all_self_orders_page = self.paginate_queryset(all_self_orders)
-        all_cyberproduct_orders_page= self.paginate_queryset(all_cyberproduct_orders)
-        all_self_orders_serializer = self.serializer_class(all_self_orders_page, many=True)
-        all_cyberproduct_orders_orders_serializer = self.serializer_class(all_cyberproduct_orders_page, many=True)
+        all_self_orders_serializer = self.serializer_class(all_self_orders, many=True)
+        all_cyberproduct_orders_orders_serializer = self.serializer_class(all_cyberproduct_orders, many=True)
         return Response({
             'selfpacked':all_self_orders_serializer.data,
             'cybershop': all_cyberproduct_orders_orders_serializer.data
