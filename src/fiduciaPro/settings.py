@@ -11,7 +11,8 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
 import os
-
+import dj_database_url
+import django_heroku
 
 from django.http import HttpResponseRedirect
 from django.urls import reverse, reverse_lazy
@@ -28,7 +29,7 @@ SECRET_KEY = '&g)0y^n3yy!*9c9#s#kvi-x-63$xwi37b$#e6_q1r0+_tj98tx'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = True
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['fiducia-logistics.herokuapp.com']
 # ALLOWED_HOSTS = []
@@ -94,7 +95,6 @@ DATABASES = {
 }
 
 
-import dj_database_url
 db_from_env = dj_database_url.config(conn_max_age=600)
 DATABASES['default'].update(db_from_env)
 
@@ -162,3 +162,5 @@ AUTH_USER_MODEL = 'UserApp.User'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+django_heroku.settings(locals())
