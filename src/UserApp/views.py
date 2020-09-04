@@ -121,7 +121,6 @@ def usr_profile(request):
     return render(request, 'UserApp/userProfilePage.html', context)
 
 
-@login_required()
 def sendpackage(request):
     user = request.user
     if request.method == 'POST':
