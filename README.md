@@ -1,5 +1,11 @@
 # Fiducia
-Fiducia (Fiduchaa) is a platform by which people can send and create order of products
-which can be transported via regular travelers.
-The traveler will be monetarily rewarded.
-# Currently under development
+Fiducia (Fiduchaa) is in an online market place where user can shop from abroad and get it delivered by regular travelers. The main goal of this platform is to connect shoppers and travelers to create a cheaper delivery system.
+
+Users can order in two ways:
+1) Choose an item from any eCommerce platform and create an order using the link.
+2) The user might already have a package that he wants to send and create request to carry the package.
+Travelers are rewarded by the shoppers for carrying the package
+
+# Login
+email :tarikul@gmail.com
+password :abcd1abcd2
