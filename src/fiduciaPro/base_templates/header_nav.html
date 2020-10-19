@@ -14,25 +14,25 @@
             <div class="navbar-nav">
         {% if user.is_authenticated %}
         <!------- top nav tools -------->
-                <div id="top-nav-container-signin-container" class="top-nav-container-tool-wrapper nav-link">
+                <div id="top-nav-container-orders-container" class="top-nav-container-tool-wrapper nav-link">
                     <a id="top-nav-container-signin" class="top-nav-tools-right" href="{% url 'UserApp:all_orders' %}">Orders</a>
                 </div>
-                <div id="top-nav-container-signin-container" class="top-nav-container-tool-wrapper nav-link">
+                <div id="top-nav-container-journeys-container" class="top-nav-container-tool-wrapper nav-link">
                     <a id="top-nav-container-signin" class="top-nav-tools-right" href="{% url 'UserApp:all_journey' %}">Journeys</a>
                 </div>
-                <div id="top-nav-container-signin-container" class="top-nav-container-tool-wrapper nav-link">
+                <div id="top-nav-container-profile-container" class="top-nav-container-tool-wrapper nav-link">
                     <a id="top-nav-container-signin" class="top-nav-tools-right" href="{% url 'UserApp:usrProfile' %}">{{ user.first_name }} {{ user.last_name }}</a>
                 </div>
 {#                <div id="top-nav-container-signin-container" class="top-nav-container-tool-wrapper nav-link">#}
 {#                    <a id="top-nav-container-signin" class="top-nav-tools-right" href="#">messages</a>#}
 {#                </div>#}
-{#                <div id="top-nav-container-signin-container" class="top-nav-container-tool-wrapper nav-link">#}
-{#                    <a id="top-nav-container-signin" class="top-nav-tools-right" href="#">notifiations</a>#}
-{#                </div>#}
+                <div id="top-nav-container-notification-container" class="top-nav-container-tool-wrapper nav-link">
+                    <a id="top-nav-container-notification" class="top-nav-tools-right" href="#">0</a>
+                </div>
 {#                <div id="top-nav-container-signin-container" class="top-nav-container-tool-wrapper nav-link">#}
 {#                    <a id="top-nav-container-signin" class="top-nav-tools-right" href="#" >Help?</a>#}
 {#                </div>#}
-                <div id="top-nav-container-signin-container" class="top-nav-container-tool-wrapper nav-link">
+                <div id="top-nav-container-logout-container" class="top-nav-container-tool-wrapper nav-link">
                     <a id="top-nav-container-signin" class="top-nav-tools-right" href="{% url 'userProfilelogout'%}" >Log out</a>
                 </div>
 {#                <div id="top-nav-container-signin-container" class="top-nav-container-tool-wrapper nav-link">#}

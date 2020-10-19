@@ -186,8 +186,7 @@ def on_success_payment(request, journey_order_id):
     journey_order_serializer.is_valid(raise_exception=True)
     # journey_order_serializer.save()
 
-
-    #Modify the related Order instance
+    # Modify the related Order instance
     order = Order.objects.get(pk=journey_order.order.id)
     order_serializer = OrderSerializer(order, data={'payment_status': True}, partial=True)
     order_serializer.is_valid(raise_exception=True)

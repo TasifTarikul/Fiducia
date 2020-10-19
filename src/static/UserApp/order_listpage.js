@@ -57,11 +57,10 @@ $(document).ready(function () {
                     $.map(val, function (order) {
                         let current_user_is_negotiator = false;
                         let orderer = order.orderer.id.toString();
-                        console.log(orderer);
-                        console.log(current_user);
+
 
                         htmlstring+=
-                            '<div id="'+order.id+'" class="order-wrapper bg-light">\n' +
+                            '<div id="'+order.id+'" class="order-wrapper bg-light" data-orderer-id="'+ order.orderer.id +'" >\n' +
                             '<img class="order-image" src='+order.package_image+'/>\n' +
                             '<div class="order-list-order-details">\n' +
                             '<div id="" class="" data-orderer-id="'+order.orderer.id+'" data-target="#order-list-page-orderer-detail-modal" data-toggle="modal" >Orderer '+order.orderer.first_name+'</div>\n' +
@@ -86,7 +85,6 @@ $(document).ready(function () {
 
                             htmlstring+='</div>\n';
 
-                            console.log(current_user_is_negotiator);
                             // if current user is in negotitation or is a orderer
                             // disable accept and negotitation button by not adding
                             //  the classes .accept-button and .negotiate-button
@@ -269,4 +267,28 @@ $(document).ready(function () {
     $('.close-main-modal-button').on('click', function () {
         $('.main-modal').css('display', 'none');
     });
+
+
+    //  const chatSocket = new WebSocket(
+    //     'ws://'+window.location.host+'/ws/user_app/notify/'+current_user+'/'
+    //  );
+    //
+    //  chatSocket.onmessage = function(e) {
+    //        console.log(JSON.parse(e.data))
+    //     };
+    //
+    // $('.order-list-container').on('click','.notify',function () {
+    // //     let user = $(this).clone('.order-wrapper').data('orderer-id');
+    // //     const chatSocket = new WebSocket(
+    // //     'ws://'+window.location.host+'/ws/user_app/notify/'+user+'/'
+    // // );
+    //     console.log("notify");
+    //     chatSocket.send(JSON.stringify({
+    //         'message': 'notification from order list'
+    //
+    //     }));
+    //
+    // });
+
+
 });
