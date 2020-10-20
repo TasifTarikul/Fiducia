@@ -7,6 +7,7 @@ from django.conf import settings
 import uuid
 import os
 
+
 # user model modified to sign in with email
 
 
