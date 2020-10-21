@@ -13,7 +13,6 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 import os
 import dj_database_url
 import django_heroku
-
 from django.http import HttpResponseRedirect
 from django.urls import reverse, reverse_lazy
 
@@ -25,7 +24,6 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = True
@@ -49,6 +47,7 @@ INSTALLED_APPS = [
     'widget_tweaks',
     'django_filters',
     'rest_framework',
+    'storages',
 ]
 
 MIDDLEWARE = [
@@ -111,7 +110,8 @@ DATABASES['default'].update(db_from_env)
 
 DEFAULT_FILE_STORAGES = 'storage.backends.dropbox.DropBoxStorage'
 
-DROPBOX_ROOT_PATH = '/uploaded_files/'
+
+DROPBOX_ROOT_PATH = '/'
 
 DROPBOX_TIMEOUT = 100
 
