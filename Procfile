@@ -1,1 +1,1 @@
-web: sh -c 'cd ./src/ && exec gunicorn fiduciaPro.wsgi --log-file -'
+web: sh -c 'cd ./src/ && exec gunicorn fiduciaPro.wsgi --log-file - && python manage.py makemigrations && python manage.py migrate'

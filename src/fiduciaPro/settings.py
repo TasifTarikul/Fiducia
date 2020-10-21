@@ -35,6 +35,7 @@ ALLOWED_HOSTS = ['fiducia-logistics.herokuapp.com']
 # Application definition
 
 INSTALLED_APPS = [
+    'storages',
     'channels',
     'django.contrib.auth',
     'django.contrib.admin',
@@ -47,7 +48,6 @@ INSTALLED_APPS = [
     'widget_tweaks',
     'django_filters',
     'rest_framework',
-    'storages',
 ]
 
 MIDDLEWARE = [
