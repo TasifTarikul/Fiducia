@@ -35,7 +35,6 @@ ALLOWED_HOSTS = ['fiducia-logistics.herokuapp.com']
 # Application definition
 
 INSTALLED_APPS = [
-    'storages',
     'channels',
     'django.contrib.auth',
     'django.contrib.admin',
@@ -48,6 +47,7 @@ INSTALLED_APPS = [
     'widget_tweaks',
     'django_filters',
     'rest_framework',
+    'storages',
 ]
 
 MIDDLEWARE = [
@@ -108,10 +108,10 @@ DATABASES = {
 db_from_env = dj_database_url.config(conn_max_age=600)
 DATABASES['default'].update(db_from_env)
 
-DEFAULT_FILE_STORAGES = 'storage.backends.dropbox.DropBoxStorage'
+DEFAULT_FILE_STORAGES = 'storages.backends.dropbox.DropBoxStorage'
 
 
-DROPBOX_ROOT_PATH = '/media/'
+DROPBOX_ROOT_PATH = '/'
 
 DROPBOX_TIMEOUT = 100
 
