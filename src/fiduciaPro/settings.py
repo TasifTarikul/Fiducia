@@ -111,7 +111,7 @@ DATABASES['default'].update(db_from_env)
 DEFAULT_FILE_STORAGES = 'storages.backends.dropbox.DropBoxStorage'
 
 
-DROPBOX_ROOT_PATH = '/'
+DROPBOX_ROOT_PATH = '/Fiduciabeta'
 
 DROPBOX_TIMEOUT = 100
 
