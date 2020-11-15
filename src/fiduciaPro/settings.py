@@ -110,12 +110,7 @@ DATABASES['default'].update(db_from_env)
 
 DEFAULT_FILE_STORAGES = 'storages.backends.dropbox.DropBoxStorage'
 
-
-DROPBOX_ROOT_PATH = '/'
-
-DROPBOX_TIMEOUT = 100
-
-DROPBOX_WRITE_MODE = 'add'
+DROPBOX_OAUTH2_TOKEN = 'MghJeZFRfE8AAAAAAAAAAcT7ZYDHJOt29scuys-kYRa9QhMxJhJr72ejJH0K0kBD'
 
 
 
@@ -181,5 +176,7 @@ AUTH_USER_MODEL = 'UserApp.User'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+
 
 django_heroku.settings(locals())
