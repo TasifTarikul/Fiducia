@@ -108,7 +108,7 @@ def usr_profile(request):
         doc = request.FILES.get('profile_pic')
 
         if doc:
-            fs = FileSystemStorage(location='Fiduciabeta/media/user_profile_images/'+str(user.id)+'/')
+            fs = FileSystemStorage(location='user_profile_images/'+str(user.id)+'/')
             filename = fs.save(doc.name, doc)
             user.profile_pic = 'user_profile_images/'+str(user.id)+'/'+filename
             user.save()
