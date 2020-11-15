@@ -110,7 +110,16 @@ DATABASES['default'].update(db_from_env)
 
 DEFAULT_FILE_STORAGES = 'storages.backends.dropbox.DropBoxStorage'
 
+<<<<<<< HEAD
 DROPBOX_OAUTH2_TOKEN = 'MghJeZFRfE8AAAAAAAAAAcT7ZYDHJOt29scuys-kYRa9QhMxJhJr72ejJH0K0kBD'
+=======
+
+DROPBOX_ROOT_PATH = '/Fiduciabeta'
+
+DROPBOX_TIMEOUT = 100
+
+DROPBOX_WRITE_MODE = 'add'
+>>>>>>> e98a2c2b24fe5c246b6cee317ad93b24fe0d878f
 
 
 
