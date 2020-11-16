@@ -1,0 +1,282 @@
+/****** homepage.html ******/
+
+
+body, html, head{
+            padding: 0;
+            margin: 0;
+            height: 100%;
+        }
+
+
+        *{
+            box-sizing: border-box;
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        }
+
+        #top-section-wrapper{
+            height: 100%;
+            background-color: white;
+        }
+
+        #top-nav-container{
+            background-image: linear-gradient(to top, #082860, #06164d);
+
+            /*box-shadow: 0px 0px 1px dimgrey;*/
+        }
+
+        /*#top-nav-container-logo-container{*/
+            /*float: left;*/
+            /*height: 100%;*/
+            /*width: 220px;*/
+            /*background-color: transparent;*/
+            /*display: flex;*/
+            /*align-items: center;*/
+            /*justify-content: center;*/
+        /*}*/
+        #top-nav-container-logo-1{
+
+            /*margin-left: 80px;*/
+            font-size: 2.5vw;
+            color: white;
+            text-decoration: none;
+            font-family: "Ubuntu Light";
+        }
+
+        #top-nav-container-logo-2{
+            /*display: block;*/
+            font-size: 1.2vw;
+            color: white;
+            text-decoration: none;
+            font-family: "Ubuntu Light";
+        }
+        /*.top-nav-container-tool-wrapper{*/
+            /*float: right;*/
+            /*!*background-color: steelblue;*!*/
+            /*margin: 0 0 0 30px;*/
+            /*line-height: 100px;*/
+            /*height: 100%;*/
+        /*}*/
+
+        .top-nav-tools-right{
+            outline: none;
+            text-decoration: none;
+            color: white;
+            font-weight: 900;
+        }
+
+        .top-nav-tools-right:hover{
+            outline: none;
+            color: white;
+            text-decoration: none;
+            text-shadow: 0 0 2vh white;
+            font-weight: 900;
+        }
+
+        /****** main banner ******/
+
+        #main-banner{
+            background-image: linear-gradient(to top, #18a4e0, #06164d);
+            /*padding-top: 40px;*/
+            /*height: 83%;*/
+            min-height: 100%;
+        }
+
+
+        #main-banner-content-container{
+            /*background-color: #0d3b52;*/
+            /*width: 500px;*/
+            /*margin: 0 0 0 80px;*/
+            /*float: left;*/
+
+        }
+
+        #main-banner-content-heading-wrapper{
+            margin-top: 10vh;
+            margin-bottom: 8vh;
+        }
+
+        #main-banner-content-heading{
+            color: #f8f9fa;
+            font-weight: bolder;
+            font-size: 4.5rem;
+            font-family: "Ubuntu Light";
+            text-shadow: 0 3px 8px rgba(0, 0, 0, .25),
+                    0 3px 8px rgba(0, 0, 0, .25),
+                    0 3px 8px rgba(0, 0, 0, .25);
+
+
+        }
+
+        #main-banner-card-wrapper{
+
+        }
+        #main-banner-content-traveller-section{
+            margin-bottom: 0;
+        }
+
+        .main-banner-card{
+            background-color: #f8f9fa;
+            height: 30vh;
+            padding: 3vh;
+            border-radius: 1vh;
+            /*-webkit-box-shadow: 0 3px 8px rgba(0, 0, 0, .25);*/
+            /*-moz-box-shadow: 0 3px 8px rgba(0, 0, 0, .25);*/
+            box-shadow:
+                    0 3px 8px rgba(0, 0, 0, .25),
+                    0 3px 8px rgba(0, 0, 0, .25),
+                    0 3px 8px rgba(0, 0, 0, .25);
+            -webkit-border-radius: 1vh;
+            -moz-border-radius: 1vh;
+            display: flex;
+            justify-content: center;
+
+        }
+
+        .main-banner-card-body{
+            text-align: center;
+        }
+
+        .main-banner-card-text{
+            /*margin-bottom: 10px;*/
+            font-size: 1.1rem;
+            color: #495056;
+            font-weight: bold;
+            font-family: "Ubuntu Light";
+        }
+
+        .main-banner-content-button{
+            text-decoration: none;
+            color: black;
+            background-color: white;
+            display: block;
+            width: 200px;
+            height: 50px;
+            line-height: 48px;
+            text-align: center;
+            border: 1px solid #18a4e0;
+            border-radius: 50px;
+            font-weight: 700;;
+            margin: 6vh auto 0 auto;
+        }
+
+        .main-banner-content-button:hover{
+            text-decoration: none;
+            color: white;
+            background-image: linear-gradient(to top, #18a4e0, #06164d);
+            border: none;
+        }
+
+        #main-banner-video-container{
+            height: 350px;
+            width: 550px;
+            float: right;
+            margin-right: 80px;
+            position: relative;
+            background-color: #22044a;
+
+        }
+
+        #main-banner-video-element{
+            height: 350px;
+            width: 100%;
+        }
+
+        /******** second section ********/
+
+        #second-section{
+            height: 100%;
+            background-color: #fa6e4f;
+        }
+
+        /*******third section********/
+        #third-section{
+            height: 100%;
+            background-color: #18a4e0;
+        }
+
+
+/****** send_package_form_page.html ******/
+
+
+.item-image-prev{
+    width: 25vw;
+    min-height: 25vh;
+    border: 2px solid #dddddd;
+    margin-top: 15px;
+    margin-bottom: 15px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: #cccccc;
+}
+.image-preview_image{
+    display: none;
+    width: 100%;
+}
+
+/****** checkout_page ******/
+
+.box-decoration{
+    box-shadow: 0vh 1vh 3vh darkgrey;
+    border-radius: 2vh;
+}
+
+#checkout-page-wrapper{
+    min-height: 100%;
+    /*background-color: #06184F;*/
+}
+
+#checkout-content-container{
+    padding: 2vh 2vw 2vh 2vw;
+}
+
+.checkout-each-order-row{
+    padding: 2vh;
+}
+
+.checkout-package-image{
+    max-width: 30vh;
+    max-height: 30vh;
+}
+
+.StripeElement {
+  box-sizing: border-box;
+
+  height: 40px;
+
+  padding: 10px 12px;
+
+  border: 1px solid transparent;
+  border-radius: 4px;
+  background-color: white;
+
+  box-shadow: 0 1px 3px 0 #e6ebf1;
+  -webkit-transition: box-shadow 150ms ease;
+  transition: box-shadow 150ms ease;
+}
+
+.StripeElement--focus {
+  box-shadow: 0 1px 3px 0 #cfd7df;
+}
+
+.StripeElement--invalid {
+  border-color: #fa755a;
+}
+
+.StripeElement--webkit-autofill {
+  background-color: #fefde5 !important;
+}
+
+.payment-options-buttons{
+    font-size: 4vh;
+    font-weight: bolder;
+    text-align: center;
+    line-height: 200%;
+    border-radius: 2vh;
+}
+
+.payment-option-panel{
+
+}

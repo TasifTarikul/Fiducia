@@ -1,0 +1,107 @@
+{% extends 'base.html' %}
+    {% block content %}
+        {% include 'header_nav.html' %}
+
+        <div id="journey-list-page-wrapper" class="p-3">
+
+            <div id="journey-list-page-header-wrapper" class="" >
+                <h1 id="journey-list-page-header" class="m-0" >Journeys</h1>
+            </div>
+
+            <div id="" class="container-fluid">
+
+                <div id="" class="row justify-content-center mt-4">
+
+                   <div id="journey-list-each-journey-container" class="col-sm-12">
+
+{#                       <div id="" class="row journey-list-each-journey-wrapper">#}
+{#                            <div id="" class="col-sm-4">#}
+{#                                <h5>Journey detail</h5>#}
+{#                                <div>Travelling from </div>#}
+{#                                <div>Travelling to </div>#}
+{#                            </div>#}
+{#                            <div id="" class="col-sm-7">#}
+{#                                <div id="" class="row">#}
+{#                                    <div id="" class="col-sm-4">#}
+{#                                        <img id="" class="journey-list-traveller-image" src="">#}
+{#                                    </div>#}
+{#                                    <div id="" class="col-sm-8">#}
+{#                                        <h5>Traveller detail</h5>#}
+{#                                        <div>Name </div>#}
+{#                                        <div>Bio</div>#}
+{#                                        <div>Nationality</div>#}
+{#                                        <div>Traveller Rating</div>#}
+{#                                        <div>Shopper Rating</div>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                           <div class="col-sm-1">#}
+{#                               <button id="2" class="btn btn-primary journey-list-request-button"#}
+{#                               data-toggle="modal" data-target="#journey-list-page-user-request-form-modal" >Request</button>#}
+{#                           </div>#}
+{#                        </div>#}
+
+
+                   </div>
+
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination">
+                            <li class="page-item">
+                                <a id="previous-link" class="page-link" data-url="" aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+                            <li class="page-item"><a id="start-link" class="page-link" data-url="">Start</a></li>
+                            <li class="page-item"><a class="page-link page-number-boxes" href="">1</a></li>
+                            <li id="end-link-wrapper" class="page-item">
+                                <a id="end-link" class="page-link" data-url="">End</a>
+                            </li>
+                            <li id="next-link-wrapper" class="page-item">
+                              <a id="next-link" class="page-link" data-url="" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                              </a>
+                            </li>
+                        </ul>
+                    </nav>
+
+                </div>
+
+            </div>
+
+            <!---- MODAL ALL ACTIVE ORDERS OF CURRENT USER ---->
+
+            <div class="modal fade" id="journey-list-page-user-request-form-modal" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Requet form</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div id="journey-list-page-all-product-list" class="modal-body">
+                      <form id="order-request-form" class="" action="{% url 'UserApp:UserProfileApi:user_api:negotiate_api-list' %}" method="post">
+                        {% csrf_token %}
+
+                          <!--- ORDER BOXES--->
+{#                          all current user active orders added from api call#}
+
+                          <input type="hidden" id="negotiation-status-value" class="" name="negotiation_status" value="active">
+                          <input type="hidden" id="negotiator-value" class="" name="negotiator" value="{{ request.user.id }}">
+                          <div class="modal-footer justify-content-center mt-3">
+                            <input type="submit" id="order-request-form-submit-button" class="btn btn-primary" value="Submit">
+                          </div>
+                      </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+        </div>
+
+        <input type="hidden" id="journey-list-current-user-id" class="" value="{{ request.user.id }}"/>
+        <input type="hidden" id="current-user-active-orders-url" class=""
+               value="{% url 'UserApp:UserProfileApi:user_api:order_api-user-active-orders' %}"/>
+        <input type="hidden" id="all_journey_url" class="" value="{% url "UserApp:UserProfileApi:user_api:journey_api-list" %}">
+        <input type="hidden" id="journey-list-csrf_token" class="" value="{{ csrf_token }}" >
+    {% endblock %}

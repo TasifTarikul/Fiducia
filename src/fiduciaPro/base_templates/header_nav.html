@@ -1,0 +1,62 @@
+{% load static %}
+
+    <nav id="top-nav-container" class="navbar navbar-expand-lg navbar-dark">
+{#        <div id="top-nav-container-logo-container" class="top-nav-container-element-wrapper">#}
+{#                    src="{% static 'UserApp/images/main_logo.png' %}">#}
+{#        </div>#}
+        <a id="top-nav-container-logo-1" class="navbar-brand" href="{% url 'UserApp:homePage' %}">Fiducia<span id="top-nav-container-logo-2">Logistics</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#top-nav-tool-container"
+                aria-controls="top-nav-tool-container" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse flex-row-reverse" id="top-nav-tool-container">
+            <div class="navbar-nav">
+        {% if user.is_authenticated %}
+        <!------- top nav tools -------->
+                <div id="top-nav-container-orders-container" class="top-nav-container-tool-wrapper nav-link">
+                    <a id="top-nav-container-signin" class="top-nav-tools-right" href="{% url 'UserApp:all_orders' %}">Orders</a>
+                </div>
+                <div id="top-nav-container-journeys-container" class="top-nav-container-tool-wrapper nav-link">
+                    <a id="top-nav-container-signin" class="top-nav-tools-right" href="{% url 'UserApp:all_journey' %}">Journeys</a>
+                </div>
+                <div id="top-nav-container-profile-container" class="top-nav-container-tool-wrapper nav-link">
+                    <a id="top-nav-container-signin" class="top-nav-tools-right" href="{% url 'UserApp:usrProfile' %}">{{ user.first_name }} {{ user.last_name }}</a>
+                </div>
+{#                <div id="top-nav-container-signin-container" class="top-nav-container-tool-wrapper nav-link">#}
+{#                    <a id="top-nav-container-signin" class="top-nav-tools-right" href="#">messages</a>#}
+{#                </div>#}
+                <div id="top-nav-container-notification-container" class="top-nav-container-tool-wrapper nav-link">
+                    <a id="top-nav-container-notification" class="top-nav-tools-right" href="#">0</a>
+                </div>
+{#                <div id="top-nav-container-signin-container" class="top-nav-container-tool-wrapper nav-link">#}
+{#                    <a id="top-nav-container-signin" class="top-nav-tools-right" href="#" >Help?</a>#}
+{#                </div>#}
+                <div id="top-nav-container-logout-container" class="top-nav-container-tool-wrapper nav-link">
+                    <a id="top-nav-container-signin" class="top-nav-tools-right" href="{% url 'userProfilelogout'%}" >Log out</a>
+                </div>
+{#                <div id="top-nav-container-signin-container" class="top-nav-container-tool-wrapper nav-link">#}
+{#                    <a id="top-nav-container-signin" class="top-nav-tools-right" href="/admin/">Admin</a>#}
+{#                </div>#}
+
+        {% else %}
+            <!------- top nav tools -------->
+
+                <div id="top-nav-container-signin-container" class="top-nav-container-tool-wrapper nav-link">
+                    <a id="top-nav-container-signin" class="top-nav-tools-right" href="{% url 'UserApp:signup' %}?next=UserApp:homePage">Sign Up</a>
+                </div>
+                <div id="top-nav-container-signin-container" class="top-nav-container-tool-wrapper nav-link">
+                    <a id="top-nav-container-signin" class="top-nav-tools-right" href="{% url 'UserApp:signin' %}?next=UserApp:homePage">Sign In</a>
+                </div>
+{#                <div id="top-nav-container-signin-container" class="top-nav-container-tool-wrapper nav-link">#}
+{#                    <a id="top-nav-container-signin" class="top-nav-tools-right" href="{% url 'UserApp:signin' %}">Help?</a>#}
+{#                </div>#}
+{#                 <div id="top-nav-container-signin-container" class="top-nav-container-tool-wrapper nav-link">#}
+{#                    <a id="top-nav-container-signin" class="top-nav-tools-right" href="/admin/">Admin</a>#}
+{#                </div>#}
+
+        {% endif %}
+            </div>
+        </div>
+    </nav>
+

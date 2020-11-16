@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+    {% block content %}
+        {% include 'header_nav.html' %}
+        {% load static %}
+        <div id="order-list-page-wrapper">
+{#            <h1 id="order-header">Orders</h1>#}
+
+            <div id="order-type-top-nav-wrapper">
+                <div id="" class="order-type-top-nav-items hover-effect-selected">Selfpacked</div>
+                <div id="" class="order-type-top-nav-items hover-effect">Cybershop orders</div>
+            </div>
+            <div id="selfpacked-order-list-container" class="order-list-container">
+{#                <h1 class="order-category-header">Selfpacked</h1>#}
+            </div>
+            <div id="cybershop-order-list-container" class="order-list-container" >
+{#                <h1 class="order-category-header">Cyber Product</h1>#}
+
+            </div>
+        </div>
+
+        <!---- Modal for each Order ---->
+
+        <div class="modal fade" id="order-list-page-orderer-detail-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+              <div class="modal-header">
+                  <h2>Orderer details</h2>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                  <div id="order-list-page-orderer-detail-container" class="container-fluid">
+
+                  </div>
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <!-- Modal for Order Acceptance -->
+        <div id="" class="main-modal">
+            <span class="material-icons close-main-modal-button" style="font-size:48px;color:white">close</span>
+            <div id="" class="modal-content-container">
+                <h1 id="" class="modal-content-header">
+                    Current Journeys
+                </h1>
+                <form action="{% url "UserApp:UserProfileApi:create_journey_order" %}" method="POST" id="modal-current-journey">
+                    {% csrf_token %}
+                </form>
+            </div>
+        </div>
+
+        <!-- Modal for Price Negotiation-->
+        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+          <div class="modal-dialog modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Journeys</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="negotiation-modal-body modal-body">
+                  <form class="negotiate-form" action="{% url "UserApp:UserProfileApi:user_api:negotiate_api-list" %}" method="POST">
+                      {% csrf_token %}
+                      <div class="form-group row nego-price-wrapper">
+                          <label for="inputEmail3" class="col-sm-2 col-form-label">Price</label>
+                          <div class="col-sm-10">
+                              <input type="text" class="form-control" id="" placeholder="" name="negotiator_price">
+                          </div>
+                      </div>
+                      <div class="d-flex justify-content-center">
+                          <input type="submit" class="btn btn-primary submit-nego-price-button" value="Submit Price">
+                      </div>
+                  </form>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <! --- url to list all order --- >
+        <input type="hidden" id="order-list-url" class="list_url"
+               value="{% url 'UserApp:UserProfileApi:user_api:order_api-list' %}">
+
+        <! --- url to get all current journey of current user --- >
+        <input type="hidden" id="current-completed-journeys-url" class="list_url"
+               value="{% url 'UserApp:UserProfileApi:user_api:journey_api-current-completed-journey' %}">
+
+        <! --- url to link order and journey --- >
+        <input type="hidden" id="journey-order-url" class="list_url"
+               value="{% url 'UserApp:UserProfileApi:user_api:journey_order_api-list' %}">
+
+        <! --- to  get url to redirect to create journey page create --- >
+        <input type="hidden" id="be-a-traveller-url" class="list_url"
+               value="{% url 'UserApp:create_journey' %}">
+
+
+
+        <input type="hidden" id="current_user" value="{{ request.user.pk }}">
+
+
+        <input type="hidden" name="csrf_token" id="order-list-csrf-token" class="csrf_token" value="{{ csrf_token }}">
+    {% endblock %}
