@@ -1,6 +1,5 @@
 __pycache__/
 *.py[cod]
-migrations/
 src/media
 db.sqlite3
 .idea/workspace
