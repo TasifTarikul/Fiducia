@@ -25,7 +25,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 
-SECRET_KEY = '&g)0y^n3yy!*9c9#s#kvi-x-63$xwi37b$#e6_q1r0+_tj98tx'
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -110,7 +110,7 @@ DATABASES = {
 db_from_env = dj_database_url.config(conn_max_age=600)
 DATABASES['default'].update(db_from_env)
 
-DEFAULT_FILE_STORAGES = 'storages.backends.dropbox.DropBoxStorage'
+DEFAULT_FILE_STORAGE = 'storages.backends.dropbox.DropBoxStorage'
 
 DROPBOX_OAUTH2_TOKEN = 'MghJeZFRfE8AAAAAAAAAAcT7ZYDHJOt29scuys-kYRa9QhMxJhJr72ejJH0K0kBD'
 
