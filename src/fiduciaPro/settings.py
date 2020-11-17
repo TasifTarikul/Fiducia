@@ -112,7 +112,7 @@ DATABASES['default'].update(db_from_env)
 
 DEFAULT_FILE_STORAGE = 'storages.backends.dropbox.DropBoxStorage'
 
-DROPBOX_OAUTH2_TOKEN = '_e-Je97aQ-8AAAAAAAAAAQJyuhtCzI54jfNDgXfPsBfLo82Wp24IipmwJ45rzEAc'
+DROPBOX_OAUTH2_TOKEN = 'dhiTx4hnk34AAAAAAAAAAcU8fTKDklOgQDVsJCVqyU0CsT_ow-ZwlSjBQh3CQER3'
 
 DROPBOX_ROOT_PATH = "/"
 
