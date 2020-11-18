@@ -144,7 +144,7 @@ $(document).ready(function () {
                             '<div class="order-details" >';
                         add_string+= get_total_negotiator(e.negotiates, e.order_status);
                         add_string+='<div class="order-details">Views</div>\n' +
-                            '<a href="http://127.0.0.1:8000/single-order/'+e.id+'">' +
+                            '<a href="/single-order/'+e.id+'">' +
                             'Details</a>' +
                             '</div>\n' +
                         '</div>\n' +
