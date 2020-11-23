@@ -119,7 +119,7 @@ def usr_profile(request):
 
             # DROPBOX
             dbx = dropbox.Dropbox(settings.DROPBOX_OAUTH2_TOKEN)
-            dbx.files_upload(doc, path='/user_profile_images/'+str(user.id)+'/'+doc.name)
+            dbx.files_upload(doc.read(), path='/user_profile_images/'+str(user.id)+'/'+doc.name)
             user.profile_pic = 'user_profile_images/'+str(user.id)+'/'+doc.name
             user.save()
 
