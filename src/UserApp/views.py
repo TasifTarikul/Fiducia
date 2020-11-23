@@ -6,9 +6,13 @@ from .models import Order, Journey, JourneyOrder
 from django.contrib import auth
 from django.urls import reverse, path
 from django.contrib.auth.decorators import login_required
+from django.conf import settings
+import dropbox
 from django.core.files.storage import FileSystemStorage
 from django.urls import resolve
 import stripe
+
+
 
 from django.db.models import Q
 # from .api.serializers import
@@ -108,10 +112,17 @@ def usr_profile(request):
         doc = request.FILES.get('profile_pic')
 
         if doc:
-            fs = FileSystemStorage(location='user_profile_images/'+str(user.id)+'/')
-            filename = fs.save(doc.name, doc)
-            user.profile_pic = 'user_profile_images/'+str(user.id)+'/'+filename
+            # fs = FileSystemStorage(location='user_profile_images/'+str(user.id)+'/')
+            # filename = fs.save(doc.name, doc)
+            # user.profile_pic = 'user_profile_images/'+str(user.id)+'/'+filename
+            # user.save()
+
+            # DROPBOX
+            dbx = dropbox.Dropbox(settings.DROPBOX_OAUTH2_TOKEN)
+            dbx.files_upload(doc, path='user_profile_images/'+str(user.id)+'/'+doc.name)
+            user.profile_pic = 'user_profile_images/'+str(user.id)+'/'+doc.name
             user.save()
+
             return HttpResponseRedirect(reverse('UserApp:usrProfile'))
 
     context = {
