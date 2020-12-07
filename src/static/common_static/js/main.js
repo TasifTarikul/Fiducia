@@ -1,6 +1,6 @@
 $(document).ready(function () {
 
-    console.log("main.js")
+    console.log("main.js");
     // SEND PACKAGE FORM PAGE AND CREATE ORDER FORM PAGE //
 
     const input_file = $(".create-order-form-input-file");

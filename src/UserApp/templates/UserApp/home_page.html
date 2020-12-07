@@ -18,38 +18,48 @@
                 </div>
 
                 <div id="main-banner-content-heading-wrapper" class="row justify-content-center">
-                    <h1 id="main-banner-content-heading" class="col-sm-7 text-center">
-                        Order, Travel, Earn, Save !
+                    <h1 id="main-banner-content-heading" class="text-center">
+                        Order, Travel, Earn,<br/> Save !
                     </h1>
                 </div>
 
                 <div id="main-banner-card-wrapper" class="row">
 
-                    <div id="" class="col-sm-4 main-banner-content-section-wrapper">
+{#                    ################################################}
+
+                    <div id="" class="col-md-4 main-banner-content-section-wrapper">
                         <div class="main-banner-card">
-                          <div class="main-banner-card-body">
-                            <p id="main-banner-content-send-text" class="main-banner-card-text">Send self-packed item. If you already have some items and you want to send the Package.</p>
-                            <a href="{% url 'UserApp:sendpackage' %}" id="main-banner-content-send-button" class="main-banner-content-button">Send Package</a>
-                          </div>
+                            <p id="main-banner-content-send-text" class="main-banner-card-text">
+                                Send self-packed item. If you already have some items and you want to send the Package.
+                            </p>
+                            <a href="{% url 'UserApp:sendpackage' %}" id="main-banner-content-send-button" class="main-banner-content-button">
+                                Send Package
+                            </a>
                         </div>
                     </div>
 
-                    <div id="" class="col-sm-4 main-banner-content-section-wrapper">
+                    <div id="" class="col-md-4 main-banner-content-section-wrapper">
                         <div class="main-banner-card">
-                          <div class="main-banner-card-body">
-                            <p id="main-banner-content-create-text" class="main-banner-card-text">Want to buy something from abroad. Copy url from any E-commerce sit and create an Order.</p>
-                            <a href="{% url 'UserApp:createorder' %}" id="main-banner-content-create-button" class="main-banner-content-button">Create Order</a>
-                          </div>
+                            <p id="main-banner-content-create-text" class="main-banner-card-text">
+                                Want to buy something from abroad. Copy url from any E-commerce sit and create an Order.
+
+                            </p>
+                            <a href="{% url 'UserApp:createorder' %}" id="main-banner-content-create-button" class="main-banner-content-button">
+                                Create Order
+                            </a>
                         </div>
                     </div>
 
-                    <div id="" class="col-sm-4 main-banner-content-section-wrapper">
-
+                    <div id="" class="col-md-4 main-banner-content-section-wrapper">
                         <div class="main-banner-card">
-                          <div class="main-banner-card-body">
-                            <p id="main-banner-content-journey-text" class="main-banner-card-text">Earn while travelling by carrying packages and reduce you trip cost.</p>
-                            <a href="{% url 'UserApp:create_journey' %}" id="main-banner-content-journey-button" class="main-banner-content-button">Post journey</a>
-                          </div>
+                            <p id="main-banner-content-journey-text" class="main-banner-card-text">
+                                Earn while travelling by carrying packages and reduce you trip cost.
+                            </p>
+
+                            <a href="{% url 'UserApp:create_journey' %}" id="main-banner-content-journey-button" class="main-banner-content-button">
+                                Post journey
+                            </a>
+
                         </div>
                     </div>
 

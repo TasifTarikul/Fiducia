@@ -114,11 +114,20 @@ body, html, head{
             margin-bottom: 0;
         }
 
+        @media(max-width: 768px) {
+            .main-banner-content-section-wrapper {
+                margin-bottom: 15px;
+            }
+        }
+
         .main-banner-card{
             background-color: #f8f9fa;
-            height: 30vh;
-            padding: 3vh;
+            min-height: 100%;
+            padding: 15px;
             border-radius: 1vh;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
             /*-webkit-box-shadow: 0 3px 8px rgba(0, 0, 0, .25);*/
             /*-moz-box-shadow: 0 3px 8px rgba(0, 0, 0, .25);*/
             box-shadow:
@@ -127,14 +136,11 @@ body, html, head{
                     0 3px 8px rgba(0, 0, 0, .25);
             -webkit-border-radius: 1vh;
             -moz-border-radius: 1vh;
-            display: flex;
-            justify-content: center;
+            /*display: flex;*/
+            /*justify-content: center;*/
 
         }
 
-        .main-banner-card-body{
-            text-align: center;
-        }
 
         .main-banner-card-text{
             /*margin-bottom: 10px;*/
@@ -142,28 +148,30 @@ body, html, head{
             color: #495056;
             font-weight: bold;
             font-family: "Ubuntu Light";
+            height: 85%;
+            margin: 0 0 20px 0;
         }
 
+
         .main-banner-content-button{
+            align-self: center;
             text-decoration: none;
             color: black;
-            background-color: white;
-            display: block;
-            width: 200px;
-            height: 50px;
-            line-height: 48px;
+            background-color: transparent;
             text-align: center;
+            font-weight: 700;
             border: 1px solid #18a4e0;
             border-radius: 50px;
-            font-weight: 700;;
-            margin: 6vh auto 0 auto;
+            margin-top: auto;
+            padding: 15px 20px;
         }
+
 
         .main-banner-content-button:hover{
             text-decoration: none;
             color: white;
             background-image: linear-gradient(to top, #18a4e0, #06164d);
-            border: none;
+            border: 1px solid white;
         }
 
         #main-banner-video-container{
