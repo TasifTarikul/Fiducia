@@ -24,7 +24,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '&g)0y^n3yy!*9c9#s#kvi-x-63$xwi37b$#e6_q1r0+_tj98tx'
+
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -107,14 +107,14 @@ DATABASES = {
 }
 
 
-# db_from_env = dj_database_url.config(conn_max_age=600)
-# DATABASES['default'].update(db_from_env)
+db_from_env = dj_database_url.config(conn_max_age=600)
+DATABASES['default'].update(db_from_env)
 
-# DEFAULT_FILE_STORAGE = 'storages.backends.dropbox.DropBoxStorage'
-#
-# DROPBOX_OAUTH2_TOKEN = 'dhiTx4hnk34AAAAAAAAAAcU8fTKDklOgQDVsJCVqyU0CsT_ow-ZwlSjBQh3CQER3'
-#
-# DROPBOX_ROOT_PATH = "/"
+DEFAULT_FILE_STORAGE = 'storages.backends.dropbox.DropBoxStorage'
+
+DROPBOX_OAUTH2_TOKEN = 'dhiTx4hnk34AAAAAAAAAAcU8fTKDklOgQDVsJCVqyU0CsT_ow-ZwlSjBQh3CQER3'
+
+DROPBOX_ROOT_PATH = "/"
 
 
 
